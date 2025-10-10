@@ -3,3 +3,5 @@ segmentation/models/mask_rcnn_commitment.model
 RedTell
 RedTell
 venv/
+/cellpose
+/Segmented_Images

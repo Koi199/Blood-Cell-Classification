@@ -2,58 +2,159 @@ import numpy as np
 from skimage import io, measure
 import os
 from PIL import Image
+import cv2
+from pathlib import Path
 
-# Load your Cellpose .npy results
-data = np.load("C:\\Users\\kylea\\Repos\\Blood-Cell-Classification\\SampleImages\\Images\\tile_x003_y002_cropped_seg.npy", allow_pickle=True).item()
-masks = data['masks']
-img = io.imread(data['filename'])   # original TIFF image
-imgname = os.path.basename(data['filename'])
-imgname = imgname[:-4] # remove .tif extension
-print(f"Processing image: {imgname}")
-
-# Padding size in pixels
-pad = 10   # change this to whatever margin you want
-props = measure.regionprops(masks) # get properties of labeled regions
-# User input for mode
-# mode = input("Without Background? Enter 1 || With Background? Enter 2: ")
-
-# Output folder
-output_dir = imgname + "_single_cells_padded"
-os.makedirs(output_dir, exist_ok=True)
-
-for i, prop in enumerate(props, start=1):
-    minr, minc, maxr, maxc = prop.bbox
+def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_strength=10, contrast=2.0):
+    """
+    Extract single cells from segmentation with maximum image quality
     
-    # Expand bounding box by pad, but keep inside image bounds
-    minr = max(minr - pad, 0)
-    minc = max(minc - pad, 0)
-    maxr = min(maxr + pad, masks.shape[0])
-    maxc = min(maxc + pad, masks.shape[1])
+    Parameters:
+    -----------
+    seg_file : str or Path
+        Path to _seg.npy file
+    output_dir : str or Path
+        Directory to save extracted cells
+    pad : int
+        Padding around cell in pixels
+    bg_size : int
+        Background image size (256, 512, etc.)
+    denoise_strength : int
+        Denoising strength (5-20, higher = more denoising)
+    contrast : float
+        Contrast multiplier (1.0 = no change, 2.0 = double contrast, 0.5 = half contrast)
+    """
     
-    # Crop image and mask
-    crop_img = img[minr:maxr, minc:maxc].copy()
-    cell_mask = (masks[minr:maxr, minc:maxc] == prop.label)
+    # Load segmentation data
+    data = np.load(seg_file, allow_pickle=True).item()
+    masks = data['masks']
+    img = io.imread(data['filename'])
     
-    # Apply mask so background is zeroed out
-    if crop_img.ndim == 3:  # color image
-        crop_img[~cell_mask] = 0
-    else:               # grayscale
-        crop_img[~cell_mask] = 0
-
-    # Convert NumPy crop to PIL RGBA
-    pil_crop = Image.fromarray(crop_img.astype(np.uint8)).convert("RGBA")
-
-    # Open new black background image
-    bg = Image.open(
-        r"C:\Users\kylea\Repos\Blood-Cell-Classification\SampleImages\Images\Black_background_128x128.png"
-    ).convert("RGBA")
+    imgname = Path(data['filename']).stem
+    output_dir = Path(output_dir)
+    output_dir.mkdir(exist_ok=True)
     
-    # Center the cropped cell on the background
-    x = (bg.width - pil_crop.width) // 2
-    y = (bg.height - pil_crop.height) // 2
-    bg.paste(pil_crop, (x, y), pil_crop)  # use pil_crop as its own mask
+    print(f"Processing image: {imgname}")
+    print(f"Image dtype: {img.dtype}, shape: {img.shape}\n")
+    
+    # Handle 3D masks
+    if masks.ndim == 3:
+        masks = masks[0]
+    
+    # Handle 3D images
+    if img.ndim == 3:
+        if img.shape[0] == 1:
+            img = img[0]
+        elif img.shape[0] < 4:
+            img = img[0]
+    
+    # Get cell properties
+    props = measure.regionprops(masks)
+    print(f"Found {len(props)} cells\n")
+    
+    # Extract each cell
+    for i, prop in enumerate(props, start=1):
+        bbox = prop.bbox
+        
+        # Handle both 2D and 3D bbox
+        if len(bbox) == 6:
+            min_z, minr, minc, max_z, maxr, maxc = bbox
+        else:
+            minr, minc, maxr, maxc = bbox
+        
+        # Expand bounding box with padding
+        minr = max(minr - pad, 0)
+        minc = max(minc - pad, 0)
+        maxr = min(maxr + pad, masks.shape[0])
+        maxc = min(maxc + pad, masks.shape[1])
+        
+        # Crop image and mask
+        crop_img = img[minr:maxr, minc:maxc].copy()
+        crop_mask = masks[minr:maxr, minc:maxc] == prop.label
+        
+        # Convert image to uint8
+        if crop_img.dtype == np.uint16:
+            crop_img = (crop_img.astype(np.float32) / crop_img.max() * 255).astype(np.uint8)
+        elif crop_img.dtype != np.uint8:
+            crop_img = ((crop_img.astype(np.float32) - crop_img.min()) / 
+                       (crop_img.max() - crop_img.min() + 1e-10) * 255).astype(np.uint8)
+        
+        # Apply non-local means denoising
+        crop_img = cv2.fastNlMeansDenoising(crop_img, h=denoise_strength, 
+                                           templateWindowSize=7, searchWindowSize=21)
+        
+        # Apply CLAHE for local contrast enhancement
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        crop_img = clahe.apply(crop_img)
+        
+        # Apply contrast adjustment
+        if contrast != 1.0:
+            # Convert to float, adjust contrast around midpoint (128)
+            crop_img = crop_img.astype(np.float32)
+            crop_img = 128 + (crop_img - 128) * contrast
+            crop_img = np.clip(crop_img, 0, 255).astype(np.uint8)
+        
+        # Convert grayscale to RGB
+        if crop_img.ndim == 2:
+            crop_rgb = np.stack([crop_img] * 3, axis=-1)
+        else:
+            crop_rgb = crop_img.copy()
+        
+        # Apply mask - set background to 0
+        for c in range(crop_rgb.shape[-1]):
+            crop_rgb[~crop_mask, c] = 0
+        
+        # Create canvas with the cropped cell centered
+        canvas = np.zeros((bg_size, bg_size, 3), dtype=np.uint8)
+        
+        # Center the crop on canvas
+        y_offset = (bg_size - crop_rgb.shape[0]) // 2
+        x_offset = (bg_size - crop_rgb.shape[1]) // 2
+        
+        # Ensure we don't go out of bounds
+        y_min = max(0, y_offset)
+        y_max = min(bg_size, y_offset + crop_rgb.shape[0])
+        x_min = max(0, x_offset)
+        x_max = min(bg_size, x_offset + crop_rgb.shape[1])
+        
+        crop_y_min = max(0, -y_offset)
+        crop_y_max = crop_y_min + (y_max - y_min)
+        crop_x_min = max(0, -x_offset)
+        crop_x_max = crop_x_min + (x_max - x_min)
+        
+        canvas[y_min:y_max, x_min:x_max] = crop_rgb[crop_y_min:crop_y_max, crop_x_min:crop_x_max]
+        
+        # Convert to PIL and save
+        pil_img = Image.fromarray(canvas, mode='RGB')
+        out_path = output_dir / f"{imgname}_cell_{i:04d}.png"
+        pil_img.save(out_path)
+        
+        if i % 10 == 0 or i == len(props):
+            print(f"Saved {i}/{len(props)} cells")
+    
+    print(f"\nCompleted! {len(props)} cells extracted to {output_dir}")
 
-    # Save result
-    out_path = os.path.join(output_dir, f"cell_{i}.png")
-    bg.save(out_path)
-    print(f"Saved {out_path}")
+
+# ============ USAGE ============
+
+seg_file = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Segmented_Images/tile_x001_y005_seg.npy")
+output_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/SingleCells")
+output_dir2 = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/SingleCells2")
+
+extract_single_cells(
+    seg_file=seg_file,
+    output_dir=output_dir,
+    pad=20,
+    bg_size=256,
+    denoise_strength=15,
+    contrast=1.0  # Adjust: 0.5 (less contrast) to 3.0 (more contrast)
+)
+
+extract_single_cells(
+    seg_file=seg_file,
+    output_dir=output_dir2,
+    pad=20,
+    bg_size=256,
+    denoise_strength=15,
+    contrast=1.6  # Adjust: 0.5 (less contrast) to 3.0 (more contrast)
+)
