@@ -5,3 +5,6 @@ RedTell
 venv/
 /cellpose
 /Segmented_Images
+/Overlays
+/Overlays
+/SingleCells_Batch

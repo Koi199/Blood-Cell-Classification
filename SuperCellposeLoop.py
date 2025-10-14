@@ -15,40 +15,26 @@ if core.use_gpu() == False:
 
 model = models.CellposeModel(gpu=True)
 
-dir = Path("D:/Kyle 2025/MMA/Slide 1-1/testfolder")
-if not dir.exists():
-    raise FileNotFoundError("directory does not exist")
+# Base directory containing all the slide folders
+base_dir = Path("D:/Kyle 2025/MMA")
+if not base_dir.exists():
+    raise FileNotFoundError(f"Base directory does not exist: {base_dir}")
+
+# Find all "Large Images" folders recursively
+large_image_dirs = list(base_dir.rglob("Large Image"))
+print(f"Found {len(large_image_dirs)} 'Large Image' folders")
+
+if len(large_image_dirs) == 0:
+    raise FileNotFoundError("No 'Large Image' folders found")
 
 image_ext = ".tif"
-files = natsorted([f for f in dir.glob("*"+image_ext) 
-                    if "_masks" not in f.name and "_flows" not in f.name])
-
-if len(files) == 0:
-    raise FileNotFoundError("no image files found")
-else:
-    print(f"{len(files)} images in folder.")
-
 flow_threshold = 0.4
 cellprob_threshold = 0.0
 tile_norm_blocksize = 0
+black_threshold = 0.30  # Skip images with >30% black pixels
 
-save_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Segemented_Images")
-save_dir.mkdir(exist_ok=True)
-
-overlay_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Overlays")
-overlay_dir.mkdir(exist_ok=True)
-
-print("loading images")
-imgs = [io.imread(files[i]) for i in trange(len(files))]
-
-print("running cellpose-SAM")
-masks, flows, styles = model.eval(
-    imgs, 
-    batch_size=32, 
-    flow_threshold=flow_threshold, 
-    cellprob_threshold=cellprob_threshold,
-    normalize={"tile_norm_blocksize": tile_norm_blocksize}
-)
+save_base_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Segmented_Images")
+overlay_base_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Overlays")
 
 def normalize99(img):
     """Normalize image to 0-1 range using 1st and 99th percentiles"""
@@ -73,13 +59,13 @@ def visualize_segmentation(img, masks, filename, output_dir, alpha=0.5):
     
     # Handle image dimensions - squeeze single z dimension
     if img.ndim == 4:
-        img_2d = img[0]  # Take first z-slice
+        img_2d = img[0]
     elif img.ndim == 3:
         if img.shape[0] == 1:
-            img_2d = img[0]  # Remove single z dimension
-        elif img.shape[0] < 4:  # Likely (Z, Y, X)
             img_2d = img[0]
-        else:  # Likely (Y, X, C)
+        elif img.shape[0] < 4:
+            img_2d = img[0]
+        else:
             img_2d = img
     else:
         img_2d = img
@@ -99,20 +85,17 @@ def visualize_segmentation(img, masks, filename, output_dir, alpha=0.5):
     # Create figure
     fig, axes = plt.subplots(1, 3, figsize=(18, 5))
     
-    # Plot 1: Original image
     axes[0].imshow(img_display, cmap='gray')
     axes[0].set_title('Original Image')
     axes[0].axis('off')
     
-    # Plot 2: Masks only
     axes[1].imshow(masks_2d, cmap='nipy_spectral')
     n_cells = len(np.unique(masks_2d)) - 1
     axes[1].set_title(f'Segmentation Masks ({n_cells} cells)')
     axes[1].axis('off')
     
-    # Plot 3: Overlay
     overlay = img_display.copy()
-    cell_ids = np.unique(masks_2d)[1:]  # Skip background
+    cell_ids = np.unique(masks_2d)[1:]
     colors = random_colors(len(cell_ids))
     
     for idx, cell_id in enumerate(cell_ids):
@@ -124,79 +107,157 @@ def visualize_segmentation(img, masks, filename, output_dir, alpha=0.5):
     axes[2].axis('off')
     
     plt.tight_layout()
-    
-    # Save figure
     save_path = output_dir / f"{filename}_overlay.png"
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.close()
     
     return save_path, n_cells
 
-print("\nsaving segmentations and generating visualizations")
+# Process each "Large Images" directory
+total_images = 0
+total_cells = 0
 
-for i, f in enumerate(files):
-    f = Path(f)
-    img = imgs[i]
-    mask = masks[i]
-    flow = flows[i]
+for large_img_dir in large_image_dirs:
+    print(f"\n{'='*60}")
+    print(f"Processing: {large_img_dir}")
+    print('='*60)
     
-    # Handle 2D images (add z-axis if needed)
-    if img.ndim == 2:
-        img = img[np.newaxis, ...]
-    if mask.ndim == 2:
-        mask = mask[np.newaxis, ...]
+    # Get image files
+    files = natsorted([f for f in large_img_dir.glob("*"+image_ext) 
+                      if "_masks" not in f.name and "_flows" not in f.name])
     
-    Ly, Lx = img.shape[-2:]
+    if len(files) == 0:
+        print(f"No image files found in {large_img_dir}")
+        continue
     
-    # Prepare flows in GUI format
-    flows_new = []
-    flows_new.append(flow[0].copy())  # RGB flow
-    flows_new.append(flow[1].copy())  # dP (flow vectors)
-    flows_new.append((np.clip(normalize99(flow[2].copy()), 0, 1) * 255).astype("uint8"))  # normalized cellprob
-    flows_new.append(flow[2].copy())  # original cellprob
+    print(f"Found {len(files)} images")
     
-    # Resize flows if needed
-    resized_flows = []
-    for j, fl in enumerate(flows_new):
-        if fl.shape[-2:] != (Ly, Lx):
-            if fl.ndim == 3:
-                resized = resize_image(fl, Ly=Ly, Lx=Lx, 
-                                     no_channels=False, 
-                                     interpolation=cv2.INTER_NEAREST)
-            elif fl.ndim == 2:
-                resized = resize_image(fl, Ly=Ly, Lx=Lx, 
-                                     no_channels=True, 
-                                     interpolation=cv2.INTER_NEAREST)
+    # Create output directories with descriptive names
+    folder_name = large_img_dir.parent.name
+    save_dir = save_base_dir / folder_name
+    overlay_dir = overlay_base_dir / folder_name
+    save_dir.mkdir(parents=True, exist_ok=True)
+    overlay_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Load all images
+    print("Loading images...")
+    imgs = [io.imread(files[i]) for i in trange(len(files))]
+    
+    # Filter out images with >30% black pixels
+    print("Filtering images by black pixel content...")
+    filtered_imgs = []
+    filtered_files = []
+    
+    for img, file in zip(imgs, files):
+        # Handle 3D images
+        if img.ndim == 3:
+            if img.shape[0] == 1:
+                img_2d = img[0]
+            elif img.shape[0] < 4:
+                img_2d = img[0]
             else:
-                resized = resize_image(fl, Ly=Ly, Lx=Lx, 
-                                     no_channels=False, 
-                                     interpolation=cv2.INTER_NEAREST)
-            resized_flows.append(resized)
+                img_2d = img
         else:
-            resized_flows.append(fl)
+            img_2d = img
+        
+        # Calculate percentage of black pixels (value < 10)
+        black_pixels = np.sum(img_2d < 10) / img_2d.size
+        
+        if black_pixels <= black_threshold:
+            filtered_imgs.append(img)
+            filtered_files.append(file)
+            print(f"  ✓ {file.name} ({black_pixels*100:.1f}% black)")
+        else:
+            print(f"  ✗ {file.name} ({black_pixels*100:.1f}% black) - SKIPPED")
     
-    # Build the save dictionary
-    seg_data = {
-        'masks': mask,
-        'flows': resized_flows,
-        'filename': str(f.resolve()),
-        'diameter': None,
-        'ismanual': np.zeros(len(np.unique(mask))-1, dtype=bool),
-    }
+    print(f"Kept {len(filtered_imgs)}/{len(files)} images\n")
     
-    # Save as *_seg.npy
-    save_path = save_dir / f"{f.stem}_seg.npy"
-    np.save(save_path, seg_data, allow_pickle=True)
+    if len(filtered_imgs) == 0:
+        print("No images passed the black pixel filter, skipping this folder")
+        continue
     
-    # Generate and save visualization
-    overlay_path, n_cells = visualize_segmentation(img, mask, f.stem, overlay_dir, alpha=0.4)
+    # Run segmentation on filtered images
+    print("Running cellpose-SAM...")
+    masks, flows, styles = model.eval(
+        filtered_imgs, 
+        batch_size=32, 
+        flow_threshold=flow_threshold, 
+        cellprob_threshold=cellprob_threshold,
+        normalize={"tile_norm_blocksize": tile_norm_blocksize}
+    )
     
-    print(f"Saved: {save_path}")
-    print(f"  Cells found: {n_cells}")
-    print(f"  Overlay: {overlay_path}")
+    # Save segmentations
+    print("Saving segmentations and generating visualizations...")
+    
+    for i, f in enumerate(filtered_files):
+        f = Path(f)
+        img = imgs[i]
+        mask = masks[i]
+        flow = flows[i]
+        
+        # Handle 2D images
+        if img.ndim == 2:
+            img = img[np.newaxis, ...]
+        if mask.ndim == 2:
+            mask = mask[np.newaxis, ...]
+        
+        Ly, Lx = img.shape[-2:]
+        
+        # Prepare flows
+        flows_new = []
+        flows_new.append(flow[0].copy())
+        flows_new.append(flow[1].copy())
+        flows_new.append((np.clip(normalize99(flow[2].copy()), 0, 1) * 255).astype("uint8"))
+        flows_new.append(flow[2].copy())
+        
+        # Resize flows if needed
+        resized_flows = []
+        for j, fl in enumerate(flows_new):
+            if fl.shape[-2:] != (Ly, Lx):
+                if fl.ndim == 3:
+                    resized = resize_image(fl, Ly=Ly, Lx=Lx, 
+                                         no_channels=False, 
+                                         interpolation=cv2.INTER_NEAREST)
+                elif fl.ndim == 2:
+                    resized = resize_image(fl, Ly=Ly, Lx=Lx, 
+                                         no_channels=True, 
+                                         interpolation=cv2.INTER_NEAREST)
+                else:
+                    resized = resize_image(fl, Ly=Ly, Lx=Lx, 
+                                         no_channels=False, 
+                                         interpolation=cv2.INTER_NEAREST)
+                resized_flows.append(resized)
+            else:
+                resized_flows.append(fl)
+        
+        # Build save dictionary
+        seg_data = {
+            'masks': mask,
+            'flows': resized_flows,
+            'filename': str(f.resolve()),
+            'diameter': None,
+            'ismanual': np.zeros(len(np.unique(mask))-1, dtype=bool),
+        }
+        
+        # Save segmentation
+        save_path = save_dir / f"{f.stem}_seg.npy"
+        np.save(save_path, seg_data, allow_pickle=True)
+        
+        # Generate visualization
+        overlay_path, n_cells = visualize_segmentation(img, mask, f.stem, overlay_dir, alpha=0.4)
+        
+        print(f"Saved: {f.stem}")
+        print(f"  Cells found: {n_cells}")
+        
+        total_images += 1
+        total_cells += n_cells
+    
+    print(f"\nFolder complete: {len(files)} images processed")
 
 print("\n" + "="*60)
-print("SEGMENTATION COMPLETE!")
-print(f"Segmentation files saved to: {save_dir}")
-print(f"Overlay visualizations saved to: {overlay_dir}")
+print("BATCH SEGMENTATION COMPLETE!")
+print(f"Total images processed: {total_images}")
+print(f"Total cells found: {total_cells}")
+print(f"Segmentation files saved to: {save_base_dir}")
+print(f"Overlay visualizations saved to: {overlay_base_dir}")
 print("="*60)
