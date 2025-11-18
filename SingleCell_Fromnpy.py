@@ -137,53 +137,53 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
 
 # ============ USAGE ============
 
-# Base directories
-segmented_images_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Segmented_Images")
-output_base_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/SingleCells_Batch")
+# # Base directories
+# segmented_images_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/Segmented_Images")
+# output_base_dir = Path("D:/Kyle 2025/Repos/Blood-Cell-Classification/SingleCells_Batch")
 
-# Parameters
-pad = 20
-bg_size = 256
-denoise_strength = 15
-contrast_values = [1.0, 1.6]  # Process with different contrast settings
+# # Parameters
+# pad = 20
+# bg_size = 256
+# denoise_strength = 15
+# contrast_values = [1.0, 1.6]  # Process with different contrast settings
 
-# Find all _seg.npy files
-seg_files = list(segmented_images_dir.glob("**/*_seg.npy"))
-print(f"Found {len(seg_files)} segmentation files\n")
+# # Find all _seg.npy files
+# seg_files = list(segmented_images_dir.glob("**/*_seg.npy"))
+# print(f"Found {len(seg_files)} segmentation files\n")
 
-if len(seg_files) == 0:
-    print("No segmentation files found. Check your directory path.")
-else:
-    # Process each contrast setting
-    for contrast in contrast_values:
-        print(f"\n{'='*60}")
-        print(f"Processing with contrast = {contrast}")
-        print(f"{'='*60}\n")
+# if len(seg_files) == 0:
+#     print("No segmentation files found. Check your directory path.")
+# else:
+#     # Process each contrast setting
+#     for contrast in contrast_values:
+#         print(f"\n{'='*60}")
+#         print(f"Processing with contrast = {contrast}")
+#         print(f"{'='*60}\n")
         
-        # Process each segmentation file
-        for idx, seg_file in enumerate(seg_files, start=1):
-            print(f"\n[{idx}/{len(seg_files)}] Processing: {seg_file.name}")
-            print(f"Path: {seg_file}\n")
+#         # Process each segmentation file
+#         for idx, seg_file in enumerate(seg_files, start=1):
+#             print(f"\n[{idx}/{len(seg_files)}] Processing: {seg_file.name}")
+#             print(f"Path: {seg_file}\n")
             
-            try:
-                # Extract slide folder name from the file's parent directory
-                slide_folder = seg_file.parent.name
+#             try:
+#                 # Extract slide folder name from the file's parent directory
+#                 slide_folder = seg_file.parent.name
                 
-                # Create output directory with slide grouping
-                output_dir = output_base_dir / f"contrast_{contrast}" / slide_folder
-                output_dir.mkdir(parents=True, exist_ok=True)
+#                 # Create output directory with slide grouping
+#                 output_dir = output_base_dir / f"contrast_{contrast}" / slide_folder
+#                 output_dir.mkdir(parents=True, exist_ok=True)
                 
-                extract_single_cells(
-                    seg_file=seg_file,
-                    output_dir=output_dir,
-                    pad=pad,
-                    bg_size=bg_size,
-                    denoise_strength=denoise_strength,
-                    contrast=contrast
-                )
-            except Exception as e:
-                print(f"ERROR processing {seg_file.name}: {str(e)}\n")
+#                 extract_single_cells(
+#                     seg_file=seg_file,
+#                     output_dir=output_dir,
+#                     pad=pad,
+#                     bg_size=bg_size,
+#                     denoise_strength=denoise_strength,
+#                     contrast=contrast
+#                 )
+#             except Exception as e:
+#                 print(f"ERROR processing {seg_file.name}: {str(e)}\n")
     
-    print(f"\n{'='*60}")
-    print("ALL PROCESSING COMPLETE!")
-    print(f"{'='*60}")
+#     print(f"\n{'='*60}")
+#     print("ALL PROCESSING COMPLETE!")
+#     print(f"{'='*60}")
