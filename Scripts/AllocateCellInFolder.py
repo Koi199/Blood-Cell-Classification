@@ -3,15 +3,24 @@ import shutil
 import os
 from urllib.parse import unquote
 import re
+import os
+from PIL import Image
+import numpy as np
 
 # Path to csv data
-Label_Export = 'C:/repos/Blood-Cell-Classification/LabelledData/LabelExport_20260304.csv'
+Label_Export = 'C:/repos/Blood-Cell-Classification/LabelledData/LabelExport_20260309v3.csv'
 MCwRBC_folder = "D:/MMA_LabelledData/Unsliced/Monocyte_with_RBC"
 MCwORBC_folder = "D:/MMA_LabelledData/Unsliced/Monocyte_without_RBC"
 Lymphocyte_folder = "D:/MMA_LabelledData/Unsliced/Lymphocyte"
 RBConly_folder = "D:/MMA_LabelledData/Unsliced/RBC alone"
 Unusable_folder = "D:/MMA_LabelledData/Unsliced/Unusable"
 Clusteredcell_folder = "D:/MMA_LabelledData/Unsliced/Clustered_cell"
+
+# Base parent folders
+Unsliced_parent = "D:/MMA_LabelledData/Unsliced"
+Sliced_parent = "D:/MMA_LabelledData/Sliced"
+
+blackcontext_folder = "D:/MMA_LabelledData/contextside_isBlack"
 
 # Helper functions
 def fix_image_path(label_studio_path):
@@ -40,18 +49,28 @@ def build_dst_filename(local_path):
     name, ext = os.path.splitext(basename)
     return f"{name}_slide{slide_id}{ext}"  # e.g. tile_x001_y001_cell_0001_slide1_1.png
 
-import os
-from PIL import Image
-
-# Base parent folders
-Unsliced_parent = "D:/MMA_LabelledData/Unsliced"
-Sliced_parent = "D:/MMA_LabelledData/Sliced"
-
 def slice_image(src_path, dst_path):
     """Crop image to top-left 256x256 pixels and save."""
     with Image.open(src_path) as img:
-        cropped = img.crop((0, 0, 256, 256))
-        cropped.save(dst_path)
+        """
+        Checks if the right 256x256 portion of a 256x512 image is a black square.
+        black_threshold: pixel value below which we consider a pixel black (0-255)
+        """        
+        # Crop right 256x256 (left, upper, right, lower)
+        right_half = img.crop((256, 0, 512, 256))
+        
+        # Convert to numpy and check if all pixels are below threshold - 10 where 0 is pitch black
+        pixels = np.array(right_half)
+        is_black = np.all(pixels <= 10)
+
+        if is_black:
+            os.makedirs(blackcontext_folder, exist_ok=True)
+            shutil.move(src_path, blackcontext_folder)
+            print(f"  → Moved to black folder: {os.path.basename(src_path)}")
+
+        else:
+            cropped = img.crop((0, 0, 256, 256))
+            cropped.save(dst_path)
 
 # Import csv as dataframe
 df_Labels = pd.read_csv(Label_Export)
