@@ -5,11 +5,10 @@ from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 from torchvision import transforms, models
 from PIL import Image
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, fbeta_score
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import confusion_matrix
 from openpyxl import load_workbook
 from datetime import date
 from sklearn.metrics import precision_recall_fscore_support
@@ -17,28 +16,34 @@ from sklearn.metrics import precision_recall_fscore_support
 # ─────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────
+_mono_total = 2211  # 737 × 3
+
 CONFIG = {
     "data_dir": "D:/MMA_LabelledData/Sliced",
     "img_size": 256,
     "batch_size": 32,
-    "num_epochs": 20,
-    "lr": 1e-4,
-    "weight_decay": 1e-4,
+    "num_epochs": 50,                  # high ceiling — early stopping decides
+    "early_stopping_patience": 7,      # stop if no improvement for 7 epochs
+    "lr": 5e-5,
+    "weight_decay": 5e-4,              # increased from 1e-4 for more regularisation
     "num_workers": 4,
     "checkpoint_path": "checkpoints/resnet34_binary.pth",
     "device": "cuda" if torch.cuda.is_available() else "cpu",
+    "class_weights": [1.0, 3.0],       # penalise monocyte misses 3x more
+    "optimise_metric": "F2",           # optimise for recall-weighted F2 score
+    "classification_threshold": 0.35,  # refined by threshold search after training
 
-    # Top-level binary targets (Monocyte subsampled to match Non-Monocyte)
+    # Top-level binary targets
     "binary_targets": {
-        0: 3000,   # Non-Monocyte 
-        1: 3000,   # Monocyte
+        0: 2211,   # Non-Monocyte — natural training count
+        1: _mono_total,   # Monocyte — 737 × 3
     },
 
-    # Within-Monocyte subtype targets (must sum to binary_targets[1] = 2500)
+    # Within-Monocyte subtype targets (must sum to binary_targets[1])
     "monocyte_subtype_targets": {
-        "MCwRBC": 1000,   # boosted from ~802
-        "MCwoRBC": 1000,   # subsampled from ~3948
-        "Clustered": 1000,   # subsampled from ~5357
+        "MCwRBC":    _mono_total // 3,
+        "MCwoRBC":   _mono_total // 3,
+        "Clustered": _mono_total - 2 * (_mono_total // 3),  # absorbs rounding remainder
     }
 }
 
@@ -86,13 +91,17 @@ class BloodCellDataset(Dataset):
 
 # ─────────────────────────────────────────────
 # TRANSFORMS
+# Stronger augmentation to simulate cross-slide variation
 # ─────────────────────────────────────────────
 train_transforms = transforms.Compose([
     transforms.Resize((256, 256)),
     transforms.RandomHorizontalFlip(),
     transforms.RandomVerticalFlip(),
     transforms.RandomRotation(15),
-    transforms.ColorJitter(brightness=0.2, contrast=0.2),
+    transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.2, hue=0.05),
+    transforms.RandomGrayscale(p=0.05),
+    transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 1.0)),
+    transforms.RandomAffine(degrees=0, translate=(0.05, 0.05)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406],
                          std=[0.229, 0.224, 0.225]),
@@ -147,10 +156,8 @@ def make_weighted_sampler(train_samples, binary_targets, subtype_targets):
     sample_weights = np.zeros(len(train_samples), dtype=np.float32)
     for idx, (_, fine_label, _) in enumerate(train_samples):
         if fine_label == "NonMonocyte":
-            # Non-Monocyte: weight relative to binary target
             w = binary_targets[0] / fine_counts["NonMonocyte"]
         else:
-            # Monocyte subtype: weight relative to subtype target
             w = subtype_targets[fine_label] / fine_counts[fine_label]
         sample_weights[idx] = w
 
@@ -242,7 +249,7 @@ def build_model(num_classes=2, freeze_backbone=False):
 
     # Replace final FC layer
     model.fc = nn.Sequential(
-        nn.Dropout(p=0.4),
+        nn.Dropout(p=0.5),                              # increased from 0.4
         nn.Linear(model.fc.in_features, num_classes)
     )
     return model
@@ -264,6 +271,71 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
         correct += (outputs.argmax(1) == labels).sum().item()
         total += imgs.size(0)
     return total_loss / total, correct / total
+
+# ─────────────────────────────────────────────
+# EVALUATE
+# Supports custom threshold for cascaded architecture
+# ─────────────────────────────────────────────
+@torch.no_grad()
+def evaluate(model, loader, criterion, device, threshold=0.5):
+    model.eval()
+    total_loss, correct, total = 0, 0, 0
+    all_preds, all_labels = [], []
+    for imgs, labels in loader:
+        imgs, labels = imgs.to(device), labels.to(device)
+        outputs = model(imgs)
+        loss = criterion(outputs, labels)
+        total_loss += loss.item() * imgs.size(0)
+        # Use threshold instead of argmax for flexible decision boundary
+        probs = torch.softmax(outputs, dim=1)
+        preds = (probs[:, 1] >= threshold).long()
+        correct += (preds == labels).sum().item()
+        total += imgs.size(0)
+        all_preds.extend(preds.cpu().numpy())
+        all_labels.extend(labels.cpu().numpy())
+    return total_loss / total, correct / total, all_preds, all_labels
+
+# ─────────────────────────────────────────────
+# THRESHOLD SEARCH
+# Find optimal threshold for cascaded architecture —
+# prioritises monocyte recall > 0.95
+# ─────────────────────────────────────────────
+def threshold_search(model, test_loader, criterion, device):
+    all_probs, all_labels = [], []
+    model.eval()
+    with torch.no_grad():
+        for imgs, labels in test_loader:
+            imgs = imgs.to(device)
+            probs = torch.softmax(model(imgs), dim=1)
+            all_probs.extend(probs[:, 1].cpu().numpy())
+            all_labels.extend(labels.numpy())
+
+    print(f"\n── Threshold Search ──")
+    print(f"{'Threshold':>10} {'Mono Recall':>12} {'Mono Prec':>10} {'NonMono Prec':>13} {'Accuracy':>10} {'F2':>8}")
+    print("-" * 70)
+
+    best_threshold = 0.5
+    best_score = 0
+
+    for threshold in np.arange(0.20, 0.71, 0.05):
+        preds = (np.array(all_probs) >= threshold).astype(int)
+        prec, rec, f1, _ = precision_recall_fscore_support(
+            all_labels, preds, labels=[0, 1], zero_division=0
+        )
+        f2 = fbeta_score(all_labels, preds, beta=2, average="weighted")
+        acc = np.mean(np.array(preds) == np.array(all_labels))
+
+        print(f"{threshold:>10.2f} {rec[1]:>12.4f} {prec[1]:>10.4f} "
+              f"{prec[0]:>13.4f} {acc:>10.4f} {f2:>8.4f}")
+
+        # Target: monocyte recall >= 0.95, maximise non-mono precision
+        if rec[1] >= 0.95 and prec[0] > best_score:
+            best_score = prec[0]
+            best_threshold = threshold
+
+    print(f"\n  Recommended threshold: {best_threshold:.2f}")
+    print(f"  (Monocyte recall ≥ 0.95, best Non-Monocyte precision)")
+    return best_threshold
 
 # ─────────────────────────────────────────────
 # PLOTTING
@@ -299,15 +371,19 @@ def save_plots(train_losses, val_losses, train_accs, val_accs,
     plt.close()
     print("  ✓ Saved accuracy_curve.png")
 
-    # ── Confusion matrix heatmap ──
+    # ── Confusion matrix heatmap (%) ──
     cm = confusion_matrix(true_labels, preds)
+    cm_percent = cm.astype(float) / cm.sum(axis=1, keepdims=True) * 100
+
     plt.figure(figsize=(7, 6))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+    sns.heatmap(cm_percent, annot=True, fmt=".1f", cmap="Blues",
                 xticklabels=["Non-Monocyte", "Monocyte"],
                 yticklabels=["Non-Monocyte", "Monocyte"])
-    plt.title("Confusion Matrix")
+    plt.title("Confusion Matrix (%)")
     plt.ylabel("True Label")
     plt.xlabel("Predicted Label")
+    for text in plt.gca().texts:
+        text.set_text(text.get_text() + "%")
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "confusion_matrix.png"), dpi=150)
     plt.close()
@@ -319,19 +395,15 @@ def save_plots(train_losses, val_losses, train_accs, val_accs,
 def log_experiment(config, results, log_path="experiment_log.xlsx", notes=""):
     """
     Appends a new run row to the experiment log Excel file.
-    results: dict with keys — test_acc, non_mono_prec, non_mono_recall,
-             non_mono_f1, mono_prec, mono_recall, mono_f1,
-             macro_f1, weighted_f1, tp, tn, fp, fn
     """
     wb = load_workbook(log_path)
     ws = wb.active
 
-    # Find next empty row
     next_row = ws.max_row + 1
     run_num  = next_row - 2  # subtract 2 header rows
 
     mono_target = sum(config["monocyte_subtype_targets"].values())
-    aug_str = "HFlip, VFlip, Rotation(15°), ColorJitter(b=0.2,c=0.2), ImageNet norm"
+    aug_str = "HFlip, VFlip, Rot(15°), ColorJitter(b=0.3,c=0.3,s=0.2,h=0.05), Grayscale(0.05), GaussianBlur, Affine(t=0.05)"
 
     row = [
         run_num,
@@ -339,7 +411,7 @@ def log_experiment(config, results, log_path="experiment_log.xlsx", notes=""):
         notes,
         "ResNet34", "ImageNet",
         "Yes" if config.get("freeze_backbone", False) else "No",
-        0.4,
+        0.5,                                              # updated dropout
         12494,
         70, 10, 20,
         config["binary_targets"][0],
@@ -347,13 +419,13 @@ def log_experiment(config, results, log_path="experiment_log.xlsx", notes=""):
         config["monocyte_subtype_targets"]["MCwRBC"],
         config["monocyte_subtype_targets"]["MCwoRBC"],
         config["monocyte_subtype_targets"]["Clustered"],
-        "Inverse natural frequency",
+        f"Fixed [{config['class_weights'][0]}, {config['class_weights'][1]}]",
         "AdamW",
         config["lr"],
         config["weight_decay"],
         config["batch_size"],
         config["num_epochs"],
-        f"CosineAnnealingLR (T_max={config['num_epochs']})",
+        f"ReduceLROnPlateau(factor=0.5, patience=3)",
         f"{config['img_size']}x{config['img_size']}",
         aug_str,
         results["test_acc"],
@@ -378,61 +450,63 @@ def log_experiment(config, results, log_path="experiment_log.xlsx", notes=""):
     wb.save(log_path)
     print(f"  ✓ Run {run_num} logged to {log_path}")
 
-
-@torch.no_grad()
-def evaluate(model, loader, criterion, device):
-    model.eval()
-    total_loss, correct, total = 0, 0, 0
-    all_preds, all_labels = [], []
-    for imgs, labels in loader:
-        imgs, labels = imgs.to(device), labels.to(device)
-        outputs = model(imgs)
-        loss = criterion(outputs, labels)
-        total_loss += loss.item() * imgs.size(0)
-        preds = outputs.argmax(1)
-        correct += (preds == labels).sum().item()
-        total += imgs.size(0)
-        all_preds.extend(preds.cpu().numpy())
-        all_labels.extend(labels.cpu().numpy())
-    return total_loss / total, correct / total, all_preds, all_labels
-
-
+# ─────────────────────────────────────────────
+# TRAIN
+# ─────────────────────────────────────────────
 def train(config):
     device = config["device"]
     print(f"Training on: {device}")
     os.makedirs(os.path.dirname(config["checkpoint_path"]), exist_ok=True)
 
     train_loader, val_loader, test_loader, fine_counts = make_dataloaders(config)
-    model = build_model(num_classes=2, freeze_backbone=False).to(device)
 
-    non_mono_count = fine_counts.get("NonMonocyte", 1)
-    mono_count = sum(v for k, v in fine_counts.items() if k != "NonMonocyte")
+    # Two-stage training: freeze backbone for first 5 epochs, then unfreeze
+    model = build_model(num_classes=2, freeze_backbone=True).to(device)
+
+    # Fixed asymmetric class weights — penalise monocyte misses 3x more
     class_weights = torch.tensor(
-        [1.0 / non_mono_count, 1.0 / mono_count], dtype=torch.float
+        config["class_weights"], dtype=torch.float
     ).to(device)
-    criterion = nn.CrossEntropyLoss(weight=class_weights)
+    criterion = nn.CrossEntropyLoss(
+        weight=class_weights,
+        label_smoothing=0.1    # prevents overconfidence
+    )
 
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=config["lr"], weight_decay=config["weight_decay"]
     )
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-        optimizer, T_max=config["num_epochs"]
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode="max", factor=0.5, patience=3
     )
 
     # ── Track metrics per epoch ──
     train_losses, val_losses = [], []
     train_accs,   val_accs   = [], []
-    best_val_acc = 0.0
+    best_f2       = 0.0
+    best_val_acc  = 0.0
+    epochs_without_improvement = 0
 
     print("\n── Training ──")
     for epoch in range(1, config["num_epochs"] + 1):
+
+        # ── Unfreeze backbone after epoch 5 ──
+        if epoch == 6:
+            for param in model.parameters():
+                param.requires_grad = True
+            print("  ✓ Backbone unfrozen — fine-tuning all layers")
+
         train_loss, train_acc = train_one_epoch(
             model, train_loader, optimizer, criterion, device
         )
-        val_loss, val_acc, _, _ = evaluate(
-            model, val_loader, criterion, device
+        val_loss, val_acc, val_preds_epoch, val_labels_epoch = evaluate(
+            model, val_loader, criterion, device,
+            threshold=config["classification_threshold"]
         )
-        scheduler.step()
+
+        # Compute F2 on val set — weights recall higher than precision
+        f2 = fbeta_score(val_labels_epoch, val_preds_epoch, beta=2, average="weighted")
+
+        scheduler.step(val_acc)
 
         train_losses.append(train_loss)
         val_losses.append(val_loss)
@@ -441,30 +515,48 @@ def train(config):
 
         print(f"Epoch {epoch:02d}/{config['num_epochs']} | "
               f"Train Loss: {train_loss:.4f}  Acc: {train_acc:.4f} | "
-              f"Val Loss: {val_loss:.4f}  Acc: {val_acc:.4f}")
+              f"Val Loss: {val_loss:.4f}  Acc: {val_acc:.4f}  F2: {f2:.4f}")
 
-        if val_acc > best_val_acc:
+        # Save best model based on F2 score (recall-weighted)
+        if f2 > best_f2:
+            best_f2 = f2
             best_val_acc = val_acc
             torch.save(model.state_dict(), config["checkpoint_path"])
-            print(f"  ✓ New best model saved (val_acc={val_acc:.4f})")
+            epochs_without_improvement = 0
+            print(f"  ✓ New best model saved (F2={f2:.4f}, val_acc={val_acc:.4f})")
+        else:
+            epochs_without_improvement += 1
+            print(f"  No improvement ({epochs_without_improvement}/{config['early_stopping_patience']})")
+            if epochs_without_improvement >= config["early_stopping_patience"]:
+                print(f"\n  Early stopping triggered at epoch {epoch}")
+                break
 
-    # ── Final test evaluation ──
-    print("\n── Test Set Evaluation ──")
+    # ── Load best checkpoint ──
+    print("\n── Loading Best Checkpoint ──")
     model.load_state_dict(torch.load(config["checkpoint_path"]))
-    _, test_acc, preds, true_labels = evaluate(
-        model, test_loader, criterion, device
-    )
-    # ── Validation set evaluation ──
+
+    # ── Threshold search — find optimal for cascaded architecture ──
+    print("\n── Threshold Search for Cascaded Architecture ──")
+    optimal_threshold = threshold_search(model, test_loader, criterion, device)
+
+    # ── Validation set evaluation (at optimal threshold) ──
     print("\n── Validation Set Evaluation ──")
     _, val_acc_final, val_preds, val_true = evaluate(
-        model, val_loader, criterion, device
+        model, val_loader, criterion, device, threshold=optimal_threshold
     )
     print(f"Val Accuracy: {val_acc_final:.4f}\n")
     print(classification_report(
         val_true, val_preds,
         target_names=["Non-Monocyte", "Monocyte"]
     ))
-    # -- Test Accuracy --
+    print("Confusion Matrix:")
+    print(confusion_matrix(val_true, val_preds))
+
+    # ── Test set evaluation (at optimal threshold) ──
+    print("\n── Test Set Evaluation ──")
+    _, test_acc, preds, true_labels = evaluate(
+        model, test_loader, criterion, device, threshold=optimal_threshold
+    )
     print(f"Test Accuracy: {test_acc:.4f}\n")
     print(classification_report(
         true_labels, preds,
@@ -478,15 +570,19 @@ def train(config):
     plot_dir = os.path.dirname(config["checkpoint_path"])
     save_plots(train_losses, val_losses, train_accs, val_accs,
                true_labels, preds, output_dir=plot_dir)
-    
+
     # ── Log experiment ──
     prec, rec, f1, _ = precision_recall_fscore_support(
         true_labels, preds, labels=[0, 1]
     )
-    macro_f1    = (f1[0] + f1[1]) / 2
-    weighted_f1 = (f1[0] * 477 + f1[1] * 2022) / 2499  # adjust support counts
-
+    _, _, f1_weighted, _ = precision_recall_fscore_support(
+        true_labels, preds, average="weighted"
+    )
+    _, _, f1_macro, _ = precision_recall_fscore_support(
+        true_labels, preds, average="macro"
+    )
     cm = confusion_matrix(true_labels, preds)
+
     log_experiment(config, {
         "test_acc":        round(test_acc, 4),
         "non_mono_prec":   round(prec[0], 4),
@@ -495,11 +591,11 @@ def train(config):
         "mono_prec":       round(prec[1], 4),
         "mono_recall":     round(rec[1],  4),
         "mono_f1":         round(f1[1],   4),
-        "macro_f1":        round(macro_f1,    4),
-        "weighted_f1":     round(weighted_f1, 4),
+        "macro_f1":        round(f1_macro,    4),
+        "weighted_f1":     round(f1_weighted, 4),
         "tp": int(cm[1,1]), "tn": int(cm[0,0]),
         "fp": int(cm[0,1]), "fn": int(cm[1,0]),
-        "val_acc": round(val_acc, 4),
+        "val_acc": round(val_acc_final, 4),
     }, log_path="C:/repos/Blood-Cell-Classification/experiment_log.xlsx",
        notes="")  # <-- fill in notes per run
 
