@@ -37,9 +37,9 @@ CONFIG = {
     "data_dir": "D:/MMA_LabelledData/Sliced",
     "img_size": 256,
     "batch_size": 32,
-    "num_epochs": 20,
-    "early_stopping_patience": 5,
-    "lr": 5e-5,
+    "num_epochs": 50,
+    "early_stopping_patience": 7,
+    "lr": 1e-5,
     "weight_decay": 1e-4,
     "num_workers": 4,
     "checkpoint_path": "checkpoints_3class/resnet34_3class.pth",
@@ -47,8 +47,8 @@ CONFIG = {
     "classification_threshold": 0.5,  # used for binary cascade comparison only
 
     "subclass_targets": {
-        # NonMonocyte subclasses — sum to 1200
-        "Unusable":   600,
+        # NonMonocyte subclasses — sum to 1800
+        "Unusable":   1200,
         "Lymphocyte": 300,
         "RBCalone":   300,
         # Unclustered subclasses — sum to 1800

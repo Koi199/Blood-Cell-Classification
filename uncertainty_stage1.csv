@@ -1,0 +1,1140 @@
+file_path,folder,mono_probability,prediction,uncertain,label_studio_id,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0253_slide1_2.png,Clustered_cell,0.4001,NonMonocyte,TRUE,60053,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0045_slide2_6.png,Unusable,0.4003,NonMonocyte,TRUE,60898,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0278_slide1_4.png,Clustered_cell,0.4003,NonMonocyte,TRUE,62087,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0028_slide2_3.png,Unusable,0.4003,NonMonocyte,TRUE,220770,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y010_cell_0075_slide1_3.png,Unusable,0.4006,NonMonocyte,TRUE,494486,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0029_slide2_3.png,Monocyte_without_RBC,0.4006,NonMonocyte,TRUE,66465,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0050_slide2_4.png,Monocyte_without_RBC,0.4007,NonMonocyte,TRUE,221086,RBC alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0064_slide1_2.png,Clustered_cell,0.4007,NonMonocyte,TRUE,61100,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y009_cell_0015_slide1_6.png,Monocyte_without_RBC,0.4008,NonMonocyte,TRUE,483964,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0322_slide1_2.png,Monocyte_without_RBC,0.4008,NonMonocyte,TRUE,220218,Clustered
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0005_slide1_3.png,Unusable,0.401,NonMonocyte,TRUE,58182,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0102_slide1_6.png,Clustered_cell,0.4011,NonMonocyte,TRUE,221601,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0067_slide2_3.png,Unusable,0.4012,NonMonocyte,TRUE,59047,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0046_slide1_4.png,Clustered_cell,0.4013,NonMonocyte,TRUE,60902,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0004_slide2_3.png,Lymphocyte,0.4014,NonMonocyte,TRUE,58166,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0026_slide1_3.png,Monocyte_without_RBC,0.4015,NonMonocyte,TRUE,56693,unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0043_slide2_2.png,Monocyte_without_RBC,0.4019,NonMonocyte,TRUE,66663,unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0026_slide1_2.png,Unusable,0.402,NonMonocyte,TRUE,58538,Clustered
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0023_slide2_1.png,Monocyte_without_RBC,0.402,NonMonocyte,TRUE,56645,Unusable~lymphocyte
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0269_slide1_4.png,Monocyte_without_RBC,0.4021,NonMonocyte,TRUE,65882,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0045_slide1_8.png,Monocyte_without_RBC,0.4021,NonMonocyte,TRUE,221013,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0013_slide2_8.png,Monocyte_without_RBC,0.4023,NonMonocyte,TRUE,68304,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0081_slide2_1.png,Unusable,0.4028,NonMonocyte,TRUE,59187,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0285_slide1_5.png,Monocyte_without_RBC,0.4031,NonMonocyte,TRUE,58025,Clustered
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0192_slide1_1.png,Clustered_cell,0.4033,NonMonocyte,TRUE,219840,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0040_slide1_6.png,Clustered_cell,0.4034,NonMonocyte,TRUE,56910,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0010_slide1_3.png,Monocyte_without_RBC,0.4035,NonMonocyte,TRUE,220473,Unusable~lymphocyte
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y014_cell_0002_slide1_3.png,Monocyte_without_RBC,0.4036,NonMonocyte,TRUE,495161,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0010_slide1_4.png,Clustered_cell,0.4036,NonMonocyte,TRUE,494751,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0003_slide1_2.png,Clustered_cell,0.4038,NonMonocyte,TRUE,56206,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0080_slide2_4.png,Monocyte_without_RBC,0.4039,NonMonocyte,TRUE,57391,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0035_slide2_7.png,Unusable,0.4046,NonMonocyte,TRUE,62711,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0010_slide2_1.png,Clustered_cell,0.4048,NonMonocyte,TRUE,60375,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0140_slide1_4.png,Monocyte_without_RBC,0.405,NonMonocyte,TRUE,219618,Unusable~Lymphocyte
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0128_slide2_4.png,Monocyte_without_RBC,0.405,NonMonocyte,TRUE,469818,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0026_slide2_4.png,Monocyte_without_RBC,0.4052,NonMonocyte,TRUE,66421,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0004_slide2_8.png,Monocyte_without_RBC,0.4054,NonMonocyte,TRUE,68126,RBC alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0093_slide1_5.png,Clustered_cell,0.4057,NonMonocyte,TRUE,65280,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0038_slide1_6.png,Clustered_cell,0.4061,NonMonocyte,TRUE,60792,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0004_slide2_4.png,Clustered_cell,0.4062,NonMonocyte,TRUE,66043,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0069_slide2_1.png,Unusable,0.4062,NonMonocyte,TRUE,57278,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0225_slide1_2.png,Clustered_cell,0.4064,NonMonocyte,TRUE,59941,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0018_slide2_3.png,Unusable,0.4065,NonMonocyte,TRUE,58431,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0052_slide1_8.png,Clustered_cell,0.4067,NonMonocyte,TRUE,62938,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0144_slide1_6.png,Unusable,0.4068,NonMonocyte,TRUE,219639,Clustered
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0099_slide1_4.png,Unusable,0.4068,NonMonocyte,TRUE,67227,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0109_slide1_5.png,Clustered_cell,0.4069,NonMonocyte,TRUE,61492,x
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y004_cell_0004_slide2_4.png,RBC alone,0.4071,NonMonocyte,TRUE,62199,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0221_slide1_6.png,Clustered_cell,0.4072,NonMonocyte,TRUE,61987,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0161_slide1_1.png,Unusable,0.4074,NonMonocyte,TRUE,221934,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0123_slide1_4.png,Monocyte_without_RBC,0.4075,NonMonocyte,TRUE,67428,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0069_slide2_4.png,Monocyte_without_RBC,0.4076,NonMonocyte,TRUE,57281,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0134_slide1_5.png,Clustered_cell,0.4077,NonMonocyte,TRUE,63553,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0013_slide1_2.png,Lymphocyte,0.4078,NonMonocyte,TRUE,60423,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0114_slide1_5.png,Monocyte_without_RBC,0.4081,NonMonocyte,TRUE,67357,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0039_slide1_3.png,Monocyte_without_RBC,0.4085,NonMonocyte,TRUE,62756,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0003_slide2_8.png,Lymphocyte,0.4086,NonMonocyte,TRUE,56220,RBC alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0069_slide2_3.png,Clustered_cell,0.4088,NonMonocyte,TRUE,59069,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0009_slide1_4.png,Unusable,0.4093,NonMonocyte,TRUE,60351,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0128_slide1_5.png,Lymphocyte,0.4094,NonMonocyte,TRUE,61626,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0049_slide1_8.png,Monocyte_without_RBC,0.4097,NonMonocyte,TRUE,60944,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0075_slide1_5.png,Monocyte_without_RBC,0.4098,NonMonocyte,TRUE,67012,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0054_slide1_1.png,Unusable,0.4098,NonMonocyte,TRUE,64864,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0063_slide1_1.png,Monocyte_without_RBC,0.4099,NonMonocyte,TRUE,66897,RBC alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0033_slide1_3.png,Clustered_cell,0.4102,NonMonocyte,TRUE,62672,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0050_slide2_3.png,Monocyte_without_RBC,0.4104,NonMonocyte,TRUE,58854,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0335_slide1_5.png,Monocyte_without_RBC,0.4106,NonMonocyte,TRUE,58075,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y006_cell_0175_slide1_8.png,Monocyte_without_RBC,0.4107,NonMonocyte,TRUE,479879,unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0222_slide1_6.png,Clustered_cell,0.4108,NonMonocyte,TRUE,61990,unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0021_slide2_1.png,Monocyte_without_RBC,0.4109,NonMonocyte,TRUE,56609,RBC alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0022_slide2_7.png,Unusable,0.4116,NonMonocyte,TRUE,66364,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0042_slide1_2.png,Clustered_cell,0.4116,NonMonocyte,TRUE,56933,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y013_cell_0024_slide1_4.png,Monocyte_without_RBC,0.4117,NonMonocyte,TRUE,495002,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0002_slide1_7.png,Lymphocyte,0.4118,NonMonocyte,TRUE,56187,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0077_slide2_2.png,Monocyte_without_RBC,0.412,NonMonocyte,TRUE,57359,Rbc Alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0326_slide1_4.png,Unusable,0.4122,NonMonocyte,TRUE,63976,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0053_slide1_8.png,Monocyte_without_RBC,0.4122,NonMonocyte,TRUE,62950,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0119_slide1_5.png,Clustered_cell,0.4124,NonMonocyte,TRUE,59436,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0031_slide1_8.png,Unusable,0.4126,NonMonocyte,TRUE,62648,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0119_slide1_2.png,Unusable,0.4131,NonMonocyte,TRUE,59433,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0160_slide1_5.png,Clustered_cell,0.4132,NonMonocyte,TRUE,479803,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0026_slide1_1.png,Clustered_cell,0.4135,NonMonocyte,TRUE,56691,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0075_slide1_2.png,Clustered_cell,0.4135,NonMonocyte,TRUE,59125,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0240_slide1_6.png,Unusable,0.4136,NonMonocyte,TRUE,63886,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0223_slide1_2.png,Monocyte_without_RBC,0.4138,NonMonocyte,TRUE,219965,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0029_slide1_7.png,Unusable,0.4138,NonMonocyte,TRUE,56749,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0086_slide2_6.png,Clustered_cell,0.4141,NonMonocyte,TRUE,67115,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0001_slide2_2.png,Clustered_cell,0.4149,NonMonocyte,TRUE,65970,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0196_slide1_3.png,Monocyte_without_RBC,0.4149,NonMonocyte,TRUE,67814,RBC alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0019_slide2_6.png,Unusable,0.415,NonMonocyte,TRUE,62483,MonowithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0054_slide2_4.png,Monocyte_without_RBC,0.4154,NonMonocyte,TRUE,62965,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0033_slide1_4.png,Unusable,0.4155,NonMonocyte,TRUE,66518,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0135_slide1_2.png,Clustered_cell,0.4156,NonMonocyte,TRUE,219591,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0023_slide1_4.png,Unusable,0.4156,NonMonocyte,TRUE,66368,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0107_slide1_4.png,Clustered_cell,0.4157,NonMonocyte,TRUE,67299,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0156_slide1_1.png,Monocyte_without_RBC,0.4157,NonMonocyte,TRUE,219695,x
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0080_slide1_5.png,RBC alone,0.416,NonMonocyte,TRUE,59176,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0070_slide1_5.png,Clustered_cell,0.4164,NonMonocyte,TRUE,57284,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0008_slide1_1.png,Monocyte_without_RBC,0.4167,NonMonocyte,TRUE,220432,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0171_slide1_5.png,Monocyte_without_RBC,0.4169,NonMonocyte,TRUE,63701,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0070_slide2_3.png,Monocyte_without_RBC,0.4176,NonMonocyte,TRUE,59080,RBC alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0024_slide1_6.png,Monocyte_without_RBC,0.4177,NonMonocyte,TRUE,64430,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0208_slide1_4.png,Clustered_cell,0.418,NonMonocyte,TRUE,67861,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y011_cell_0088_slide1_3.png,Monocyte_without_RBC,0.4182,NonMonocyte,TRUE,494711,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0134_slide1_5.png,Monocyte_without_RBC,0.4186,NonMonocyte,TRUE,221802,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0003_slide2_1.png,Unusable,0.4193,NonMonocyte,TRUE,58140,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0065_slide1_2.png,Unusable,0.4198,NonMonocyte,TRUE,57231,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0001_slide1_4.png,Unusable,0.4198,NonMonocyte,TRUE,60177,x
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y006_cell_0050_slide1_3.png,Monocyte_with_RBC,0.42,NonMonocyte,TRUE,493141,Clustered cell
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0001_slide1_2.png,Lymphocyte,0.42,NonMonocyte,TRUE,56158,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0005_slide1_5.png,Clustered_cell,0.42,NonMonocyte,TRUE,64084,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0146_slide1_6.png,Monocyte_without_RBC,0.4205,NonMonocyte,TRUE,63602,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0088_slide2_1.png,Clustered_cell,0.4209,NonMonocyte,TRUE,63291,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0030_slide2_5.png,Monocyte_without_RBC,0.4209,NonMonocyte,TRUE,62639,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0196_slide1_4.png,Clustered_cell,0.4209,NonMonocyte,TRUE,67815,unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0026_slide2_4.png,Clustered_cell,0.421,NonMonocyte,TRUE,60630,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y007_cell_0012_slide1_8.png,Clustered_cell,0.4213,NonMonocyte,TRUE,68279,x
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y004_cell_0239_slide1_6.png,Monocyte_with_RBC,0.4214,NonMonocyte,TRUE,63884,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0008_slide3_5.png,Unusable,0.4215,NonMonocyte,TRUE,56345,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0031_slide2_5.png,Monocyte_without_RBC,0.4215,NonMonocyte,TRUE,220817,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0150_slide1_6.png,Clustered_cell,0.4216,NonMonocyte,TRUE,57786,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0004_slide1_5.png,Clustered_cell,0.4218,NonMonocyte,TRUE,64061,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0213_slide1_6.png,Clustered_cell,0.422,NonMonocyte,TRUE,63832,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0082_slide2_4.png,Monocyte_without_RBC,0.4224,NonMonocyte,TRUE,57411,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0179_slide1_3.png,Clustered_cell,0.4227,NonMonocyte,TRUE,67746,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0125_slide1_5.png,Unusable,0.4228,NonMonocyte,TRUE,59472,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0023_slide1_6.png,Clustered_cell,0.4229,NonMonocyte,TRUE,58500,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0047_slide1_2.png,Clustered_cell,0.4237,NonMonocyte,TRUE,64771,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0007_slide2_8.png,Monocyte_without_RBC,0.4238,NonMonocyte,TRUE,60324,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0098_slide1_5.png,Monocyte_without_RBC,0.424,NonMonocyte,TRUE,67219,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0275_slide1_4.png,Lymphocyte,0.424,NonMonocyte,TRUE,62084,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0011_slide2_4.png,Monocyte_without_RBC,0.4241,NonMonocyte,TRUE,66182,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0007_slide1_6.png,Clustered_cell,0.4242,NonMonocyte,TRUE,64131,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0101_slide2_6.png,Unusable,0.4244,NonMonocyte,TRUE,65360,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0002_slide2_7.png,Clustered_cell,0.4244,NonMonocyte,TRUE,62154,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0007_slide2_5.png,Monocyte_without_RBC,0.4245,NonMonocyte,TRUE,220423,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0221_slide1_4.png,Monocyte_without_RBC,0.4246,NonMonocyte,TRUE,65803,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0002_slide3_8.png,Monocyte_without_RBC,0.4247,NonMonocyte,TRUE,64032,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0007_slide1_6.png,Monocyte_without_RBC,0.4248,NonMonocyte,TRUE,56306,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0007_slide2_4.png,Monocyte_without_RBC,0.4252,NonMonocyte,TRUE,220422,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0007_slide2_3.png,Monocyte_without_RBC,0.4253,NonMonocyte,TRUE,58233,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0125_slide1_8.png,Monocyte_without_RBC,0.4254,NonMonocyte,TRUE,469799,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0123_slide1_4.png,Clustered_cell,0.4256,NonMonocyte,TRUE,65515,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y007_cell_0016_slide1_7.png,Unusable,0.426,NonMonocyte,TRUE,68344,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0009_slide2_8.png,Monocyte_without_RBC,0.426,NonMonocyte,TRUE,60363,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0033_slide1_4.png,Clustered_cell,0.4263,NonMonocyte,TRUE,58633,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0079_slide2_3.png,Lymphocyte,0.4271,NonMonocyte,TRUE,59172,RBC alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0227_slide1_6.png,Clustered_cell,0.4274,NonMonocyte,TRUE,59952,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0009_slide3_7.png,Monocyte_without_RBC,0.4277,NonMonocyte,TRUE,60365,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0087_slide1_1.png,Unusable,0.4281,NonMonocyte,TRUE,67116,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0066_slide1_2.png,Clustered_cell,0.4281,NonMonocyte,TRUE,59028,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0130_slide1_4.png,Clustered_cell,0.4282,NonMonocyte,TRUE,57716,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0253_slide1_6.png,Monocyte_without_RBC,0.4283,NonMonocyte,TRUE,60056,Rbc alone
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0072_slide1_6.png,Lymphocyte,0.4284,NonMonocyte,TRUE,61184,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0295_slide1_2.png,Unusable,0.4286,NonMonocyte,TRUE,220190,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0020_slide1_1.png,Clustered_cell,0.4286,NonMonocyte,TRUE,220635,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0033_slide1_4.png,Clustered_cell,0.4288,NonMonocyte,TRUE,494834,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0070_slide1_8.png,Monocyte_without_RBC,0.4293,NonMonocyte,TRUE,59077,unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0012_slide1_4.png,Clustered_cell,0.4294,NonMonocyte,TRUE,494954,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0183_slide1_5.png,Clustered_cell,0.4294,NonMonocyte,TRUE,479914,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0024_slide1_8.png,Monocyte_without_RBC,0.4297,NonMonocyte,TRUE,64432,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0258_slide1_2.png,Monocyte_without_RBC,0.4299,NonMonocyte,TRUE,220096,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0003_slide2_4.png,Monocyte_without_RBC,0.43,NonMonocyte,TRUE,68098,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0209_slide1_4.png,Unusable,0.4301,NonMonocyte,TRUE,65779,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0083_slide2_2.png,Monocyte_without_RBC,0.4304,NonMonocyte,TRUE,221448,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0056_slide1_8.png,Monocyte_without_RBC,0.4304,NonMonocyte,TRUE,62986,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0075_slide2_5.png,Unusable,0.4305,NonMonocyte,TRUE,63196,x
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y002_cell_0068_slide1_8.png,Monocyte_with_RBC,0.4306,NonMonocyte,TRUE,59055,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0064_slide2_5.png,Clustered_cell,0.4308,NonMonocyte,TRUE,64990,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0268_slide1_4.png,Unusable,0.431,NonMonocyte,TRUE,65881,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0039_slide1_1.png,Clustered_cell,0.4314,NonMonocyte,TRUE,66599,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y007_cell_0005_slide1_6.png,Clustered_cell,0.4316,NonMonocyte,TRUE,68139,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0143_slide1_2.png,Clustered_cell,0.4318,NonMonocyte,TRUE,59577,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0001_slide1_1.png,Monocyte_without_RBC,0.4319,NonMonocyte,TRUE,68039,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0085_slide1_4.png,Clustered_cell,0.4319,NonMonocyte,TRUE,57433,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0035_slide2_4.png,Monocyte_without_RBC,0.432,NonMonocyte,TRUE,60756,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0041_slide1_3.png,Clustered_cell,0.432,NonMonocyte,TRUE,494849,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0248_slide1_4.png,Unusable,0.4322,NonMonocyte,TRUE,60034,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0096_slide2_6.png,Clustered_cell,0.4324,NonMonocyte,TRUE,57537,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0071_slide2_3.png,Monocyte_without_RBC,0.4328,NonMonocyte,TRUE,57300,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0102_slide1_5.png,Unusable,0.4328,NonMonocyte,TRUE,63374,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0055_slide1_3.png,Clustered_cell,0.4329,NonMonocyte,TRUE,62970,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0137_slide1_5.png,Monocyte_without_RBC,0.4331,NonMonocyte,TRUE,61689,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0031_slide2_4.png,Monocyte_without_RBC,0.4336,NonMonocyte,TRUE,64548,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0003_slide2_8.png,Monocyte_without_RBC,0.4341,NonMonocyte,TRUE,68102,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0188_slide1_1.png,Monocyte_without_RBC,0.4342,NonMonocyte,TRUE,222044,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0002_slide1_6.png,Unusable,0.4345,NonMonocyte,TRUE,220306,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0013_slide2_4.png,Monocyte_without_RBC,0.4345,NonMonocyte,TRUE,58351,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0230_slide1_2.png,Lymphocyte,0.4346,NonMonocyte,TRUE,59961,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0057_slide1_2.png,Monocyte_without_RBC,0.4347,NonMonocyte,TRUE,64901,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0130_slide1_8.png,Monocyte_without_RBC,0.435,NonMonocyte,TRUE,469829,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0104_slide2_1.png,Monocyte_without_RBC,0.4358,NonMonocyte,TRUE,65383,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0106_slide2_1.png,Clustered_cell,0.4369,NonMonocyte,TRUE,65399,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0023_slide2_4.png,Monocyte_without_RBC,0.4369,NonMonocyte,TRUE,220694,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y003_cell_0013_slide3_7.png,Monocyte_with_RBC,0.437,NonMonocyte,TRUE,60438,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0176_slide1_5.png,Clustered_cell,0.437,NonMonocyte,TRUE,479883,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0014_slide2_6.png,Unusable,0.4373,NonMonocyte,TRUE,60452,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0028_slide2_5.png,Unusable,0.4376,NonMonocyte,TRUE,56738,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0002_slide1_3.png,Monocyte_without_RBC,0.4376,NonMonocyte,TRUE,65987,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0187_slide1_5.png,Clustered_cell,0.4379,NonMonocyte,TRUE,479929,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0015_slide1_5.png,Clustered_cell,0.4379,NonMonocyte,TRUE,58379,x
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0254_slide1_5.png,Lymphocyte,0.4381,NonMonocyte,TRUE,62055,unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0010_slide1_1.png,Monocyte_without_RBC,0.4382,NonMonocyte,TRUE,66153,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0010_slide2_8.png,Monocyte_without_RBC,0.439,NonMonocyte,TRUE,220486,Rbc alone
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0013_slide2_4.png,Lymphocyte,0.439,NonMonocyte,TRUE,56455,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0086_slide1_5.png,Monocyte_without_RBC,0.439,NonMonocyte,TRUE,65210,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0022_slide2_7.png,Monocyte_without_RBC,0.4391,NonMonocyte,TRUE,220681,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0063_slide2_5.png,Clustered_cell,0.4394,NonMonocyte,TRUE,61098,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0111_slide1_2.png,Clustered_cell,0.4397,NonMonocyte,TRUE,59385,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0046_slide2_7.png,Monocyte_without_RBC,0.4398,NonMonocyte,TRUE,221033,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0028_slide2_4.png,Monocyte_without_RBC,0.4401,NonMonocyte,TRUE,62610,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0169_slide1_5.png,Clustered_cell,0.4402,NonMonocyte,TRUE,57842,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0002_slide2_4.png,Monocyte_without_RBC,0.4403,NonMonocyte,TRUE,62151,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0191_slide1_4.png,Clustered_cell,0.4404,NonMonocyte,TRUE,57907,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x017_y006_cell_0213_slide1_4.png,Unusable,0.4405,NonMonocyte,TRUE,479981,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0130_slide2_6.png,Clustered_cell,0.4405,NonMonocyte,TRUE,67485,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0002_slide1_1.png,Unusable,0.4406,NonMonocyte,TRUE,62140,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y005_cell_0297_slide1_4.png,RBC alone,0.4407,NonMonocyte,TRUE,65910,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0021_slide2_8.png,Lymphocyte,0.4409,NonMonocyte,TRUE,56615,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0004_slide3_2.png,Unusable,0.441,NonMonocyte,TRUE,64074,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0012_slide2_3.png,Monocyte_without_RBC,0.4411,NonMonocyte,TRUE,60414,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0033_slide1_4.png,Monocyte_without_RBC,0.4413,NonMonocyte,TRUE,220838,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0043_slide2_2.png,Unusable,0.4416,NonMonocyte,TRUE,58769,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0101_slide1_5.png,Monocyte_without_RBC,0.4416,NonMonocyte,TRUE,65356,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0056_slide1_8.png,Unusable,0.4417,NonMonocyte,TRUE,64894,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0050_slide1_7.png,Monocyte_without_RBC,0.4417,NonMonocyte,TRUE,64818,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0049_slide2_4.png,Unusable,0.4418,NonMonocyte,TRUE,221072,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0150_slide2_6.png,Unusable,0.4418,NonMonocyte,TRUE,67614,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0228_slide1_6.png,Monocyte_without_RBC,0.4419,NonMonocyte,TRUE,59956,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0023_slide2_5.png,Monocyte_without_RBC,0.4422,NonMonocyte,TRUE,220695,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0052_slide2_2.png,Monocyte_without_RBC,0.4424,NonMonocyte,TRUE,64847,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0087_slide2_4.png,Clustered_cell,0.4425,NonMonocyte,TRUE,57460,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0039_slide1_2.png,Monocyte_without_RBC,0.4426,NonMonocyte,TRUE,60802,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0175_slide1_4.png,Clustered_cell,0.443,NonMonocyte,TRUE,67731,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0082_slide1_5.png,Clustered_cell,0.443,NonMonocyte,TRUE,67075,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0005_slide2_6.png,Unusable,0.4434,NonMonocyte,TRUE,58193,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0225_slide1_6.png,Clustered_cell,0.4435,NonMonocyte,TRUE,59944,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0342_slide1_5.png,Unusable,0.4435,NonMonocyte,TRUE,58082,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0008_slide2_4.png,Monocyte_without_RBC,0.4435,NonMonocyte,TRUE,68211,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0004_slide1_4.png,Clustered_cell,0.4446,NonMonocyte,TRUE,220351,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0082_slide1_4.png,Clustered_cell,0.4448,NonMonocyte,TRUE,63246,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0041_slide2_4.png,Monocyte_without_RBC,0.445,NonMonocyte,TRUE,62792,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0035_slide2_4.png,Monocyte_without_RBC,0.4453,NonMonocyte,TRUE,62708,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0036_slide2_4.png,Monocyte_without_RBC,0.4455,NonMonocyte,TRUE,58680,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0042_slide1_3.png,Clustered_cell,0.4455,NonMonocyte,TRUE,494851,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0270_slide1_5.png,Clustered_cell,0.4461,NonMonocyte,TRUE,58010,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0058_slide1_8.png,Clustered_cell,0.4466,NonMonocyte,TRUE,57147,unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0031_slide1_4.png,Monocyte_without_RBC,0.4469,NonMonocyte,TRUE,64540,x
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y006_cell_0219_slide1_6.png,RBC alone,0.447,NonMonocyte,TRUE,67895,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0205_slide1_5.png,Clustered_cell,0.4474,NonMonocyte,TRUE,57942,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0288_slide1_5.png,Clustered_cell,0.4475,NonMonocyte,TRUE,58028,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0042_slide1_6.png,Clustered_cell,0.4478,NonMonocyte,TRUE,56937,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0029_slide2_3.png,Monocyte_without_RBC,0.4479,NonMonocyte,TRUE,64515,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0010_slide2_4.png,Monocyte_without_RBC,0.4479,NonMonocyte,TRUE,58294,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0096_slide1_4.png,Clustered_cell,0.448,NonMonocyte,TRUE,57530,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y013_cell_0022_slide1_1.png,Monocyte_without_RBC,0.4481,NonMonocyte,TRUE,494992,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0031_slide1_7.png,Monocyte_without_RBC,0.4483,NonMonocyte,TRUE,60695,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0062_slide1_4.png,Clustered_cell,0.4486,NonMonocyte,TRUE,66890,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0273_slide1_1.png,Unusable,0.4495,NonMonocyte,TRUE,220140,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0291_slide1_5.png,Clustered_cell,0.4499,NonMonocyte,TRUE,58031,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0293_slide1_5.png,Clustered_cell,0.4501,NonMonocyte,TRUE,58033,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0104_slide1_6.png,Clustered_cell,0.4503,NonMonocyte,TRUE,221615,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0014_slide1_2.png,Unusable,0.4503,NonMonocyte,TRUE,64265,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0147_slide1_4.png,Clustered_cell,0.4508,NonMonocyte,TRUE,65632,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y001_cell_0025_slide3_3.png,RBC alone,0.4509,NonMonocyte,TRUE,56689,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0047_slide1_6.png,Lymphocyte,0.4509,NonMonocyte,TRUE,57002,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0212_slide1_6.png,Clustered_cell,0.4509,NonMonocyte,TRUE,63830,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0043_slide2_7.png,Monocyte_without_RBC,0.4509,NonMonocyte,TRUE,64727,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0323_slide1_5.png,Clustered_cell,0.4511,NonMonocyte,TRUE,58063,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0258_slide1_5.png,Lymphocyte,0.4511,NonMonocyte,TRUE,62063,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0014_slide1_1.png,Unusable,0.4513,NonMonocyte,TRUE,60439,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0017_slide2_2.png,Monocyte_without_RBC,0.4514,NonMonocyte,TRUE,58415,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0034_slide2_4.png,Monocyte_without_RBC,0.4514,NonMonocyte,TRUE,220861,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0049_slide2_7.png,Monocyte_without_RBC,0.4515,NonMonocyte,TRUE,221075,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0105_slide1_4.png,Unusable,0.4516,NonMonocyte,TRUE,67281,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0065_slide1_3.png,Unusable,0.452,NonMonocyte,TRUE,63085,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0040_slide2_5.png,Monocyte_without_RBC,0.4521,NonMonocyte,TRUE,220947,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0021_slide2_7.png,Monocyte_without_RBC,0.4524,NonMonocyte,TRUE,220665,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0046_slide2_4.png,Monocyte_without_RBC,0.4526,NonMonocyte,TRUE,60910,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0057_slide2_6.png,Monocyte_without_RBC,0.4526,NonMonocyte,TRUE,221182,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0058_slide1_8.png,Lymphocyte,0.4527,NonMonocyte,TRUE,58945,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0012_slide2_2.png,Monocyte_without_RBC,0.453,NonMonocyte,TRUE,56430,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0056_slide2_2.png,Monocyte_without_RBC,0.4532,NonMonocyte,TRUE,57123,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0092_slide1_2.png,Unusable,0.4533,NonMonocyte,TRUE,61353,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0001_slide1_4.png,Unusable,0.4534,NonMonocyte,TRUE,220280,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y009_cell_0016_slide2_1.png,Clustered_cell,0.4539,NonMonocyte,TRUE,483986,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0109_slide1_4.png,Monocyte_without_RBC,0.4539,NonMonocyte,TRUE,221648,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0142_slide2_2.png,Monocyte_without_RBC,0.454,NonMonocyte,TRUE,61724,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0174_slide1_6.png,Clustered_cell,0.454,NonMonocyte,TRUE,61846,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0121_slide1_6.png,Clustered_cell,0.4543,NonMonocyte,TRUE,67414,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0029_slide1_2.png,Clustered_cell,0.4543,NonMonocyte,TRUE,58579,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0010_slide1_3.png,Clustered_cell,0.4543,NonMonocyte,TRUE,60369,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0058_slide1_1.png,Clustered_cell,0.4546,NonMonocyte,TRUE,66846,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0036_slide2_4.png,Monocyte_without_RBC,0.4546,NonMonocyte,TRUE,60770,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y001_cell_0170_slide1_6.png,Monocyte_with_RBC,0.4547,NonMonocyte,TRUE,57846,Clustered cell
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0004_slide2_8.png,Lymphocyte,0.4548,NonMonocyte,TRUE,60260,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0112_slide1_4.png,Unusable,0.4549,NonMonocyte,TRUE,57634,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0016_slide3_7.png,Unusable,0.4549,NonMonocyte,TRUE,56524,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0084_slide2_6.png,Clustered_cell,0.455,NonMonocyte,TRUE,67097,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0093_slide2_2.png,Monocyte_without_RBC,0.4552,NonMonocyte,TRUE,59274,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0004_slide2_4.png,Monocyte_without_RBC,0.4552,NonMonocyte,TRUE,64068,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0339_slide1_4.png,Monocyte_without_RBC,0.4552,NonMonocyte,TRUE,65952,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0010_slide1_6.png,Clustered_cell,0.4559,NonMonocyte,TRUE,66158,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0360_slide1_2.png,Monocyte_without_RBC,0.4561,NonMonocyte,TRUE,220256,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0110_slide1_2.png,Unusable,0.4561,NonMonocyte,TRUE,67322,x
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0233_slide1_6.png,Monocyte_without_RBC,0.4564,NonMonocyte,TRUE,59976,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0142_slide1_6.png,Clustered_cell,0.4566,NonMonocyte,TRUE,67564,x
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0246_slide1_4.png,RBC alone,0.4566,NonMonocyte,TRUE,60026,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0024_slide1_6.png,Clustered_cell,0.4566,NonMonocyte,TRUE,56660,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0132_slide1_3.png,Clustered_cell,0.4567,NonMonocyte,TRUE,221788,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0118_slide1_1.png,Unusable,0.4574,NonMonocyte,TRUE,221702,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0083_slide1_5.png,Clustered_cell,0.4577,NonMonocyte,TRUE,221444,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0042_slide2_4.png,Monocyte_without_RBC,0.458,NonMonocyte,TRUE,60854,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0055_slide2_6.png,Monocyte_without_RBC,0.4582,NonMonocyte,TRUE,221156,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0001_slide2_1.png,Monocyte_without_RBC,0.4584,NonMonocyte,TRUE,63993,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0159_slide1_5.png,Clustered_cell,0.4585,NonMonocyte,TRUE,479798,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0027_slide1_1.png,Clustered_cell,0.4585,NonMonocyte,TRUE,56709,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0073_slide1_3.png,Clustered_cell,0.4586,NonMonocyte,TRUE,66992,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0013_slide1_5.png,Unusable,0.4587,NonMonocyte,TRUE,62380,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0011_slide3_7.png,Unusable,0.4587,NonMonocyte,TRUE,58320,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y003_cell_0148_slide2_2.png,RBC alone,0.4591,NonMonocyte,TRUE,61754,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0188_slide1_6.png,Unusable,0.4592,NonMonocyte,TRUE,222047,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0068_slide2_6.png,Monocyte_without_RBC,0.4594,NonMonocyte,TRUE,61149,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0090_slide1_1.png,Clustered_cell,0.4595,NonMonocyte,TRUE,67143,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0156_slide1_3.png,Unusable,0.4597,NonMonocyte,TRUE,219697,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0091_slide2_4.png,Monocyte_without_RBC,0.4597,NonMonocyte,TRUE,57496,Unusable
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0061_slide2_3.png,RBC alone,0.4599,NonMonocyte,TRUE,58981,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y001_cell_0025_slide1_4.png,Monocyte_with_RBC,0.4601,NonMonocyte,TRUE,56676,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0321_slide1_5.png,Clustered_cell,0.4604,NonMonocyte,TRUE,58061,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0161_slide1_5.png,Clustered_cell,0.4604,NonMonocyte,TRUE,479808,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0001_slide2_8.png,Monocyte_without_RBC,0.4608,NonMonocyte,TRUE,220292,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0219_slide1_5.png,Clustered_cell,0.461,NonMonocyte,TRUE,57959,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0116_slide1_6.png,Unusable,0.4612,NonMonocyte,TRUE,61543,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0047_slide1_5.png,Clustered_cell,0.4612,NonMonocyte,TRUE,57001,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0047_slide2_2.png,Monocyte_without_RBC,0.4613,NonMonocyte,TRUE,62874,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0040_slide2_3.png,Monocyte_without_RBC,0.4613,NonMonocyte,TRUE,56915,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0014_slide1_1.png,Clustered_cell,0.4613,NonMonocyte,TRUE,494567,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0098_slide1_2.png,Clustered_cell,0.4614,NonMonocyte,TRUE,67216,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0092_slide2_6.png,Unusable,0.4618,NonMonocyte,TRUE,63318,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0051_slide1_1.png,Unusable,0.4623,NonMonocyte,TRUE,64825,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0069_slide1_5.png,Clustered_cell,0.4625,NonMonocyte,TRUE,61153,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0110_slide2_2.png,Monocyte_without_RBC,0.4625,NonMonocyte,TRUE,67328,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0002_slide2_3.png,Monocyte_without_RBC,0.4626,NonMonocyte,TRUE,62150,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0050_slide1_8.png,Clustered_cell,0.4627,NonMonocyte,TRUE,57043,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0078_slide1_1.png,Clustered_cell,0.463,NonMonocyte,TRUE,221390,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0085_slide2_1.png,Unusable,0.4631,NonMonocyte,TRUE,63270,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0066_slide1_6.png,Clustered_cell,0.4633,NonMonocyte,TRUE,65009,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0045_slide2_2.png,Clustered_cell,0.4636,NonMonocyte,TRUE,60894,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y009_cell_0099_slide1_3.png,Monocyte_with_RBC,0.4636,NonMonocyte,TRUE,494263,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0106_slide2_2.png,Monocyte_without_RBC,0.4644,NonMonocyte,TRUE,59360,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0024_slide1_5.png,Monocyte_without_RBC,0.4646,NonMonocyte,TRUE,62548,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0020_slide1_8.png,Monocyte_without_RBC,0.4647,NonMonocyte,TRUE,66327,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0099_slide1_5.png,Unusable,0.4647,NonMonocyte,TRUE,67228,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0158_slide1_4.png,Clustered_cell,0.4647,NonMonocyte,TRUE,219706,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0057_slide1_7.png,Clustered_cell,0.4648,NonMonocyte,TRUE,221176,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0028_slide2_2.png,Clustered_cell,0.4648,NonMonocyte,TRUE,62608,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0046_slide2_1.png,Unusable,0.4649,NonMonocyte,TRUE,60907,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0078_slide1_6.png,Monocyte_without_RBC,0.4651,NonMonocyte,TRUE,67040,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y006_cell_0028_slide2_7.png,Lymphocyte,0.4655,NonMonocyte,TRUE,66454,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0002_slide2_4.png,Monocyte_without_RBC,0.4656,NonMonocyte,TRUE,64020,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0044_slide1_2.png,Clustered_cell,0.4657,NonMonocyte,TRUE,64729,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0125_slide1_5.png,Clustered_cell,0.4659,NonMonocyte,TRUE,57697,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0083_slide1_5.png,Clustered_cell,0.4662,NonMonocyte,TRUE,61282,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0014_slide1_2.png,Clustered_cell,0.4666,NonMonocyte,TRUE,62395,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0110_slide1_5.png,Unusable,0.4668,NonMonocyte,TRUE,63422,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0075_slide1_1.png,Monocyte_without_RBC,0.4668,NonMonocyte,TRUE,221360,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0133_slide1_6.png,Unusable,0.4669,NonMonocyte,TRUE,63550,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0061_slide2_4.png,Monocyte_without_RBC,0.4669,NonMonocyte,TRUE,63048,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0016_slide2_4.png,Clustered_cell,0.4672,NonMonocyte,TRUE,62436,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0006_slide2_2.png,Unusable,0.4674,NonMonocyte,TRUE,64112,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0030_slide2_7.png,Monocyte_without_RBC,0.4674,NonMonocyte,TRUE,62641,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0046_slide1_2.png,Clustered_cell,0.4677,NonMonocyte,TRUE,64757,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0054_slide1_7.png,Clustered_cell,0.4678,NonMonocyte,TRUE,221137,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0169_slide1_2.png,Clustered_cell,0.4679,NonMonocyte,TRUE,67705,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0038_slide1_5.png,Unusable,0.4681,NonMonocyte,TRUE,58699,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y003_cell_0196_slide1_5.png,RBC alone,0.4683,NonMonocyte,TRUE,61911,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0042_slide1_8.png,Monocyte_without_RBC,0.4684,NonMonocyte,TRUE,58754,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0129_slide1_4.png,Monocyte_without_RBC,0.4691,NonMonocyte,TRUE,57712,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0083_slide1_2.png,Clustered_cell,0.4693,NonMonocyte,TRUE,65177,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0124_slide2_4.png,Monocyte_without_RBC,0.4699,NonMonocyte,TRUE,469794,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0135_slide2_1.png,Unusable,0.47,NonMonocyte,TRUE,57739,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0047_slide1_8.png,Monocyte_without_RBC,0.4701,NonMonocyte,TRUE,221041,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x017_y006_cell_0163_slide1_5.png,Unusable,0.4702,NonMonocyte,TRUE,479818,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0218_slide1_1.png,Unusable,0.4702,NonMonocyte,TRUE,219944,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0016_slide2_3.png,Monocyte_without_RBC,0.4703,NonMonocyte,TRUE,60482,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0180_slide1_5.png,Clustered_cell,0.4704,NonMonocyte,TRUE,479902,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0037_slide1_7.png,Monocyte_without_RBC,0.4707,NonMonocyte,TRUE,58688,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0011_slide2_7.png,Clustered_cell,0.4707,NonMonocyte,TRUE,62352,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0319_slide1_5.png,Clustered_cell,0.4708,NonMonocyte,TRUE,58059,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0143_slide1_2.png,Clustered_cell,0.471,NonMonocyte,TRUE,219631,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y012_cell_0002_slide1_1.png,Monocyte_without_RBC,0.471,NonMonocyte,TRUE,494717,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y013_cell_0047_slide1_3.png,Unusable,0.4712,NonMonocyte,TRUE,495081,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0122_slide1_6.png,Clustered_cell,0.4712,NonMonocyte,TRUE,57686,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y007_cell_0005_slide3_4.png,Unusable,0.4718,NonMonocyte,TRUE,68153,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0048_slide1_5.png,Clustered_cell,0.472,NonMonocyte,TRUE,64788,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0047_slide2_7.png,Monocyte_without_RBC,0.4722,NonMonocyte,TRUE,221047,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y012_cell_0003_slide1_3.png,Monocyte_with_RBC,0.4722,NonMonocyte,TRUE,494722,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0277_slide1_4.png,Unusable,0.4726,NonMonocyte,TRUE,62086,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0045_slide1_2.png,Lymphocyte,0.4727,NonMonocyte,TRUE,60886,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0272_slide1_5.png,Clustered_cell,0.4728,NonMonocyte,TRUE,58012,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0020_slide2_6.png,Monocyte_without_RBC,0.4728,NonMonocyte,TRUE,220648,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y002_cell_0012_slide1_1.png,Monocyte_with_RBC,0.4731,NonMonocyte,TRUE,58321,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0094_slide2_6.png,Clustered_cell,0.4732,NonMonocyte,TRUE,221539,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0022_slide1_8.png,Monocyte_without_RBC,0.4734,NonMonocyte,TRUE,56626,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0029_slide1_1.png,Clustered_cell,0.4736,NonMonocyte,TRUE,495020,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0049_slide1_5.png,Clustered_cell,0.4741,NonMonocyte,TRUE,57027,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0114_slide1_3.png,Clustered_cell,0.4744,NonMonocyte,TRUE,59404,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0146_slide2_2.png,Clustered_cell,0.4744,NonMonocyte,TRUE,65631,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0011_slide2_8.png,Monocyte_without_RBC,0.4745,NonMonocyte,TRUE,220505,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0009_slide2_3.png,Monocyte_without_RBC,0.4755,NonMonocyte,TRUE,68229,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y010_cell_0100_slide1_3.png,Unusable,0.4757,NonMonocyte,TRUE,494511,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0002_slide2_7.png,Monocyte_without_RBC,0.4757,NonMonocyte,TRUE,60212,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0161_slide1_4.png,Unusable,0.4758,NonMonocyte,TRUE,63660,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0009_slide1_2.png,Clustered_cell,0.476,NonMonocyte,TRUE,60349,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0159_slide1_4.png,Monocyte_without_RBC,0.4764,NonMonocyte,TRUE,65671,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0089_slide2_4.png,Monocyte_without_RBC,0.4767,NonMonocyte,TRUE,57478,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0145_slide1_4.png,Monocyte_without_RBC,0.4769,NonMonocyte,TRUE,65624,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0009_slide2_8.png,Lymphocyte,0.4769,NonMonocyte,TRUE,56364,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0116_slide1_5.png,Clustered_cell,0.477,NonMonocyte,TRUE,63458,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0003_slide1_6.png,Clustered_cell,0.4776,NonMonocyte,TRUE,62169,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0047_slide2_4.png,Monocyte_without_RBC,0.4777,NonMonocyte,TRUE,57008,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0042_slide2_4.png,Monocyte_without_RBC,0.4779,NonMonocyte,TRUE,64710,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0022_slide2_7.png,Monocyte_without_RBC,0.4782,NonMonocyte,TRUE,64407,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0069_slide1_4.png,Unusable,0.4783,NonMonocyte,TRUE,63130,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0005_slide1_2.png,Clustered_cell,0.4789,NonMonocyte,TRUE,56254,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0084_slide1_5.png,Unusable,0.4792,NonMonocyte,TRUE,67093,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0152_slide1_3.png,Monocyte_without_RBC,0.4792,NonMonocyte,TRUE,61768,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0006_slide2_8.png,Monocyte_without_RBC,0.4793,NonMonocyte,TRUE,220405,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0049_slide1_8.png,Monocyte_without_RBC,0.4794,NonMonocyte,TRUE,62900,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y001_cell_0023_slide1_4.png,Monocyte_with_RBC,0.4794,NonMonocyte,TRUE,56640,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0016_slide1_7.png,Clustered_cell,0.4798,NonMonocyte,TRUE,62431,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0089_slide1_3.png,Monocyte_without_RBC,0.4799,NonMonocyte,TRUE,59241,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0030_slide2_7.png,Unusable,0.4799,NonMonocyte,TRUE,60689,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0048_slide2_5.png,Unusable,0.4804,NonMonocyte,TRUE,62891,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0030_slide1_8.png,Clustered_cell,0.4806,NonMonocyte,TRUE,220797,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0152_slide1_5.png,Clustered_cell,0.4806,NonMonocyte,TRUE,61770,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0011_slide2_7.png,Monocyte_without_RBC,0.4813,NonMonocyte,TRUE,66185,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y010_cell_0061_slide1_3.png,Clustered_cell,0.4814,NonMonocyte,TRUE,494472,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0089_slide2_6.png,Monocyte_without_RBC,0.4816,NonMonocyte,TRUE,221499,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0007_slide1_5.png,Clustered_cell,0.4818,NonMonocyte,TRUE,62261,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0042_slide2_7.png,Monocyte_without_RBC,0.4819,NonMonocyte,TRUE,64713,Rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0130_slide1_2.png,Unusable,0.482,NonMonocyte,TRUE,221775,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0099_slide1_5.png,Clustered_cell,0.4824,NonMonocyte,TRUE,61412,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0092_slide1_6.png,Unusable,0.4825,NonMonocyte,TRUE,57500,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0283_slide1_5.png,Clustered_cell,0.4825,NonMonocyte,TRUE,58023,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0057_slide2_6.png,Monocyte_without_RBC,0.4825,NonMonocyte,TRUE,63003,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0039_slide2_3.png,Clustered_cell,0.4829,NonMonocyte,TRUE,220931,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0009_slide2_2.png,Lymphocyte,0.4837,NonMonocyte,TRUE,56358,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0017_slide1_7.png,Clustered_cell,0.4837,NonMonocyte,TRUE,60494,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0076_slide2_7.png,Monocyte_without_RBC,0.4838,NonMonocyte,TRUE,65115,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0126_slide1_6.png,Clustered_cell,0.4839,NonMonocyte,TRUE,65534,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y013_cell_0023_slide1_5.png,Unusable,0.484,NonMonocyte,TRUE,494999,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0044_slide2_4.png,Monocyte_without_RBC,0.4841,NonMonocyte,TRUE,60882,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y001_cell_0001_slide3_3.png,Monocyte_with_RBC,0.4844,NonMonocyte,TRUE,56175,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0120_slide1_3.png,Monocyte_without_RBC,0.4845,NonMonocyte,TRUE,59440,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0035_slide2_3.png,Clustered_cell,0.4846,NonMonocyte,TRUE,56845,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0021_slide1_2.png,Monocyte_without_RBC,0.4846,NonMonocyte,TRUE,64378,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0148_slide1_1.png,Monocyte_without_RBC,0.4847,NonMonocyte,TRUE,221869,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y012_cell_0016_slide1_4.png,Unusable,0.4848,NonMonocyte,TRUE,494775,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0045_slide1_3.png,Clustered_cell,0.4849,NonMonocyte,TRUE,221008,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y006_cell_0142_slide1_2.png,RBC alone,0.485,NonMonocyte,TRUE,67561,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0139_slide2_2.png,Monocyte_without_RBC,0.4852,NonMonocyte,TRUE,61706,rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0029_slide1_8.png,Clustered_cell,0.4852,NonMonocyte,TRUE,56750,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0042_slide1_5.png,Monocyte_without_RBC,0.4853,NonMonocyte,TRUE,64704,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0009_slide2_8.png,Monocyte_without_RBC,0.4854,NonMonocyte,TRUE,64185,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0004_slide1_6.png,Clustered_cell,0.4854,NonMonocyte,TRUE,56234,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0031_slide1_4.png,Clustered_cell,0.4855,NonMonocyte,TRUE,494830,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0049_slide2_1.png,Unusable,0.4856,NonMonocyte,TRUE,58840,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0022_slide2_1.png,Monocyte_without_RBC,0.4857,NonMonocyte,TRUE,220675,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0047_slide1_7.png,Unusable,0.4857,NonMonocyte,TRUE,66713,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0056_slide1_2.png,Clustered_cell,0.4858,NonMonocyte,TRUE,64889,Unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0054_slide1_2.png,Unusable,0.4861,NonMonocyte,TRUE,62957,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0167_slide1_4.png,Monocyte_without_RBC,0.4861,NonMonocyte,TRUE,59707,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0367_slide1_2.png,Monocyte_without_RBC,0.4863,NonMonocyte,TRUE,220263,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0176_slide1_4.png,Clustered_cell,0.4865,NonMonocyte,TRUE,479882,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0005_slide1_4.png,Unusable,0.4872,NonMonocyte,TRUE,66057,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0023_slide2_7.png,Monocyte_without_RBC,0.4872,NonMonocyte,TRUE,66379,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0194_slide1_6.png,Clustered_cell,0.4879,NonMonocyte,TRUE,219851,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0003_slide1_4.png,Clustered_cell,0.489,NonMonocyte,TRUE,56208,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0076_slide1_2.png,Unusable,0.4894,NonMonocyte,TRUE,65107,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0132_slide1_4.png,Unusable,0.4895,NonMonocyte,TRUE,63544,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0102_slide2_1.png,Monocyte_without_RBC,0.4896,NonMonocyte,TRUE,61438,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0150_slide1_6.png,Unusable,0.4896,NonMonocyte,TRUE,63618,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0176_slide1_6.png,Clustered_cell,0.4897,NonMonocyte,TRUE,59748,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0220_slide1_2.png,Monocyte_without_RBC,0.4897,NonMonocyte,TRUE,219953,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0060_slide2_4.png,Lymphocyte,0.4899,NonMonocyte,TRUE,58971,rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0296_slide1_5.png,Clustered_cell,0.4901,NonMonocyte,TRUE,58036,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0002_slide1_8.png,Monocyte_without_RBC,0.4901,NonMonocyte,TRUE,58115,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0012_slide2_8.png,Monocyte_without_RBC,0.4905,NonMonocyte,TRUE,68287,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0086_slide2_6.png,Monocyte_without_RBC,0.4905,NonMonocyte,TRUE,57452,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0050_slide2_1.png,Clustered_cell,0.4911,NonMonocyte,TRUE,62914,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0026_slide2_7.png,Monocyte_without_RBC,0.4915,NonMonocyte,TRUE,64471,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0052_slide2_2.png,Clustered_cell,0.4917,NonMonocyte,TRUE,57071,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0163_slide1_2.png,Clustered_cell,0.4919,NonMonocyte,TRUE,479815,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0009_slide2_5.png,Monocyte_without_RBC,0.4923,NonMonocyte,TRUE,64182,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0003_slide2_2.png,Monocyte_without_RBC,0.4925,NonMonocyte,TRUE,220334,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0026_slide2_7.png,Monocyte_without_RBC,0.4929,NonMonocyte,TRUE,62585,Rbc alone
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0062_slide1_4.png,Lymphocyte,0.493,NonMonocyte,TRUE,57195,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0254_slide1_5.png,Clustered_cell,0.4932,NonMonocyte,TRUE,60059,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0008_slide2_4.png,Monocyte_without_RBC,0.4934,NonMonocyte,TRUE,58255,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0068_slide1_6.png,Clustered_cell,0.4938,NonMonocyte,TRUE,65031,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0080_slide1_2.png,Clustered_cell,0.4939,NonMonocyte,TRUE,67054,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0057_slide1_3.png,Clustered_cell,0.4939,NonMonocyte,TRUE,58930,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0243_slide1_2.png,Unusable,0.4943,NonMonocyte,TRUE,220045,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0094_slide2_3.png,Clustered_cell,0.4943,NonMonocyte,TRUE,57520,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y014_cell_0006_slide1_5.png,Clustered_cell,0.4948,NonMonocyte,TRUE,495179,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0071_slide2_4.png,Clustered_cell,0.4949,NonMonocyte,TRUE,63157,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0077_slide1_5.png,Unusable,0.4951,NonMonocyte,TRUE,59148,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0016_slide2_7.png,Clustered_cell,0.4951,NonMonocyte,TRUE,64311,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0311_slide1_4.png,Unusable,0.4951,NonMonocyte,TRUE,68031,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0083_slide1_6.png,Clustered_cell,0.4951,NonMonocyte,TRUE,67085,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y009_cell_0016_slide1_4.png,Monocyte_without_RBC,0.496,NonMonocyte,TRUE,483981,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0064_slide2_5.png,Monocyte_without_RBC,0.4962,NonMonocyte,TRUE,63082,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0175_slide1_1.png,Unusable,0.4965,NonMonocyte,TRUE,221992,x
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0323_slide1_2.png,Clustered_cell,0.4967,NonMonocyte,TRUE,220219,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0033_slide2_4.png,Monocyte_without_RBC,0.4968,NonMonocyte,TRUE,56817,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0015_slide1_6.png,Clustered_cell,0.4969,NonMonocyte,TRUE,62415,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0050_slide1_3.png,Clustered_cell,0.4969,NonMonocyte,TRUE,64814,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0034_slide1_4.png,Clustered_cell,0.4976,NonMonocyte,TRUE,494836,Unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0082_slide1_5.png,Clustered_cell,0.4979,NonMonocyte,TRUE,57404,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0027_slide1_6.png,Monocyte_without_RBC,0.4979,NonMonocyte,TRUE,66430,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0198_slide1_1.png,Monocyte_without_RBC,0.4981,NonMonocyte,TRUE,219864,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0009_slide1_1.png,Clustered_cell,0.4981,NonMonocyte,TRUE,494745,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y009_cell_0015_slide1_1.png,Clustered_cell,0.4983,NonMonocyte,TRUE,483959,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0243_slide1_4.png,Clustered_cell,0.4984,NonMonocyte,TRUE,65847,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0057_slide1_2.png,Clustered_cell,0.4985,NonMonocyte,TRUE,58929,Unusable
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0033_slide1_2.png,Monocyte_without_RBC,0.4986,NonMonocyte,TRUE,66516,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0007_slide1_1.png,Clustered_cell,0.4987,NonMonocyte,TRUE,66094,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0057_slide1_6.png,Clustered_cell,0.4989,NonMonocyte,TRUE,57132,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0113_slide1_4.png,Monocyte_without_RBC,0.4989,NonMonocyte,TRUE,221675,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0041_slide1_2.png,Monocyte_without_RBC,0.499,NonMonocyte,TRUE,58735,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0045_slide1_2.png,Clustered_cell,0.499,NonMonocyte,TRUE,66682,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0209_slide1_1.png,Clustered_cell,0.4992,NonMonocyte,TRUE,219908,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0061_slide2_7.png,Monocyte_without_RBC,0.4993,NonMonocyte,TRUE,66886,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0052_slide2_4.png,Monocyte_without_RBC,0.4993,NonMonocyte,TRUE,221114,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0126_slide1_1.png,Clustered_cell,0.4993,NonMonocyte,TRUE,221750,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0007_slide2_8.png,Monocyte_without_RBC,0.4995,NonMonocyte,TRUE,58238,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0007_slide1_1.png,Clustered_cell,0.4999,NonMonocyte,TRUE,494737,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0056_slide1_5.png,Monocyte_without_RBC,0.5001,Monocyte,TRUE,66827,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0003_slide2_4.png,Lymphocyte,0.5008,Monocyte,TRUE,56216,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0109_slide1_6.png,Clustered_cell,0.5008,Monocyte,TRUE,59377,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0014_slide1_4.png,Unusable,0.5008,Monocyte,TRUE,56468,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0113_slide1_2.png,Clustered_cell,0.501,Monocyte,TRUE,59397,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0126_slide2_4.png,Monocyte_without_RBC,0.5011,Monocyte,TRUE,469806,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0073_slide1_2.png,Clustered_cell,0.5011,Monocyte,TRUE,66991,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y013_cell_0090_slide1_5.png,Unusable,0.5014,Monocyte,TRUE,495145,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0070_slide1_3.png,Clustered_cell,0.5014,Monocyte,TRUE,494693,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0160_slide1_1.png,Unusable,0.5014,Monocyte,TRUE,221929,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0065_slide1_5.png,Unusable,0.5014,Monocyte,TRUE,59020,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0267_slide1_5.png,Clustered_cell,0.5015,Monocyte,TRUE,60088,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0015_slide2_4.png,Monocyte_without_RBC,0.5016,Monocyte,TRUE,68333,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0266_slide1_4.png,Clustered_cell,0.5016,Monocyte,TRUE,65879,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0019_slide2_4.png,Monocyte_without_RBC,0.5016,Monocyte,TRUE,64356,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0028_slide2_3.png,Monocyte_without_RBC,0.5024,Monocyte,TRUE,62609,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0144_slide1_6.png,Clustered_cell,0.5026,Monocyte,TRUE,57768,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0019_slide1_5.png,Monocyte_without_RBC,0.5027,Monocyte,TRUE,66308,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0037_slide2_5.png,Unusable,0.5027,Monocyte,TRUE,66582,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0363_slide1_2.png,Monocyte_without_RBC,0.5028,Monocyte,TRUE,220259,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0018_slide2_4.png,Clustered_cell,0.5028,Monocyte,TRUE,220614,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y009_cell_0015_slide2_3.png,Monocyte_without_RBC,0.5031,Monocyte,TRUE,483969,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y013_cell_0050_slide1_3.png,Monocyte_without_RBC,0.5034,Monocyte,TRUE,495090,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0129_slide1_6.png,Unusable,0.5037,Monocyte,TRUE,63533,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0015_slide1_1.png,Clustered_cell,0.5041,Monocyte,TRUE,494769,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0101_slide1_2.png,Clustered_cell,0.5042,Monocyte,TRUE,59324,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0111_slide1_6.png,Clustered_cell,0.5046,Monocyte,TRUE,57631,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0030_slide2_4.png,Monocyte_without_RBC,0.5046,Monocyte,TRUE,62638,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0191_slide1_6.png,Clustered_cell,0.5048,Monocyte,TRUE,63769,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0020_slide2_4.png,Monocyte_without_RBC,0.5049,Monocyte,TRUE,60545,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0186_slide1_4.png,Unusable,0.5049,Monocyte,TRUE,57892,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0006_slide1_4.png,Clustered_cell,0.505,Monocyte,TRUE,494930,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0032_slide1_7.png,Monocyte_without_RBC,0.5053,Monocyte,TRUE,220826,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0325_slide1_5.png,Clustered_cell,0.5053,Monocyte,TRUE,58065,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0101_slide1_8.png,Lymphocyte,0.5056,Monocyte,TRUE,57570,Rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y006_cell_0219_slide1_4.png,Monocyte_without_RBC,0.5056,Monocyte,TRUE,479993,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0071_slide1_4.png,Lymphocyte,0.5057,Monocyte,TRUE,59085,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0109_slide1_5.png,Monocyte_without_RBC,0.5058,Monocyte,TRUE,63416,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0015_slide1_6.png,Lymphocyte,0.506,Monocyte,TRUE,60461,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0030_slide1_2.png,Monocyte_without_RBC,0.5062,Monocyte,TRUE,60676,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0040_slide2_6.png,Monocyte_without_RBC,0.5064,Monocyte,TRUE,220948,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0198_slide1_2.png,Clustered_cell,0.5064,Monocyte,TRUE,219865,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0006_slide2_1.png,Monocyte_without_RBC,0.507,Monocyte,TRUE,62242,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0041_slide1_2.png,Monocyte_without_RBC,0.5072,Monocyte,TRUE,62783,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0140_slide1_4.png,Lymphocyte,0.5074,Monocyte,TRUE,59561,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0022_slide1_5.png,Monocyte_without_RBC,0.5074,Monocyte,TRUE,64397,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0058_slide1_5.png,Monocyte_without_RBC,0.5075,Monocyte,TRUE,221187,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0133_slide1_4.png,Monocyte_without_RBC,0.5077,Monocyte,TRUE,219583,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y007_cell_0002_slide3_7.png,Unusable,0.5079,Monocyte,TRUE,68085,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0051_slide2_6.png,Clustered_cell,0.508,Monocyte,TRUE,57062,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0129_slide1_6.png,Clustered_cell,0.5082,Monocyte,TRUE,219564,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0220_slide1_6.png,Unusable,0.5083,Monocyte,TRUE,63846,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0019_slide1_3.png,Clustered_cell,0.5085,Monocyte,TRUE,64347,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0024_slide1_4.png,Clustered_cell,0.5086,Monocyte,TRUE,66383,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0188_slide1_6.png,Clustered_cell,0.5087,Monocyte,TRUE,63760,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0037_slide1_5.png,Monocyte_without_RBC,0.5088,Monocyte,TRUE,62730,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0011_slide3_7.png,Monocyte_without_RBC,0.5094,Monocyte,TRUE,220506,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0135_slide1_5.png,Clustered_cell,0.5096,Monocyte,TRUE,57737,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0261_slide1_2.png,Clustered_cell,0.5096,Monocyte,TRUE,220105,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0043_slide2_2.png,Clustered_cell,0.5096,Monocyte,TRUE,56954,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y005_cell_0163_slide1_4.png,Lymphocyte,0.5096,Monocyte,TRUE,65683,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0016_slide1_2.png,Monocyte_without_RBC,0.5097,Monocyte,TRUE,64298,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0015_slide1_4.png,Clustered_cell,0.5097,Monocyte,TRUE,58378,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0001_slide1_5.png,Clustered_cell,0.5097,Monocyte,TRUE,56161,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0015_slide2_4.png,Monocyte_without_RBC,0.5098,Monocyte,TRUE,60467,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0016_slide2_2.png,Monocyte_without_RBC,0.5099,Monocyte,TRUE,68347,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0222_slide1_4.png,Unusable,0.5101,Monocyte,TRUE,63849,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y007_cell_0013_slide1_5.png,Clustered_cell,0.5106,Monocyte,TRUE,68293,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0236_slide1_5.png,Monocyte_without_RBC,0.5107,Monocyte,TRUE,62019,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0074_slide2_6.png,Clustered_cell,0.5109,Monocyte,TRUE,57332,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0102_slide1_3.png,Clustered_cell,0.511,Monocyte,TRUE,59332,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0001_slide2_6.png,Monocyte_without_RBC,0.5111,Monocyte,TRUE,56170,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0064_slide2_6.png,Monocyte_without_RBC,0.5111,Monocyte,TRUE,64991,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0138_slide2_2.png,Clustered_cell,0.5114,Monocyte,TRUE,63571,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0121_slide2_3.png,Monocyte_without_RBC,0.5115,Monocyte,TRUE,57683,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0125_slide1_6.png,Clustered_cell,0.5117,Monocyte,TRUE,67446,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0008_slide1_3.png,Unusable,0.5118,Monocyte,TRUE,220434,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0077_slide2_3.png,Monocyte_without_RBC,0.5119,Monocyte,TRUE,59153,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0066_slide1_4.png,Clustered_cell,0.5124,Monocyte,TRUE,65007,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0067_slide1_5.png,Unusable,0.5126,Monocyte,TRUE,61133,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0121_slide1_4.png,Clustered_cell,0.5136,Monocyte,TRUE,65503,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0001_slide2_4.png,Monocyte_without_RBC,0.5139,Monocyte,TRUE,68050,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0077_slide2_4.png,Monocyte_without_RBC,0.514,Monocyte,TRUE,63213,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0096_slide2_2.png,Monocyte_without_RBC,0.5141,Monocyte,TRUE,57535,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0173_slide1_1.png,Clustered_cell,0.5143,Monocyte,TRUE,219764,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0111_slide2_2.png,Monocyte_without_RBC,0.5146,Monocyte,TRUE,67336,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0099_slide1_2.png,Clustered_cell,0.5153,Monocyte,TRUE,59310,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0074_slide1_3.png,Clustered_cell,0.5157,Monocyte,TRUE,65088,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0018_slide1_8.png,Clustered_cell,0.5166,Monocyte,TRUE,220610,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0134_slide1_2.png,Monocyte_without_RBC,0.5167,Monocyte,TRUE,221799,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0037_slide2_2.png,Monocyte_without_RBC,0.5169,Monocyte,TRUE,220902,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0013_slide1_1.png,Unusable,0.5171,Monocyte,TRUE,58340,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0010_slide1_4.png,Monocyte_without_RBC,0.5172,Monocyte,TRUE,64195,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0131_slide1_2.png,Monocyte_without_RBC,0.5172,Monocyte,TRUE,469832,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0012_slide2_4.png,Lymphocyte,0.5181,Monocyte,TRUE,56432,Rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0074_slide1_4.png,Clustered_cell,0.5182,Monocyte,TRUE,67002,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0042_slide2_2.png,Unusable,0.5183,Monocyte,TRUE,58756,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0011_slide1_5.png,Clustered_cell,0.5183,Monocyte,TRUE,60390,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0018_slide1_3.png,Clustered_cell,0.5187,Monocyte,TRUE,64331,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0064_slide1_2.png,Monocyte_without_RBC,0.5188,Monocyte,TRUE,64983,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0016_slide2_4.png,Monocyte_without_RBC,0.5188,Monocyte,TRUE,56517,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0017_slide2_3.png,Monocyte_without_RBC,0.519,Monocyte,TRUE,60498,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0238_slide1_6.png,Monocyte_without_RBC,0.519,Monocyte,TRUE,63882,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0016_slide1_1.png,Clustered_cell,0.5191,Monocyte,TRUE,220571,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0015_slide2_2.png,Lymphocyte,0.5194,Monocyte,TRUE,56495,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0018_slide2_7.png,Lymphocyte,0.5194,Monocyte,TRUE,60518,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0024_slide2_7.png,Clustered_cell,0.5195,Monocyte,TRUE,220713,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0062_slide1_3.png,Unusable,0.5195,Monocyte,TRUE,64962,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0011_slide1_1.png,Monocyte_without_RBC,0.5197,Monocyte,TRUE,58302,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0009_slide2_4.png,Monocyte_without_RBC,0.5198,Monocyte,TRUE,220463,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0142_slide1_5.png,Clustered_cell,0.5199,Monocyte,TRUE,59574,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0056_slide2_7.png,Monocyte_without_RBC,0.52,Monocyte,TRUE,62992,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0051_slide2_1.png,Unusable,0.5201,Monocyte,TRUE,60968,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0117_slide2_3.png,Monocyte_without_RBC,0.5207,Monocyte,TRUE,57663,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0025_slide2_3.png,Monocyte_without_RBC,0.5207,Monocyte,TRUE,220725,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0077_slide2_6.png,Clustered_cell,0.5208,Monocyte,TRUE,67034,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0020_slide1_2.png,Unusable,0.5209,Monocyte,TRUE,62486,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0122_slide2_2.png,Clustered_cell,0.521,Monocyte,TRUE,61587,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0123_slide1_2.png,Monocyte_without_RBC,0.5211,Monocyte,TRUE,469784,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0005_slide2_1.png,Monocyte_without_RBC,0.5211,Monocyte,TRUE,68142,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0036_slide2_2.png,Monocyte_without_RBC,0.5213,Monocyte,TRUE,60768,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0054_slide1_3.png,Clustered_cell,0.5214,Monocyte,TRUE,62958,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0064_slide1_3.png,Clustered_cell,0.5215,Monocyte,TRUE,494687,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0215_slide1_4.png,Monocyte_without_RBC,0.5216,Monocyte,TRUE,65791,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0062_slide1_3.png,Monocyte_without_RBC,0.5224,Monocyte,TRUE,66889,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0007_slide1_3.png,Clustered_cell,0.5226,Monocyte,TRUE,58225,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0097_slide2_6.png,Clustered_cell,0.5226,Monocyte,TRUE,63348,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0030_slide1_7.png,Unusable,0.5229,Monocyte,TRUE,64527,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0211_slide1_6.png,Monocyte_without_RBC,0.523,Monocyte,TRUE,59888,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0003_slide3_3.png,Monocyte_without_RBC,0.523,Monocyte,TRUE,68105,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0026_slide1_4.png,Lymphocyte,0.5231,Monocyte,TRUE,56694,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0094_slide2_6.png,Unusable,0.5236,Monocyte,TRUE,63330,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0268_slide1_4.png,Unusable,0.5236,Monocyte,TRUE,220127,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x017_y006_cell_0171_slide1_4.png,Unusable,0.5237,Monocyte,TRUE,479857,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0019_slide2_6.png,Monocyte_without_RBC,0.5239,Monocyte,TRUE,220632,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0003_slide1_1.png,Monocyte_without_RBC,0.524,Monocyte,TRUE,220325,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0069_slide2_4.png,Clustered_cell,0.5242,Monocyte,TRUE,63136,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0099_slide2_1.png,Monocyte_without_RBC,0.5245,Monocyte,TRUE,65340,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0127_slide2_1.png,Monocyte_without_RBC,0.5247,Monocyte,TRUE,67462,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0089_slide1_8.png,Clustered_cell,0.5248,Monocyte,TRUE,57474,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y013_cell_0002_slide1_3.png,Unusable,0.5251,Monocyte,TRUE,494913,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0169_slide1_5.png,Clustered_cell,0.5257,Monocyte,TRUE,59718,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0043_slide2_3.png,Monocyte_without_RBC,0.5259,Monocyte,TRUE,60867,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0026_slide2_4.png,Clustered_cell,0.5259,Monocyte,TRUE,62582,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0074_slide2_4.png,Clustered_cell,0.526,Monocyte,TRUE,57331,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0229_slide1_6.png,Clustered_cell,0.526,Monocyte,TRUE,59960,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0001_slide2_3.png,Lymphocyte,0.5262,Monocyte,TRUE,56167,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0032_slide2_4.png,Monocyte_without_RBC,0.5264,Monocyte,TRUE,64563,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0168_slide1_4.png,Unusable,0.5266,Monocyte,TRUE,57838,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0104_slide1_6.png,Clustered_cell,0.5269,Monocyte,TRUE,67274,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0119_slide1_6.png,Unusable,0.527,Monocyte,TRUE,65492,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0111_slide1_4.png,Unusable,0.5273,Monocyte,TRUE,221662,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0018_slide2_3.png,Monocyte_without_RBC,0.5274,Monocyte,TRUE,220613,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0012_slide1_1.png,Clustered_cell,0.5276,Monocyte,TRUE,494559,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0116_slide1_6.png,Clustered_cell,0.5281,Monocyte,TRUE,57656,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0008_slide2_4.png,Clustered_cell,0.5281,Monocyte,TRUE,56336,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y003_cell_0031_slide1_1.png,Monocyte_with_RBC,0.5282,Monocyte,TRUE,491956,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0004_slide2_3.png,Clustered_cell,0.5283,Monocyte,TRUE,64067,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0099_slide1_2.png,Monocyte_without_RBC,0.5285,Monocyte,TRUE,221573,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y004_cell_0012_slide1_2.png,Lymphocyte,0.5286,Monocyte,TRUE,62358,unusable
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0012_slide1_8.png,Unusable,0.5287,Monocyte,TRUE,66196,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y003_cell_0011_slide3_7.png,Monocyte_with_RBC,0.5287,Monocyte,TRUE,60402,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0001_slide1_4.png,Unusable,0.5289,Monocyte,TRUE,56160,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0218_slide1_2.png,Monocyte_without_RBC,0.529,Monocyte,TRUE,59913,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0011_slide2_8.png,Monocyte_without_RBC,0.5291,Monocyte,TRUE,62353,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0066_slide1_1.png,Clustered_cell,0.5293,Monocyte,TRUE,65004,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0034_slide2_1.png,Unusable,0.5297,Monocyte,TRUE,64591,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0115_slide2_3.png,Monocyte_without_RBC,0.5299,Monocyte,TRUE,57653,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0072_slide2_2.png,Clustered_cell,0.5299,Monocyte,TRUE,61186,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0125_slide1_3.png,Unusable,0.5301,Monocyte,TRUE,65526,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0178_slide1_6.png,Clustered_cell,0.5303,Monocyte,TRUE,63730,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0049_slide1_6.png,Clustered_cell,0.5303,Monocyte,TRUE,57028,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0332_slide1_2.png,Monocyte_without_RBC,0.5304,Monocyte,TRUE,220228,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0060_slide2_6.png,Monocyte_without_RBC,0.5305,Monocyte,TRUE,221219,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y007_cell_0002_slide3_8.png,Unusable,0.5308,Monocyte,TRUE,68086,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0133_slide1_2.png,Monocyte_without_RBC,0.5309,Monocyte,TRUE,469842,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0213_slide1_4.png,Clustered_cell,0.5309,Monocyte,TRUE,219926,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0026_slide2_3.png,Monocyte_without_RBC,0.5313,Monocyte,TRUE,58547,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0205_slide1_4.png,Monocyte_without_RBC,0.5319,Monocyte,TRUE,65771,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0097_slide1_2.png,Unusable,0.5327,Monocyte,TRUE,221557,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0009_slide1_3.png,Unusable,0.5331,Monocyte,TRUE,56351,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0095_slide1_6.png,Monocyte_without_RBC,0.5331,Monocyte,TRUE,65301,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0061_slide1_2.png,Monocyte_without_RBC,0.5332,Monocyte,TRUE,66878,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0047_slide1_2.png,Clustered_cell,0.5333,Monocyte,TRUE,56998,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0169_slide1_1.png,Clustered_cell,0.5333,Monocyte,TRUE,469998,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0045_slide2_7.png,Monocyte_without_RBC,0.5335,Monocyte,TRUE,221019,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0025_slide2_2.png,Monocyte_without_RBC,0.5336,Monocyte,TRUE,220724,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0137_slide1_3.png,Monocyte_without_RBC,0.5338,Monocyte,TRUE,469863,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0192_slide1_4.png,Clustered_cell,0.5342,Monocyte,TRUE,479939,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0023_slide2_4.png,Clustered_cell,0.5343,Monocyte,TRUE,62540,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0269_slide1_2.png,Clustered_cell,0.5349,Monocyte,TRUE,220129,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0097_slide1_2.png,Monocyte_without_RBC,0.5352,Monocyte,TRUE,61393,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0064_slide2_2.png,Unusable,0.5355,Monocyte,TRUE,61107,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0165_slide1_6.png,Unusable,0.5355,Monocyte,TRUE,63678,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0021_slide2_4.png,Clustered_cell,0.5357,Monocyte,TRUE,64388,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y003_cell_0256_slide1_5.png,RBC alone,0.5357,Monocyte,TRUE,62059,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0054_slide1_5.png,Monocyte_without_RBC,0.5361,Monocyte,TRUE,64868,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0055_slide2_2.png,Clustered_cell,0.5361,Monocyte,TRUE,62976,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0055_slide2_1.png,Monocyte_without_RBC,0.5363,Monocyte,TRUE,58912,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0165_slide1_4.png,Clustered_cell,0.5364,Monocyte,TRUE,67691,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0025_slide2_4.png,Monocyte_without_RBC,0.5366,Monocyte,TRUE,66406,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0034_slide1_1.png,Clustered_cell,0.5366,Monocyte,TRUE,64583,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0034_slide1_8.png,Monocyte_without_RBC,0.5366,Monocyte,TRUE,62690,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0048_slide2_4.png,Lymphocyte,0.5368,Monocyte,TRUE,57021,rbc alone
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0307_slide1_5.png,Lymphocyte,0.5368,Monocyte,TRUE,58047,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0201_slide1_6.png,Clustered_cell,0.5369,Monocyte,TRUE,222091,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0028_slide1_2.png,Clustered_cell,0.5369,Monocyte,TRUE,58566,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0078_slide1_7.png,Monocyte_without_RBC,0.537,Monocyte,TRUE,221396,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0055_slide2_3.png,Monocyte_without_RBC,0.5371,Monocyte,TRUE,58914,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y014_cell_0007_slide1_1.png,Clustered_cell,0.5373,Monocyte,TRUE,495180,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0059_slide1_5.png,Clustered_cell,0.5373,Monocyte,TRUE,495112,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0065_slide2_4.png,Lymphocyte,0.5374,Monocyte,TRUE,59026,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0105_slide1_5.png,Clustered_cell,0.5376,Monocyte,TRUE,57596,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0002_slide3_4.png,Unusable,0.5377,Monocyte,TRUE,60217,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0007_slide2_6.png,Clustered_cell,0.5379,Monocyte,TRUE,64139,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0065_slide2_4.png,Monocyte_without_RBC,0.5386,Monocyte,TRUE,57240,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0173_slide1_5.png,Clustered_cell,0.5387,Monocyte,TRUE,479868,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0028_slide1_6.png,Monocyte_without_RBC,0.5389,Monocyte,TRUE,64494,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0090_slide1_5.png,Unusable,0.5391,Monocyte,TRUE,65250,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0058_slide2_2.png,Clustered_cell,0.5392,Monocyte,TRUE,61046,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0304_slide1_4.png,Clustered_cell,0.5394,Monocyte,TRUE,65917,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0057_slide2_3.png,Monocyte_without_RBC,0.5394,Monocyte,TRUE,57137,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0027_slide2_4.png,Monocyte_without_RBC,0.5398,Monocyte,TRUE,60644,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0048_slide1_8.png,Monocyte_without_RBC,0.5399,Monocyte,TRUE,58827,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0010_slide2_3.png,Monocyte_without_RBC,0.5401,Monocyte,TRUE,64202,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0001_slide2_5.png,Monocyte_without_RBC,0.5402,Monocyte,TRUE,65973,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0118_slide1_2.png,Clustered_cell,0.5404,Monocyte,TRUE,65483,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0178_slide1_1.png,Unusable,0.5405,Monocyte,TRUE,219784,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0019_slide2_4.png,Clustered_cell,0.5406,Monocyte,TRUE,56575,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0015_slide1_1.png,Clustered_cell,0.5408,Monocyte,TRUE,494571,x
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0022_slide1_4.png,Unusable,0.5409,Monocyte,TRUE,56622,Clustered cell
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0022_slide2_8.png,Lymphocyte,0.5409,Monocyte,TRUE,56633,rbc alone
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0007_slide1_7.png,Lymphocyte,0.541,Monocyte,TRUE,56307,rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0001_slide2_7.png,Monocyte_without_RBC,0.541,Monocyte,TRUE,220291,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0027_slide1_5.png,Clustered_cell,0.5412,Monocyte,TRUE,56713,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0002_slide2_8.png,Monocyte_without_RBC,0.5415,Monocyte,TRUE,68078,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0052_slide1_4.png,Clustered_cell,0.5416,Monocyte,TRUE,62935,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0050_slide2_7.png,Monocyte_without_RBC,0.5416,Monocyte,TRUE,66758,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0251_slide1_6.png,Clustered_cell,0.5418,Monocyte,TRUE,60048,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0084_slide2_1.png,Unusable,0.5418,Monocyte,TRUE,67095,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0062_slide2_2.png,Monocyte_without_RBC,0.542,Monocyte,TRUE,58991,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0041_slide2_4.png,Monocyte_without_RBC,0.5422,Monocyte,TRUE,56930,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0122_slide1_5.png,Clustered_cell,0.5423,Monocyte,TRUE,57685,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0127_slide1_3.png,Clustered_cell,0.5423,Monocyte,TRUE,67459,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0232_slide1_1.png,Unusable,0.5424,Monocyte,TRUE,220000,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0164_slide1_6.png,Monocyte_without_RBC,0.5425,Monocyte,TRUE,57828,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0036_slide2_4.png,Monocyte_without_RBC,0.5428,Monocyte,TRUE,220890,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0133_slide2_2.png,Clustered_cell,0.543,Monocyte,TRUE,61664,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0014_slide1_7.png,Monocyte_without_RBC,0.543,Monocyte,TRUE,220545,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0008_slide2_8.png,Monocyte_without_RBC,0.5432,Monocyte,TRUE,58259,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0143_slide2_2.png,Clustered_cell,0.5433,Monocyte,TRUE,65619,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0063_slide2_1.png,Monocyte_without_RBC,0.5434,Monocyte,TRUE,59001,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0164_slide1_4.png,Clustered_cell,0.5434,Monocyte,TRUE,65686,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0003_slide2_2.png,Monocyte_without_RBC,0.5435,Monocyte,TRUE,60231,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0011_slide2_3.png,Clustered_cell,0.5436,Monocyte,TRUE,64222,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0314_slide1_2.png,Clustered_cell,0.5437,Monocyte,TRUE,220210,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0231_slide1_6.png,Unusable,0.544,Monocyte,TRUE,59968,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0018_slide2_1.png,Clustered_cell,0.5441,Monocyte,TRUE,56553,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0027_slide1_3.png,Monocyte_without_RBC,0.5443,Monocyte,TRUE,66427,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0118_slide1_5.png,Clustered_cell,0.5444,Monocyte,TRUE,59430,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0140_slide1_5.png,Clustered_cell,0.5445,Monocyte,TRUE,59562,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0030_slide2_4.png,Lymphocyte,0.5447,Monocyte,TRUE,56770,rbc alone
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0139_slide1_8.png,Monocyte_without_RBC,0.5451,Monocyte,TRUE,469875,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0042_slide2_4.png,Lymphocyte,0.5452,Monocyte,TRUE,58758,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0083_slide2_1.png,Monocyte_without_RBC,0.5455,Monocyte,TRUE,63256,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0023_slide2_4.png,Monocyte_without_RBC,0.5457,Monocyte,TRUE,66376,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0073_slide2_3.png,RBC alone,0.5459,Monocyte,TRUE,59113,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0132_slide1_5.png,Clustered_cell,0.546,Monocyte,TRUE,59514,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0061_slide2_2.png,Clustered_cell,0.5462,Monocyte,TRUE,58980,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0005_slide2_7.png,Monocyte_without_RBC,0.5464,Monocyte,TRUE,66068,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0060_slide1_6.png,Clustered_cell,0.5465,Monocyte,TRUE,61064,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0017_slide2_6.png,Clustered_cell,0.5465,Monocyte,TRUE,58419,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0025_slide2_8.png,Lymphocyte,0.5468,Monocyte,TRUE,56687,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0144_slide1_2.png,Clustered_cell,0.5469,Monocyte,TRUE,469897,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0042_slide2_3.png,Monocyte_without_RBC,0.5469,Monocyte,TRUE,220973,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0021_slide2_1.png,Unusable,0.5469,Monocyte,TRUE,60557,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0011_slide1_2.png,Monocyte_without_RBC,0.547,Monocyte,TRUE,60387,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0002_slide2_4.png,Monocyte_without_RBC,0.5471,Monocyte,TRUE,65996,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0063_slide2_7.png,Monocyte_without_RBC,0.5471,Monocyte,TRUE,66906,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0059_slide2_3.png,Monocyte_without_RBC,0.5472,Monocyte,TRUE,221205,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0020_slide2_2.png,Clustered_cell,0.5472,Monocyte,TRUE,60543,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0012_slide2_3.png,Monocyte_without_RBC,0.5472,Monocyte,TRUE,64240,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0014_slide2_4.png,Monocyte_without_RBC,0.5473,Monocyte,TRUE,56476,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0045_slide2_2.png,Monocyte_without_RBC,0.5473,Monocyte,TRUE,221014,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0057_slide1_4.png,Clustered_cell,0.5475,Monocyte,TRUE,64903,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0013_slide1_7.png,Unusable,0.5476,Monocyte,TRUE,62382,Clustered cell
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0006_slide2_8.png,Lymphocyte,0.5479,Monocyte,TRUE,56292,unusable
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0162_slide1_4.png,Clustered_cell,0.5482,Monocyte,TRUE,63664,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0128_slide1_2.png,Clustered_cell,0.5483,Monocyte,TRUE,469814,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0122_slide1_5.png,Monocyte_without_RBC,0.5483,Monocyte,TRUE,63494,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0007_slide2_3.png,Monocyte_without_RBC,0.5484,Monocyte,TRUE,66104,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0020_slide1_7.png,Unusable,0.5484,Monocyte,TRUE,66326,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0086_slide2_7.png,Monocyte_without_RBC,0.5484,Monocyte,TRUE,65215,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0141_slide1_4.png,Clustered_cell,0.5488,Monocyte,TRUE,57757,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0001_slide3_2.png,Unusable,0.5488,Monocyte,TRUE,64002,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0006_slide2_8.png,Monocyte_without_RBC,0.5494,Monocyte,TRUE,62249,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0012_slide2_4.png,Monocyte_without_RBC,0.5494,Monocyte,TRUE,66200,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0040_slide2_2.png,Monocyte_without_RBC,0.5495,Monocyte,TRUE,220944,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0098_slide1_6.png,Lymphocyte,0.5497,Monocyte,TRUE,61405,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0003_slide1_1.png,Clustered_cell,0.5498,Monocyte,TRUE,494916,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y012_cell_0006_slide1_4.png,Monocyte_without_RBC,0.5498,Monocyte,TRUE,494735,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0228_slide1_6.png,Clustered_cell,0.5498,Monocyte,TRUE,219987,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y005_cell_0115_slide1_1.png,Monocyte_with_RBC,0.5502,Monocyte,TRUE,492922,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0084_slide1_2.png,Monocyte_without_RBC,0.5503,Monocyte,TRUE,65187,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0124_slide1_1.png,Clustered_cell,0.5507,Monocyte,TRUE,469789,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0175_slide1_5.png,Lymphocyte,0.551,Monocyte,TRUE,57860,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0079_slide1_6.png,Clustered_cell,0.5511,Monocyte,TRUE,65141,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0073_slide1_3.png,Clustered_cell,0.5512,Monocyte,TRUE,63171,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y014_cell_0010_slide1_4.png,Clustered_cell,0.5513,Monocyte,TRUE,495194,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0049_slide2_3.png,Monocyte_without_RBC,0.5518,Monocyte,TRUE,62903,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0230_slide1_6.png,Clustered_cell,0.5527,Monocyte,TRUE,219995,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x017_y006_cell_0177_slide1_5.png,Unusable,0.5531,Monocyte,TRUE,479888,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0053_slide1_2.png,Unusable,0.5532,Monocyte,TRUE,60983,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x018_y013_cell_0097_slide1_5.png,Unusable,0.5532,Monocyte,TRUE,495152,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0002_slide1_8.png,Monocyte_without_RBC,0.5541,Monocyte,TRUE,65992,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0097_slide1_5.png,Clustered_cell,0.5542,Monocyte,TRUE,65320,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0097_slide1_5.png,Lymphocyte,0.5543,Monocyte,TRUE,59299,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0003_slide1_4.png,Monocyte_without_RBC,0.5544,Monocyte,TRUE,66012,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0060_slide2_2.png,Clustered_cell,0.5544,Monocyte,TRUE,63036,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0037_slide1_2.png,Clustered_cell,0.5545,Monocyte,TRUE,56864,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0144_slide1_6.png,Unusable,0.5546,Monocyte,TRUE,63594,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0159_slide1_6.png,Clustered_cell,0.5547,Monocyte,TRUE,67665,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0153_slide1_5.png,RBC alone,0.5552,Monocyte,TRUE,59638,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0067_slide1_1.png,Monocyte_without_RBC,0.5554,Monocyte,TRUE,65015,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y011_cell_0073_slide1_3.png,Monocyte_without_RBC,0.5554,Monocyte,TRUE,494696,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0060_slide2_2.png,Clustered_cell,0.5557,Monocyte,TRUE,61067,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y005_cell_0032_slide1_5.png,Monocyte_with_RBC,0.556,Monocyte,TRUE,64557,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0123_slide2_2.png,Clustered_cell,0.5564,Monocyte,TRUE,61594,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0091_slide1_4.png,Clustered_cell,0.5566,Monocyte,TRUE,63307,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0005_slide3_4.png,Monocyte_without_RBC,0.5566,Monocyte,TRUE,66072,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0053_slide1_3.png,Monocyte_without_RBC,0.557,Monocyte,TRUE,64853,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0119_slide1_6.png,Clustered_cell,0.5571,Monocyte,TRUE,57671,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0232_slide1_4.png,Clustered_cell,0.5574,Monocyte,TRUE,65825,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0084_slide2_1.png,Monocyte_without_RBC,0.558,Monocyte,TRUE,57428,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0115_slide1_6.png,Clustered_cell,0.5581,Monocyte,TRUE,65467,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0006_slide2_4.png,Monocyte_without_RBC,0.5583,Monocyte,TRUE,220401,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0096_slide1_5.png,Clustered_cell,0.5584,Monocyte,TRUE,65310,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0009_slide2_2.png,Monocyte_without_RBC,0.5585,Monocyte,TRUE,60357,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0106_slide1_6.png,Clustered_cell,0.5586,Monocyte,TRUE,67292,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y005_cell_0052_slide1_8.png,Monocyte_with_RBC,0.5588,Monocyte,TRUE,64845,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0300_slide1_2.png,Monocyte_without_RBC,0.5591,Monocyte,TRUE,220196,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0030_slide1_2.png,Unusable,0.5591,Monocyte,TRUE,220791,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0060_slide2_6.png,Monocyte_without_RBC,0.5592,Monocyte,TRUE,58972,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0029_slide1_6.png,Unusable,0.5594,Monocyte,TRUE,64510,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0035_slide2_3.png,Clustered_cell,0.5594,Monocyte,TRUE,220875,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y010_cell_0060_slide1_3.png,Clustered_cell,0.5595,Monocyte,TRUE,494471,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0011_slide2_5.png,Monocyte_without_RBC,0.5595,Monocyte,TRUE,58314,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0068_slide1_2.png,Unusable,0.5595,Monocyte,TRUE,63117,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0002_slide1_3.png,Monocyte_without_RBC,0.5598,Monocyte,TRUE,220303,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0058_slide2_3.png,Clustered_cell,0.56,Monocyte,TRUE,66854,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y007_cell_0002_slide3_6.png,Unusable,0.56,Monocyte,TRUE,68084,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0044_slide2_4.png,Monocyte_without_RBC,0.5601,Monocyte,TRUE,64738,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0075_slide1_6.png,Monocyte_without_RBC,0.5604,Monocyte,TRUE,65101,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0034_slide2_1.png,Monocyte_without_RBC,0.5606,Monocyte,TRUE,66536,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0008_slide1_5.png,Clustered_cell,0.5608,Monocyte,TRUE,62283,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0337_slide1_2.png,Clustered_cell,0.5611,Monocyte,TRUE,220233,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0082_slide1_7.png,Monocyte_without_RBC,0.5611,Monocyte,TRUE,221436,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0012_slide1_8.png,Monocyte_without_RBC,0.5613,Monocyte,TRUE,64237,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0189_slide1_6.png,Clustered_cell,0.5619,Monocyte,TRUE,61891,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0039_slide2_3.png,Clustered_cell,0.562,Monocyte,TRUE,60811,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0090_slide2_2.png,Unusable,0.5622,Monocyte,TRUE,63305,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0094_slide1_3.png,Unusable,0.5622,Monocyte,TRUE,67181,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0034_slide1_2.png,Clustered_cell,0.5623,Monocyte,TRUE,62685,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0016_slide1_3.png,Monocyte_without_RBC,0.5624,Monocyte,TRUE,68340,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0022_slide1_7.png,Monocyte_without_RBC,0.5624,Monocyte,TRUE,58487,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0121_slide2_1.png,Monocyte_without_RBC,0.5624,Monocyte,TRUE,67415,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0197_slide1_3.png,Monocyte_without_RBC,0.5626,Monocyte,TRUE,67818,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0143_slide1_6.png,Unusable,0.5629,Monocyte,TRUE,67570,Clustered cell
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0071_slide1_7.png,Monocyte_without_RBC,0.5632,Monocyte,TRUE,61175,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0011_slide2_4.png,Monocyte_without_RBC,0.5633,Monocyte,TRUE,220501,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0012_slide2_4.png,Monocyte_without_RBC,0.5633,Monocyte,TRUE,64241,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0011_slide1_1.png,Clustered_cell,0.5635,Monocyte,TRUE,494555,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x018_y013_cell_0007_slide1_5.png,RBC alone,0.5636,Monocyte,TRUE,494935,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0062_slide1_2.png,Monocyte_without_RBC,0.5636,Monocyte,TRUE,63051,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0003_slide2_2.png,Monocyte_without_RBC,0.5637,Monocyte,TRUE,68096,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0167_slide1_5.png,Clustered_cell,0.5638,Monocyte,TRUE,59708,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0066_slide1_6.png,Clustered_cell,0.5638,Monocyte,TRUE,57245,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0132_slide1_6.png,Clustered_cell,0.5639,Monocyte,TRUE,219579,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0044_slide2_7.png,Monocyte_without_RBC,0.564,Monocyte,TRUE,66680,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0235_slide1_4.png,Clustered_cell,0.5642,Monocyte,TRUE,65831,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0018_slide2_7.png,Monocyte_without_RBC,0.5645,Monocyte,TRUE,220617,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0175_slide1_6.png,Unusable,0.5648,Monocyte,TRUE,63718,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0099_slide2_1.png,Monocyte_without_RBC,0.5649,Monocyte,TRUE,63358,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0014_slide2_3.png,Monocyte_without_RBC,0.5652,Monocyte,TRUE,56475,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0135_slide2_1.png,Clustered_cell,0.5653,Monocyte,TRUE,65585,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0139_slide1_2.png,Clustered_cell,0.5657,Monocyte,TRUE,219611,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0059_slide2_4.png,Monocyte_without_RBC,0.5657,Monocyte,TRUE,57164,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0235_slide1_6.png,Clustered_cell,0.5658,Monocyte,TRUE,220015,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0047_slide2_6.png,Monocyte_without_RBC,0.5658,Monocyte,TRUE,58821,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0026_slide2_3.png,Unusable,0.566,Monocyte,TRUE,66420,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0031_slide2_6.png,Monocyte_without_RBC,0.5661,Monocyte,TRUE,220818,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0011_slide2_3.png,Lymphocyte,0.5661,Monocyte,TRUE,60396,rbc alone
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0024_slide2_4.png,Unusable,0.5661,Monocyte,TRUE,66391,rbc alone
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0238_slide1_6.png,Clustered_cell,0.5662,Monocyte,TRUE,59996,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0011_slide2_7.png,Monocyte_without_RBC,0.5664,Monocyte,TRUE,64226,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0001_slide2_2.png,Monocyte_without_RBC,0.5664,Monocyte,TRUE,68048,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0044_slide2_7.png,Clustered_cell,0.5664,Monocyte,TRUE,60885,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0024_slide2_3.png,Monocyte_without_RBC,0.5665,Monocyte,TRUE,62553,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0072_slide1_3.png,Monocyte_without_RBC,0.5668,Monocyte,TRUE,61181,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0098_slide1_6.png,Monocyte_without_RBC,0.5668,Monocyte,TRUE,221569,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0010_slide2_4.png,Monocyte_without_RBC,0.5672,Monocyte,TRUE,64203,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0015_slide1_8.png,Monocyte_without_RBC,0.5673,Monocyte,TRUE,220562,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0226_slide1_4.png,Unusable,0.5674,Monocyte,TRUE,61998,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0031_slide2_4.png,Clustered_cell,0.5676,Monocyte,TRUE,62652,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0044_slide2_1.png,Clustered_cell,0.5678,Monocyte,TRUE,56966,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0033_slide2_4.png,Clustered_cell,0.5679,Monocyte,TRUE,66525,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0016_slide2_3.png,Monocyte_without_RBC,0.568,Monocyte,TRUE,220581,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0165_slide1_6.png,Monocyte_without_RBC,0.5682,Monocyte,TRUE,219735,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0064_slide2_7.png,Monocyte_without_RBC,0.5683,Monocyte,TRUE,66916,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0007_slide2_3.png,Monocyte_without_RBC,0.5687,Monocyte,TRUE,64136,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0093_slide1_5.png,Clustered_cell,0.5687,Monocyte,TRUE,59271,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0224_slide1_6.png,Monocyte_without_RBC,0.5689,Monocyte,TRUE,219971,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0015_slide2_4.png,Monocyte_without_RBC,0.5692,Monocyte,TRUE,56497,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0007_slide1_1.png,Unusable,0.5693,Monocyte,TRUE,58223,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0053_slide1_6.png,Clustered_cell,0.5693,Monocyte,TRUE,66790,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0146_slide1_2.png,Clustered_cell,0.5695,Monocyte,TRUE,67585,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0117_slide1_6.png,Unusable,0.5698,Monocyte,TRUE,221701,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0022_slide2_2.png,Monocyte_without_RBC,0.5698,Monocyte,TRUE,58490,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0080_slide1_6.png,Clustered_cell,0.5705,Monocyte,TRUE,57385,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0078_slide2_6.png,Clustered_cell,0.5708,Monocyte,TRUE,57372,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0024_slide1_2.png,Clustered_cell,0.5709,Monocyte,TRUE,58510,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0145_slide1_6.png,Monocyte_without_RBC,0.5712,Monocyte,TRUE,65625,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0058_slide2_4.png,Monocyte_without_RBC,0.5714,Monocyte,TRUE,58949,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0110_slide2_1.png,Unusable,0.5715,Monocyte,TRUE,67327,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0170_slide1_5.png,Unusable,0.5717,Monocyte,TRUE,61833,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0043_slide1_4.png,Clustered_cell,0.5718,Monocyte,TRUE,494854,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0130_slide1_1.png,Clustered_cell,0.5719,Monocyte,TRUE,221774,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0183_slide1_4.png,Clustered_cell,0.572,Monocyte,TRUE,479913,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0037_slide2_3.png,Monocyte_without_RBC,0.572,Monocyte,TRUE,60783,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0014_slide1_5.png,Clustered_cell,0.572,Monocyte,TRUE,64268,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0201_slide1_6.png,Monocyte_without_RBC,0.5726,Monocyte,TRUE,63799,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0035_slide1_2.png,Monocyte_without_RBC,0.5726,Monocyte,TRUE,66544,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0117_slide1_5.png,Clustered_cell,0.5727,Monocyte,TRUE,63464,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y011_cell_0068_slide1_3.png,Clustered_cell,0.5729,Monocyte,TRUE,494691,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0187_slide1_2.png,Clustered_cell,0.5732,Monocyte,TRUE,222041,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0039_slide1_4.png,Clustered_cell,0.5733,Monocyte,TRUE,494846,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x007_y004_cell_0048_slide1_3.png,RBC alone,0.5734,Monocyte,TRUE,221050,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0012_slide2_7.png,Clustered_cell,0.5737,Monocyte,TRUE,220521,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0126_slide1_1.png,Clustered_cell,0.574,Monocyte,TRUE,469801,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0217_slide1_6.png,Clustered_cell,0.5741,Monocyte,TRUE,59912,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x018_y013_cell_0001_slide1_1.png,RBC alone,0.5742,Monocyte,TRUE,494908,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0002_slide2_2.png,Monocyte_without_RBC,0.5743,Monocyte,TRUE,62149,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0045_slide1_7.png,Monocyte_without_RBC,0.5743,Monocyte,TRUE,66687,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0005_slide1_1.png,Clustered_cell,0.5746,Monocyte,TRUE,494729,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0037_slide2_5.png,Monocyte_without_RBC,0.5746,Monocyte,TRUE,62737,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y004_cell_0028_slide2_4.png,Unusable,0.5748,Monocyte,TRUE,220771,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0092_slide1_5.png,Clustered_cell,0.5749,Monocyte,TRUE,61356,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0210_slide1_5.png,Unusable,0.5752,Monocyte,TRUE,61953,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0139_slide2_2.png,Clustered_cell,0.5752,Monocyte,TRUE,63575,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y001_cell_0012_slide1_1.png,Unusable,0.5752,Monocyte,TRUE,56421,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0198_slide1_6.png,Monocyte_without_RBC,0.5752,Monocyte,TRUE,222082,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0170_slide2_2.png,Monocyte_without_RBC,0.5755,Monocyte,TRUE,63699,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0004_slide2_1.png,Unusable,0.5756,Monocyte,TRUE,66040,Clustered cell
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y002_cell_0064_slide1_5.png,RBC alone,0.5758,Monocyte,TRUE,59009,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0106_slide1_6.png,Lymphocyte,0.5758,Monocyte,TRUE,61469,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0241_slide1_5.png,Clustered_cell,0.5759,Monocyte,TRUE,62029,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0261_slide1_2.png,Clustered_cell,0.576,Monocyte,TRUE,60075,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0098_slide2_1.png,Clustered_cell,0.5761,Monocyte,TRUE,65331,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0114_slide2_1.png,Unusable,0.5762,Monocyte,TRUE,63448,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0040_slide2_5.png,Unusable,0.5763,Monocyte,TRUE,62779,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0044_slide2_3.png,Monocyte_without_RBC,0.5765,Monocyte,TRUE,221001,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0049_slide2_3.png,Monocyte_without_RBC,0.5768,Monocyte,TRUE,66742,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0166_slide1_5.png,Clustered_cell,0.5771,Monocyte,TRUE,479833,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0043_slide2_1.png,Monocyte_without_RBC,0.5773,Monocyte,TRUE,60865,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0222_slide1_5.png,Clustered_cell,0.5774,Monocyte,TRUE,61989,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0020_slide2_7.png,Monocyte_without_RBC,0.5778,Monocyte,TRUE,220649,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0130_slide1_3.png,Lymphocyte,0.5778,Monocyte,TRUE,59500,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0025_slide2_7.png,Monocyte_without_RBC,0.5778,Monocyte,TRUE,66409,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0050_slide2_3.png,Monocyte_without_RBC,0.5779,Monocyte,TRUE,221085,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0045_slide2_7.png,Clustered_cell,0.578,Monocyte,TRUE,60899,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y007_cell_0003_slide1_6.png,Clustered_cell,0.5783,Monocyte,TRUE,68092,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0158_slide1_5.png,Clustered_cell,0.5784,Monocyte,TRUE,59663,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0022_slide1_3.png,Monocyte_without_RBC,0.5785,Monocyte,TRUE,58483,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y014_cell_0005_slide1_4.png,Clustered_cell,0.5785,Monocyte,TRUE,495174,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0004_slide2_6.png,Monocyte_without_RBC,0.5786,Monocyte,TRUE,58169,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0023_slide2_8.png,Monocyte_without_RBC,0.5787,Monocyte,TRUE,220698,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0114_slide2_1.png,Monocyte_without_RBC,0.5792,Monocyte,TRUE,57647,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0010_slide2_3.png,Unusable,0.5794,Monocyte,TRUE,58293,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0047_slide2_2.png,Clustered_cell,0.5795,Monocyte,TRUE,57006,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0077_slide2_6.png,Monocyte_without_RBC,0.5795,Monocyte,TRUE,63214,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0006_slide2_4.png,Monocyte_without_RBC,0.5796,Monocyte,TRUE,66085,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0202_slide1_4.png,Monocyte_without_RBC,0.5796,Monocyte,TRUE,65765,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0004_slide2_8.png,Monocyte_without_RBC,0.5797,Monocyte,TRUE,58171,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0104_slide2_2.png,Monocyte_without_RBC,0.5798,Monocyte,TRUE,67276,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y007_cell_0013_slide3_2.png,Clustered_cell,0.5799,Monocyte,TRUE,68305,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0043_slide2_1.png,Clustered_cell,0.5803,Monocyte,TRUE,66662,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0144_slide1_4.png,Clustered_cell,0.5805,Monocyte,TRUE,59585,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0049_slide1_4.png,Clustered_cell,0.5806,Monocyte,TRUE,66736,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0189_slide1_4.png,Clustered_cell,0.5808,Monocyte,TRUE,65739,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0002_slide2_8.png,Unusable,0.5809,Monocyte,TRUE,62155,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0023_slide1_7.png,Clustered_cell,0.581,Monocyte,TRUE,60583,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0082_slide1_3.png,Clustered_cell,0.581,Monocyte,TRUE,59191,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0029_slide1_2.png,Unusable,0.5811,Monocyte,TRUE,62615,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y002_cell_0074_slide1_8.png,Lymphocyte,0.5811,Monocyte,TRUE,59120,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0007_slide2_4.png,Monocyte_without_RBC,0.5813,Monocyte,TRUE,58234,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x007_y003_cell_0197_slide1_2.png,Monocyte_with_RBC,0.5817,Monocyte,TRUE,219861,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0004_slide3_6.png,Unusable,0.5821,Monocyte,TRUE,60265,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0065_slide1_3.png,Clustered_cell,0.5821,Monocyte,TRUE,221262,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0125_slide1_5.png,Monocyte_without_RBC,0.5823,Monocyte,TRUE,63512,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0291_slide1_4.png,Clustered_cell,0.5825,Monocyte,TRUE,62100,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0024_slide2_3.png,Monocyte_without_RBC,0.5828,Monocyte,TRUE,220709,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0100_slide1_2.png,Clustered_cell,0.5828,Monocyte,TRUE,61417,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0031_slide2_2.png,Monocyte_without_RBC,0.583,Monocyte,TRUE,220814,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0157_slide1_3.png,Monocyte_without_RBC,0.5831,Monocyte,TRUE,61788,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0082_slide1_2.png,Clustered_cell,0.5832,Monocyte,TRUE,59190,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0093_slide1_2.png,Clustered_cell,0.5832,Monocyte,TRUE,67171,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0213_slide1_6.png,Monocyte_without_RBC,0.5835,Monocyte,TRUE,219927,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0252_slide1_6.png,Clustered_cell,0.5837,Monocyte,TRUE,67966,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x018_y002_cell_0076_slide1_1.png,Monocyte_with_RBC,0.5839,Monocyte,TRUE,491703,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0008_slide3_3.png,Clustered_cell,0.584,Monocyte,TRUE,64165,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0095_slide2_7.png,Monocyte_without_RBC,0.5845,Monocyte,TRUE,65305,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0050_slide2_3.png,Monocyte_without_RBC,0.5846,Monocyte,TRUE,66755,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0010_slide2_3.png,Monocyte_without_RBC,0.5846,Monocyte,TRUE,62329,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y002_cell_0006_slide2_3.png,Monocyte_without_RBC,0.5847,Monocyte,TRUE,58212,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0028_slide1_1.png,Clustered_cell,0.5848,Monocyte,TRUE,495016,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0022_slide2_5.png,Monocyte_without_RBC,0.5848,Monocyte,TRUE,60575,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0026_slide1_4.png,Clustered_cell,0.5849,Monocyte,TRUE,66413,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0073_slide2_5.png,Monocyte_without_RBC,0.585,Monocyte,TRUE,63178,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0057_slide2_3.png,Clustered_cell,0.585,Monocyte,TRUE,66843,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y006_cell_0175_slide1_2.png,Clustered_cell,0.5851,Monocyte,TRUE,479875,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0044_slide1_3.png,Clustered_cell,0.5851,Monocyte,TRUE,62826,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0162_slide1_2.png,Monocyte_without_RBC,0.5855,Monocyte,TRUE,219721,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0118_slide1_5.png,Clustered_cell,0.5857,Monocyte,TRUE,61556,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y003_cell_0145_slide2_2.png,Lymphocyte,0.5857,Monocyte,TRUE,61739,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y007_cell_0011_slide2_8.png,Monocyte_without_RBC,0.5861,Monocyte,TRUE,68270,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0170_slide1_6.png,Unusable,0.5864,Monocyte,TRUE,219755,Clustered cell
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y003_cell_0014_slide1_6.png,Unusable,0.5868,Monocyte,TRUE,60444,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0063_slide1_2.png,Clustered_cell,0.587,Monocyte,TRUE,221241,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0027_slide1_4.png,Clustered_cell,0.587,Monocyte,TRUE,58554,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0137_slide1_6.png,Unusable,0.5873,Monocyte,TRUE,63566,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0024_slide1_7.png,Monocyte_without_RBC,0.5875,Monocyte,TRUE,220705,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0094_slide1_2.png,Unusable,0.5876,Monocyte,TRUE,65287,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0224_slide1_6.png,Monocyte_without_RBC,0.5878,Monocyte,TRUE,63854,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0294_slide1_4.png,Clustered_cell,0.5882,Monocyte,TRUE,65907,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0090_slide2_3.png,Clustered_cell,0.5885,Monocyte,TRUE,57486,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y003_cell_0074_slide1_2.png,Monocyte_without_RBC,0.5889,Monocyte,TRUE,61198,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0008_slide1_2.png,Monocyte_without_RBC,0.589,Monocyte,TRUE,66115,
+D:/MMA_LabelledData/Sliced\Lymphocyte\tile_x001_y001_cell_0017_slide2_8.png,Lymphocyte,0.589,Monocyte,TRUE,56540,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0049_slide1_8.png,Clustered_cell,0.5891,Monocyte,TRUE,57030,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0119_slide2_1.png,Clustered_cell,0.5891,Monocyte,TRUE,61565,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0048_slide1_3.png,Monocyte_without_RBC,0.5895,Monocyte,TRUE,62882,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y012_cell_0002_slide1_5.png,Clustered_cell,0.5899,Monocyte,TRUE,494720,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0160_slide2_2.png,Clustered_cell,0.5902,Monocyte,TRUE,63659,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0079_slide2_2.png,Monocyte_without_RBC,0.5903,Monocyte,TRUE,57379,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0042_slide2_1.png,Clustered_cell,0.5903,Monocyte,TRUE,66648,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y005_cell_0016_slide1_7.png,Unusable,0.5904,Monocyte,TRUE,64303,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0022_slide2_4.png,Clustered_cell,0.5907,Monocyte,TRUE,64404,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0054_slide1_5.png,Clustered_cell,0.5907,Monocyte,TRUE,60997,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0276_slide1_2.png,Clustered_cell,0.5909,Monocyte,TRUE,60097,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0043_slide2_6.png,Clustered_cell,0.591,Monocyte,TRUE,64726,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0037_slide1_3.png,Clustered_cell,0.5911,Monocyte,TRUE,220896,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0002_slide3_1.png,Unusable,0.5913,Monocyte,TRUE,62156,MonocytewithoutRBC
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y002_cell_0010_slide2_6.png,Unusable,0.5915,Monocyte,TRUE,58296,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0255_slide1_4.png,Monocyte_without_RBC,0.5916,Monocyte,TRUE,65868,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0251_slide1_1.png,Clustered_cell,0.5917,Monocyte,TRUE,220074,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0110_slide1_4.png,Clustered_cell,0.5923,Monocyte,TRUE,65428,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0077_slide1_3.png,Clustered_cell,0.5923,Monocyte,TRUE,59146,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y004_cell_0176_slide1_4.png,Clustered_cell,0.5924,Monocyte,TRUE,63720,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y004_cell_0119_slide2_2.png,Unusable,0.5925,Monocyte,TRUE,63479,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0125_slide2_2.png,Monocyte_without_RBC,0.5926,Monocyte,TRUE,63515,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x007_y003_cell_0249_slide1_4.png,Unusable,0.5927,Monocyte,TRUE,220070,Clustered cell
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0069_slide1_5.png,Clustered_cell,0.5929,Monocyte,TRUE,66958,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0164_slide1_2.png,Clustered_cell,0.593,Monocyte,TRUE,221949,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x007_y003_cell_0335_slide1_2.png,Monocyte_with_RBC,0.593,Monocyte,TRUE,220231,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y001_cell_0027_slide1_4.png,Monocyte_with_RBC,0.5931,Monocyte,TRUE,56712,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0027_slide2_7.png,Monocyte_without_RBC,0.5931,Monocyte,TRUE,64487,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x018_y012_cell_0006_slide1_3.png,Monocyte_without_RBC,0.5932,Monocyte,TRUE,494734,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x001_y002_cell_0004_slide2_2.png,Monocyte_with_RBC,0.594,Monocyte,TRUE,58165,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y013_cell_0018_slide1_3.png,Clustered_cell,0.594,Monocyte,TRUE,494977,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0260_slide1_1.png,Monocyte_without_RBC,0.5941,Monocyte,TRUE,220101,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y005_cell_0003_slide2_8.png,Monocyte_without_RBC,0.5941,Monocyte,TRUE,64048,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0025_slide1_1.png,Clustered_cell,0.5944,Monocyte,TRUE,64441,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y002_cell_0168_slide1_4.png,Monocyte_without_RBC,0.5944,Monocyte,TRUE,469996,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y001_cell_0299_slide1_5.png,Clustered_cell,0.5945,Monocyte,TRUE,58039,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0048_slide2_4.png,Monocyte_without_RBC,0.5947,Monocyte,TRUE,221058,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y001_cell_0102_slide2_6.png,Monocyte_without_RBC,0.5948,Monocyte,TRUE,57580,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y004_cell_0016_slide2_3.png,Monocyte_without_RBC,0.5952,Monocyte,TRUE,62435,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0003_slide1_3.png,Clustered_cell,0.5952,Monocyte,TRUE,66011,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y004_cell_0093_slide1_3.png,Clustered_cell,0.5955,Monocyte,TRUE,221526,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y003_cell_0159_slide1_1.png,Monocyte_without_RBC,0.5957,Monocyte,TRUE,219708,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0045_slide1_1.png,Monocyte_without_RBC,0.5962,Monocyte,TRUE,66681,
+D:/MMA_LabelledData/Sliced\RBC alone\tile_x001_y004_cell_0003_slide2_3.png,RBC alone,0.5963,Monocyte,TRUE,62174,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x001_y006_cell_0004_slide1_5.png,Monocyte_without_RBC,0.5963,Monocyte,TRUE,66036,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0012_slide2_2.png,Monocyte_without_RBC,0.5965,Monocyte,TRUE,220516,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x018_y014_cell_0012_slide1_4.png,Clustered_cell,0.5969,Monocyte,TRUE,495202,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0004_slide2_8.png,Monocyte_without_RBC,0.5969,Monocyte,TRUE,220363,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0025_slide1_7.png,Clustered_cell,0.5971,Monocyte,TRUE,64447,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y006_cell_0156_slide2_6.png,Clustered_cell,0.5974,Monocyte,TRUE,67650,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0056_slide2_1.png,Clustered_cell,0.5976,Monocyte,TRUE,61023,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x017_y009_cell_0016_slide3_3.png,Monocyte_without_RBC,0.5981,Monocyte,TRUE,483994,
+D:/MMA_LabelledData/Sliced\Monocyte_without_RBC\tile_x007_y004_cell_0066_slide1_1.png,Monocyte_without_RBC,0.5987,Monocyte,TRUE,221270,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x017_y002_cell_0160_slide1_4.png,Clustered_cell,0.599,Monocyte,TRUE,469964,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x007_y003_cell_0140_slide1_2.png,Clustered_cell,0.599,Monocyte,TRUE,219616,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0014_slide1_3.png,Clustered_cell,0.599,Monocyte,TRUE,60441,
+D:/MMA_LabelledData/Sliced\Unusable\tile_x001_y006_cell_0029_slide1_1.png,Unusable,0.5993,Monocyte,TRUE,66455,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x017_y016_cell_0017_slide3_3.png,Monocyte_with_RBC,0.5996,Monocyte,TRUE,490987,
+D:/MMA_LabelledData/Sliced\Monocyte_with_RBC\tile_x017_y001_cell_0152_slide1_2.png,Monocyte_with_RBC,0.5996,Monocyte,TRUE,467995,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y005_cell_0071_slide1_1.png,Clustered_cell,0.5996,Monocyte,TRUE,65056,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0188_slide1_2.png,Clustered_cell,0.5996,Monocyte,TRUE,59793,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y002_cell_0113_slide1_4.png,Clustered_cell,0.5998,Monocyte,TRUE,59399,
+D:/MMA_LabelledData/Sliced\Clustered_cell\tile_x001_y003_cell_0217_slide1_6.png,Clustered_cell,0.5999,Monocyte,TRUE,61975,

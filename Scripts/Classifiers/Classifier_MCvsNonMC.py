@@ -23,7 +23,7 @@ from sklearn.metrics import precision_recall_fscore_support
 #
 # At inference: class 0 + class 1 → NonMonocyte, class 2 → Monocyte
 # ─────────────────────────────────────────────
-_mono_total = 2211  # 737 × 3
+_mono_total = 2400  # 737 × 3
 
 CONFIG = {
     "data_dir": "D:/MMA_LabelledData/Sliced",
@@ -49,9 +49,9 @@ CONFIG = {
     #   MCwoRBC    (~2764) → 737:  0.27x subsampled
     #   Clustered  (~3748) → 737:  0.20x subsampled
     "subclass_targets": {
-        "Unusable":   600,
-        "Lymphocyte": 300,
-        "RBCalone":   300,
+        "Unusable":   800,
+        "Lymphocyte": 200,
+        "RBCalone":   400,
         "MCwRBC":     _mono_total // 3,
         "MCwoRBC":    _mono_total // 3,
         "Clustered":  _mono_total - 2 * (_mono_total // 3),
