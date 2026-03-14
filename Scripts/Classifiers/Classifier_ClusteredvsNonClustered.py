@@ -13,6 +13,11 @@ from openpyxl import load_workbook
 from datetime import date
 from sklearn.metrics import precision_recall_fscore_support
 
+import sys
+sys.path.append("C:/repos/Blood-Cell-Classification/Scripts/Logging")
+
+from Logger import setup_mlflow, start_run, log_params, log_epoch, log_results, log_artifacts, log_confusion_matrix, end_run
+
 # ─────────────────────────────────────────────
 # CONFIG
 #
@@ -23,7 +28,7 @@ from sklearn.metrics import precision_recall_fscore_support
 #   0 = Unclustered (MCwRBC + MCwoRBC collapsed)
 #   1 = Clustered
 # ─────────────────────────────────────────────
-_target = 1800  # samples per class per epoch — equal balance
+_target = 2000  # samples per class per epoch — equal balance
 
 CONFIG = {
     "data_dir": "D:/MMA_LabelledData/Sliced",
@@ -216,7 +221,8 @@ def make_dataloaders(config):
 # MODEL — 2 output classes
 # ─────────────────────────────────────────────
 def build_model(num_classes=2, freeze_backbone=False):
-    model = models.resnet34(weights=models.ResNet34_Weights.DEFAULT)
+    # model = models.resnet34(weights=models.ResNet34_Weights.DEFAULT)
+    model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
     if freeze_backbone:
         for param in model.parameters():
             param.requires_grad = False
@@ -412,6 +418,11 @@ def train(config):
     print(f"Training on: {device}")
     os.makedirs(os.path.dirname(config["checkpoint_path"]), exist_ok=True)
 
+    # MLflow Logging setup 
+    setup_mlflow("Stage2_ClusteredvsNonClusteredClean")
+    start_run(run_name="3subclass_split", notes="MonoW and W/o + Clustered")
+    log_params(config)
+
     train_loader, val_loader, test_loader, fine_counts = make_dataloaders(config)
 
     model = build_model(num_classes=2, freeze_backbone=False).to(device)
@@ -462,6 +473,9 @@ def train(config):
             if epochs_without_improvement >= config["early_stopping_patience"]:
                 print(f"\n  Early stopping triggered at epoch {epoch}")
                 break
+
+        # log epoch information
+        log_epoch(epoch, train_loss, train_acc, val_loss, val_acc)
 
     # ── Load best checkpoint ──
     print("\n── Loading Best Checkpoint ──")
@@ -516,7 +530,7 @@ def train(config):
     )
     cm = confusion_matrix(true_labels, preds)
 
-    log_experiment(config, {
+    results = {
         "test_acc":       round(test_acc, 4),
         "unclust_prec":   round(prec[0], 4),
         "unclust_recall": round(rec[0],  4),
@@ -529,8 +543,16 @@ def train(config):
         "tp": int(cm[1,1]), "tn": int(cm[0,0]),
         "fp": int(cm[0,1]), "fn": int(cm[1,0]),
         "val_acc": round(val_acc_final, 4),
-    }, log_path="C:/repos/Blood-Cell-Classification/experiment_log.xlsx",
+    }
+
+    log_experiment(config, results, log_path="C:/repos/Blood-Cell-Classification/experiment_log.xlsx",
        notes="Stage 2 — Clustered vs Unclustered")
+    
+    # After training:
+    log_results(results)
+    log_confusion_matrix(true_labels, preds, ["Non-Monocyte", "Monocyte"], "checkpoints_stage2/confusion_matrix_stage2.png")
+    log_artifacts(["checkpoints_stage2/loss_curve_stage2.png", "checkpoints_stage2/accuracy_curve_stage2.png", config["checkpoint_path"]])
+    end_run()
 
 # ─────────────────────────────────────────────
 # ENTRY POINT

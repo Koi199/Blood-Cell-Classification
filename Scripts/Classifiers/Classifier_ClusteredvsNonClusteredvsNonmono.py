@@ -13,6 +13,11 @@ from openpyxl import load_workbook
 from datetime import date
 from sklearn.metrics import precision_recall_fscore_support
 
+import sys
+sys.path.append("C:/repos/Blood-Cell-Classification/Scripts/Logging")
+
+from Logger import setup_mlflow, start_run, log_params, log_epoch, log_results, log_artifacts, log_confusion_matrix, end_run
+
 # ─────────────────────────────────────────────
 # CONFIG
 #
@@ -47,10 +52,10 @@ CONFIG = {
     "classification_threshold": 0.5,  # used for binary cascade comparison only
 
     "subclass_targets": {
-        # NonMonocyte subclasses — sum to 1800
-        "Unusable":   1200,
-        "Lymphocyte": 300,
-        "RBCalone":   300,
+        # NonMonocyte subclasses — doesnt sum to 1800
+        "Unusable":   1000,
+        "Lymphocyte": 150,
+        "RBCalone":   400,
         # Unclustered subclasses — sum to 1800
         "MCwRBC":     900,
         "MCwoRBC":    900,
@@ -406,6 +411,11 @@ def train(config):
     print(f"Training on: {device}")
     os.makedirs(os.path.dirname(config["checkpoint_path"]), exist_ok=True)
 
+    # MLflow Logging setup 
+    setup_mlflow("3Class_NonmonovsClusteredvsUnclustered")
+    start_run(run_name="3subclass_split", notes="First layer??")
+    log_params(config)
+
     train_loader, val_loader, test_loader, fine_counts = make_dataloaders(config)
 
     model = build_model(num_classes=3, freeze_backbone=False).to(device)
@@ -456,6 +466,9 @@ def train(config):
                 print(f"\n  Early stopping triggered at epoch {epoch}")
                 break
 
+        # log epoch information
+        log_epoch(epoch, train_loss, train_acc, val_loss, val_acc)
+
     # ── Load best checkpoint ──
     print("\n── Loading Best Checkpoint ──")
     model.load_state_dict(torch.load(config["checkpoint_path"]))
@@ -501,7 +514,7 @@ def train(config):
         true_labels, preds, average="macro"
     )
 
-    log_experiment(config, {
+    results = {
         "test_acc":        round(test_acc, 4),
         "nonmono_prec":    round(prec[2], 4),
         "nonmono_recall":  round(rec[2],  4),
@@ -515,8 +528,16 @@ def train(config):
         "macro_f1":        round(f1_macro,    4),
         "weighted_f1":     round(f1_weighted, 4),
         "val_acc":         round(val_acc_final, 4),
-    }, log_path="C:/repos/Blood-Cell-Classification/experiment_log.xlsx",
+    }
+
+    log_experiment(config, results, log_path="C:/repos/Blood-Cell-Classification/experiment_log.xlsx",
        notes="3-class single model — Unclustered / Clustered / NonMonocyte")
+    
+    # After training:
+    log_results(results)
+    log_confusion_matrix(true_labels, preds, ["Non-Monocyte", "Monocyte"], "checkpoints_3class/confusion_matrix_3class.png")
+    log_artifacts(["checkpoints_3class/loss_curve_3class.png", "checkpoints_3class/accuracy_curve_3class.png", config["checkpoint_path"]])
+    end_run()
 
 # ─────────────────────────────────────────────
 # ENTRY POINT
