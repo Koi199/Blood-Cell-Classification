@@ -10,3 +10,7 @@ venv/
 /SingleCells_Batch
 /myenv
 /cellenv
+/mlruns
+/checkpoints_stage2
+/checkpoints_3class
+/checkpoints_stage1
