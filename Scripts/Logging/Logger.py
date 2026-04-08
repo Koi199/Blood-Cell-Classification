@@ -10,8 +10,7 @@ from sklearn.metrics import confusion_matrix
 # MLflow stores all runs under mlruns/ at this path.
 # Change to wherever your project lives.
 # ─────────────────────────────────────────────
-TRACKING_URI = "C:/repos/Blood-Cell-Classification/mlruns"
-
+TRACKING_URI = "sqlite:///D:/MMA_LabelledData/ML_logs/mlflow.db"
 
 def setup_mlflow(experiment_name):
     """
@@ -31,17 +30,11 @@ def setup_mlflow(experiment_name):
 def start_run(run_name=None, notes=""):
     """
     Start a new MLflow run. Call before training loop.
-    Automatically ends any lingering active run first so grid searches
-    don't get blocked by a previous failed run.
+    Returns the active run so you can pass it around if needed.
 
     Usage:
         start_run(run_name="baseline", notes="3-class subclass split")
     """
-    # Safety cleanup — end any run left open by a previous crash
-    if mlflow.active_run() is not None:
-        print(f"  ⚠ Lingering MLflow run detected — ending it before starting new run")
-        mlflow.end_run()
-
     run = mlflow.start_run(run_name=run_name)
     if notes:
         mlflow.set_tag("notes", notes)

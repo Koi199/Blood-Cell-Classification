@@ -35,6 +35,7 @@ import mlflow
 from datetime import datetime
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
+from multiprocessing import freeze_support
 
 import sys
 sys.path.append("C:/repos/Blood-Cell-Classification/Scripts/Logging")
@@ -88,7 +89,6 @@ def kfold_validate(
 ):
     """
     Run stratified k-fold validation on any classifier.
-
     Args:
         train_fn:         the train() function from any classifier module
         config:           config dict — checkpoint_path will be modified per fold
@@ -208,6 +208,10 @@ def kfold_validate(
         print(f"  {key:20s}: {mean:.4f} ± {std:.4f}")
 
     return aggregate
+
+if __name__ == "__main__":
+    freeze_support()
+    kfold_validate()
 
 # ─────────────────────────────────────────────
 # USAGE EXAMPLE

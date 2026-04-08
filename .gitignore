@@ -16,3 +16,4 @@ venv/
 /checkpoints_stage1
 /checkpoints_rbc_clustered
 /checkpoints_rbc
+/active_learning

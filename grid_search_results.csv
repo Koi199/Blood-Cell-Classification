@@ -1,0 +1,9 @@
+architecture,target_size,timestamp,test_acc,error,non_mono_prec,non_mono_recall,non_mono_f1,mono_prec,mono_recall,mono_f1,macro_f1,weighted_f1,tp,tn,fp,fn,val_acc
+convnext_tiny,2000,2026-04-01 16:45,,[Errno 2] No such file or directory: 'C:/repos/Blood-Cell-Classification/ExperimentLog/experiment_log.xlsx',,,,,,,,,,,,,
+convnext_tiny,2500,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_tiny,3000,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_base,1500,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_base,2000,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_base,2500,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_base,3000,2026-04-01 16:45,,"Run with UUID cd50b82a7beb402fac665d52d84f5031 is already active. To start a new run, first end the current run with mlflow.end_run(). To start a nested run, call start_run with nested=True",,,,,,,,,,,,,
+convnext_tiny,1500,2026-04-01 17:13,0.9152,,0.7155,0.8691,0.7849,0.9703,0.9251,0.9472,0.866,0.9183,2447.0,498.0,75.0,198.0,0.9148
