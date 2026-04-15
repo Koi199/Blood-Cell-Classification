@@ -20,4 +20,4 @@ venv/
 /.xlsx
 /.csv
 /LabelledData
-
+/.db
