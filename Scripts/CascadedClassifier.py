@@ -2,6 +2,7 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 from typing import Dict, Callable, Any
+from torchvision.models import convnext_tiny, convnext_base
 
 # -------------------------
 # Shared preprocessing (256x256)
@@ -82,33 +83,56 @@ class CascadeTree:
             # Otherwise route to next model
             current = node.routes[out["pred"]]
 
+def load_convnext_tiny(path, num_classes, device="cuda"):
+    # 1. Instantiate architecture
+    model = convnext_tiny(weights=None)   # no pretrained weights
+    model.classifier[2] = torch.nn.Linear(model.classifier[2].in_features,
+                                          num_classes)
+
+    # 2. Load state_dict
+    state = torch.load(path, map_location=device)
+    model.load_state_dict(state)
+
+    # 3. Move to device
+    return model.to(device)
+
+def load_convnext_base(path, num_classes, device="cuda"):
+    model = convnext_base(weights=None)
+    model.classifier[2] = torch.nn.Linear(model.classifier[2].in_features,
+                                          num_classes)
+
+    state = torch.load(path, map_location=device)
+    model.load_state_dict(state)
+
+    return model.to(device)
+
 def main(img_path):
     # Load your models
-    Model_MonocytevsNonMonocyte = torch.load(r"C:\repos\Blood-Cell-Classification\checkpoints_stage1\convnext_tiny_t3000.pth") 
-    Model_ClusteredvsUnclustered = torch.load(r"C:\repos\Blood-Cell-Classification\checkpoints_stage2\convnext_base_t1500.pth")
-    Model_ClusteredRBCCount = torch.load(r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_clustered\convnext_tiny.pth")
-    Model_UnclusteredRBCCount = torch.load(r"C:\repos\Blood-Cell-Classification\checkpoints_rbc\convnext_tiny.pth")
+    Model_MonocytevsNonMonocyte = load_convnext_tiny(r"C:\repos\Blood-Cell-Classification\checkpoints_stage1\convnext_tiny_t3000.pth", 3) 
+    Model_ClusteredvsUnclustered = load_convnext_base(r"C:\repos\Blood-Cell-Classification\checkpoints_stage2\convnext_base_t1500.pth", 2)
+    Model_ClusteredRBCCount = load_convnext_tiny(r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_clustered\convnext_tiny.pth", 5)
+    Model_UnclusteredRBCCount = load_convnext_base(r"C:\repos\Blood-Cell-Classification\checkpoints_rbc\convnext_base.pth", 4)
 
     # Wrap them
-    A = ModelNode("A", Model_MonocytevsNonMonocyte, device="cuda")
-    B = ModelNode("B", Model_ClusteredvsUnclustered, device="cuda")
-    C = ModelNode("C", Model_ClusteredRBCCount, device="cuda")
-    D = ModelNode("D", Model_UnclusteredRBCCount, device="cuda")
+    MonovsNonMono = ModelNode("MonovsNonMono", Model_MonocytevsNonMonocyte, device="cuda")
+    Cluster = ModelNode("Cluster", Model_ClusteredvsUnclustered, device="cuda")
+    Cluster_RBCCount = ModelNode("Cluster_RBCCount", Model_ClusteredRBCCount, device="cuda")
+    Unclustered_RBCCount = ModelNode("Unclustered_RBCCount", Model_UnclusteredRBCCount, device="cuda")
 
     # Define routing logic
-    A.set_routes({
-        1: "B"    # If A predicts class 1 → go to C
+    MonovsNonMono.set_routes({
+        2: "Cluster"    # If A predicts class 2 → go to B (monocyte)
     })
 
-    B.set_routes({
-        0: "D",   # If B predicts class 2 → go to C
-        1: "C"
+    Cluster.set_routes({
+        0: "Unclustered_RBCCount",  # Unclustered
+        1: "Cluster_RBCCount" # clustered
     })
 
     # Build cascade
     tree = CascadeTree(
-        nodes={"A": A, "B": B, "C": C, "D": D},
-        root="A"
+        nodes={"MonovsNonMono": MonovsNonMono, "Cluster": Cluster, "Cluster_RBCCount": Cluster_RBCCount, "Unclustered_RBCCount": Unclustered_RBCCount},
+        root="MonovsNonMono"
     )
 
     # Run on an image
@@ -117,4 +141,4 @@ def main(img_path):
     print(result)
 
 if __name__ == "__main__":
-    main(r"D:\MMA_LabelledData\Clustered_RBCCount\RBC_1\tile_x001_y001_cell_0087_slide1_5.png")
+    main(r"D:\MMA_batch1\contrast_1.0_Sliced\Slide 1-1\tile_x001_y004_cell_0028.png")

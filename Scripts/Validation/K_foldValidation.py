@@ -35,7 +35,6 @@ import mlflow
 from datetime import datetime
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix
-from multiprocessing import freeze_support
 
 import sys
 sys.path.append("C:/repos/Blood-Cell-Classification/Scripts/Logging")
@@ -101,7 +100,9 @@ def kfold_validate(
         notes:            description logged to MLflow
         n_splits:         number of folds (default 5)
         results_csv:      path to save per-fold CSV results
-                          (defaults to checkpoint_path dir / kfold_results.csv)
+                          (defaults to 
+                          
+                          _path dir / kfold_results.csv)
 
     Returns:
         aggregate: dict of {metric_mean, metric_std} across all folds
@@ -210,7 +211,6 @@ def kfold_validate(
     return aggregate
 
 if __name__ == "__main__":
-    freeze_support()
     kfold_validate()
 
 # ─────────────────────────────────────────────

@@ -72,8 +72,8 @@ if __name__ == "__main__":
 
             try:
                 with Image.open(img_path) as img:
-                    width, height = img.size
-                    left_half = img.crop((0, 0, width // 2, height))
+                    #width, height = img.size
+                    left_half = img.crop((0, 0, 256, 256))
 
                     if not dry_run:
                         os.makedirs(dest_subfolder, exist_ok=True)
