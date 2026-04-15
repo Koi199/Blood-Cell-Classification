@@ -17,3 +17,7 @@ venv/
 /checkpoints_rbc_clustered
 /checkpoints_rbc
 /active_learning
+/.xlsx
+/.csv
+/LabelledData
+
