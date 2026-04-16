@@ -1,8 +1,11 @@
 from pathlib import Path
 from typing import Any
 from PIL import Image
+import csv
+import json
 import torch
 import torch.nn.functional as F
+import numpy as np
 from torchvision import transforms
 from torchvision.models import convnext_tiny, convnext_base
 
@@ -133,7 +136,8 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
         root="MonovsNonMono",
     )
 
-def cellcount(result: list):
+# Reports the count of each class
+def count_cells(result: list):
     Nonmonocyte_count = 0
     Clustered_monocyte = 0
     Unclustered_monocyte = 0
@@ -188,6 +192,83 @@ def cellcount(result: list):
         "Clustered_RBC": Clustered_RBC
     }
 
+# save a detail record of the results to a given path
+def save_results_list_to_csv(results, csv_path):
+    csv_path = Path(csv_path)
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+    rows = []
+
+    for entry in results:
+        flat = {
+            "file": entry["file"],
+            "final_pred": entry["final_pred"],
+            "final_score": entry["final_score"],
+        }
+
+        # Combined cascade confidence
+        scores = [step["score"] for step in entry["path"]]
+        flat["combined_score"] = float(np.prod(scores))
+
+        # ----------------------------------------------------
+        # Determine final outcome label
+        # ----------------------------------------------------
+        path_len = len(entry["path"])
+
+        if path_len == 1:
+            outcome = "NONmonocyte"
+
+        elif path_len == 3:
+            last = entry["path"][2]   # third model
+            model_name = last["model"]
+            count = last["pred"]
+
+            if model_name == "Unclustered_RBCCount":
+                match count:
+                    case 0: outcome = "UNclustered Monocyte"
+                    case 1: outcome = "UNclustered Monocyte oneRBC"
+                    case 2: outcome = "UNclustered Monocyte twoRBCs"
+                    case 3: outcome = "UNclustered Monocyte threeRBCs"
+
+            elif model_name == "Cluster_RBCCount":
+                match count:
+                    case 0: outcome = "Clustered Monocyte"
+                    case 1: outcome = "Clustered Monocyte oneRBC"
+                    case 2: outcome = "Clustered Monocyte twoRBCs"
+                    case 3: outcome = "Clustered Monocyte threeRBCs"
+                    case 4: outcome = "Clustered RBC"
+
+        else:
+            outcome = "UNKNOWN"
+
+        flat["class"] = outcome
+
+        # ----------------------------------------------------
+        # Flatten cascade steps
+        # ----------------------------------------------------
+        for idx, step in enumerate(entry["path"], start=1):
+            flat[f"model{idx}_name"] = step["model"]
+            flat[f"model{idx}_pred"] = step["pred"]
+            flat[f"model{idx}_score"] = step["score"]
+            flat[f"combined_probs"] = json.dumps(step["probs"])
+
+        rows.append(flat)
+
+    # Build CSV header
+    all_keys = set()
+    for row in rows:
+        all_keys.update(row.keys())
+    fieldnames = sorted(all_keys)
+
+    # Write CSV
+    write_header = not csv_path.exists()
+
+    with open(csv_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if write_header:
+            writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
 
 # ── Main entry point ──────────────────────────────────────────
 def run_classification(

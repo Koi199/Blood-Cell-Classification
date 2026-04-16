@@ -1,20 +1,24 @@
 from PySide6.QtCore import QObject, Signal
 from pipeline.segmentation import run_segmentation
 from pipeline.npyprocessing import extract_single_cells
-from pipeline.prediction import build_cascade_tree, run_classification, cellcount
+from pipeline.prediction import build_cascade_tree, run_classification, count_cells, save_results_list_to_csv
 from pathlib import Path
 
 class PipelineWorker(QObject):
     log = Signal(str)
     finished = Signal()
 
-    def __init__(self, image_paths, npy_dir, overlay_dir, output_dir, model_path):
+    def __init__(self, image_paths, root_dir):
         super().__init__()
         self.image_paths = image_paths
-        self.npy_dir    = npy_dir
-        self.overlay_dir = overlay_dir
-        self.output_dir = output_dir
-        self.model_path  = model_path
+        # Always store root_dir as a Path
+        self.root_dir = Path(root_dir)
+
+        # Build all subpaths here
+        self.npy_dir     = self.root_dir / "segmentednpy"
+        self.overlay_dir = self.root_dir / "Overlay"
+        self.output_dir  = self.root_dir / "SingleCells"
+        self.model_path  = "Finalpipeline/model/MMA_trainv3"
 
     def run(self):
         self.log.emit("Pipeline started.")
@@ -84,8 +88,20 @@ class PipelineWorker(QObject):
         except Exception as e:
             self.log.emit(f"❌ Prediction error: {e}")
 
-        counts = cellcount(results)
-        text = "\n".join(f"{key}: {value}" for key, value in counts.items())
-        self.log.emit(text)
+        # Count cells for quick display
+        try:
+            counts = count_cells(results) # reports a summary of counts for each cell type
+            text = "\n".join(f"{key}: {value}" for key, value in counts.items())
+            self.log.emit(text)
+        except Exception as e:
+            self.log.emit(f"ERROR counting cells.\n")
+        
+        # Save results in csv format
+        try:
+            csv_path = self.root_dir / "predictions.csv"
+            save_results_list_to_csv(results,csv_path=csv_path )
+        except Exception as e:
+            self.log.emit(f"ERROR saving results.\n")
+
         self.log.emit("Pipeline finished.")
         self.finished.emit()

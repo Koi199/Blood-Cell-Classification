@@ -3,6 +3,10 @@ from PySide6.QtWidgets import QMainWindow, QFileDialog
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QThread
 from pipeline.worker import PipelineWorker
+from pathlib import Path
+import pandas as pd
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -61,16 +65,64 @@ class MainWindow(QMainWindow):
         self.ui.listWidget_imageList.clear()
         self.ui.TextEdit_Log.append("Image list cleared.")
 
+    def display_image_in_label(self, element, filepath):
+        pixmap = QPixmap(filepath)
+        pixmap = pixmap.scaled(
+            element.width(),
+            element.height(),
+            Qt.KeepAspectRatio
+        )
+        element.setPixmap(pixmap)
+
+    def after_pipeline(self):
+        self.ui.TextEdit_Log.append("Pipeline complete. Running post-processing...")
+        root_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
+        try:
+            csv_path = root_dir / 'predictions.csv'
+
+            # Load CSV
+            df = pd.read_csv(csv_path)
+
+            # Dictionary: class → top file
+            top1_by_class = {}
+
+            # Group by class
+            for cls, group in df.groupby("class"):
+                # Sort by combined score (descending)
+                group_sorted = group.sort_values(by="combined_score", ascending=False)
+
+                # Take the top 1 file
+                top_file = group_sorted.iloc[0]["file"]
+
+                top1_by_class[cls] = top_file
+
+            # Example: pick one class to display
+            # (you can choose which class you want to show)
+            some_class = list(top1_by_class.keys())[0]
+            best_image = top1_by_class[some_class]
+
+            self.ui.TextEdit_Log.append(f"Top image for {some_class}: {best_image}")
+
+            # Display in QLabel
+            self.display_image_in_label(self.ui.Image_1, top1_by_class['NONmonocyte'])
+            self.display_image_in_label(self.ui.Image_2, top1_by_class['UNclustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_3, top1_by_class['UNclustered Monocyte'])
+            self.display_image_in_label(self.ui.Image_4, top1_by_class['Clustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_5, top1_by_class['Clustered Monocyte'])
+
+        except Exception as e:
+            self.ui.TextEdit_Log.append(f"Error in post-processing: {e}")
+
     def start_pipeline(self):
         if not self.image_paths:
             self.ui.TextEdit_Log.append("No images selected.")
             return
 
-        # Hardcoded for now — could be moved to UI input fields later
-        npy_dir    = "D:/MMA_PipelineTest/segmentednpy"
-        overlay_dir = "D:/MMA_PipelineTest/Overlay"
-        model_path  = "D:/MMA_batch1/TrainedCellpose/models/MMA_trainv3"
-        output_dir = "D:/MMA_PipelineTest/SingleCells"
+        root_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
+ 
+        if not root_dir.exists():
+            self.ui.TextEdit_Log.append(f"❌ Folder does not exist: {root_dir}")
+            return
 
         self.ui.Button_Start.setEnabled(False)
         self.ui.TextEdit_Log.append("Starting pipeline...")
@@ -78,16 +130,15 @@ class MainWindow(QMainWindow):
         self.thread = QThread()
         self.worker = PipelineWorker(
             image_paths  = self.image_paths,
-            npy_dir     = npy_dir,
-            overlay_dir  = overlay_dir,
-            output_dir = output_dir,
-            model_path   = model_path,
+            root_dir= root_dir
         )
 
         self.worker.moveToThread(self.thread)
 
         self.thread.started.connect(self.worker.run)
         self.worker.log.connect(self.ui.TextEdit_Log.append)
+        # When worker finishes
+        self.worker.finished.connect(self.after_pipeline) #<-- figure out the images to display
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.worker.finished.connect(lambda: self.ui.Button_Start.setEnabled(True))
