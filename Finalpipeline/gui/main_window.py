@@ -96,13 +96,6 @@ class MainWindow(QMainWindow):
 
                 top1_by_class[cls] = top_file
 
-            # Example: pick one class to display
-            # (you can choose which class you want to show)
-            some_class = list(top1_by_class.keys())[0]
-            best_image = top1_by_class[some_class]
-
-            self.ui.TextEdit_Log.append(f"Top image for {some_class}: {best_image}")
-
             # Display in QLabel
             self.display_image_in_label(self.ui.Image_1, top1_by_class['NONmonocyte'])
             self.display_image_in_label(self.ui.Image_2, top1_by_class['UNclustered Monocyte oneRBC'])

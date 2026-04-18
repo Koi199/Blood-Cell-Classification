@@ -26,3 +26,6 @@ venv/
 Finalpipeline/pipeline/__pycache__/prediction.cpython-311.pyc
 Finalpipeline/pipeline/__pycache__/worker.cpython-311.pyc
 Finalpipeline/gui/__pycache__/main_window.cpython-311.pyc
+/Finalpipeline/pipeline/__pycache__
+/Finalpipeline/pipeline/__pycache__
+/Finalpipeline/gui/__pycache__

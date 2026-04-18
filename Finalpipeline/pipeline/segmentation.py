@@ -72,12 +72,13 @@ def run_segmentation(
     image_paths: list[str],
     save_base_dir: str,
     overlay_base_dir: str,
-    model_path: str = "D:/MMA_batch1/TrainedCellpose/models/MMA_trainv3",
+    model_path: str = "cpsam",
     flow_threshold: float = 0.4,
     cellprob_threshold: float = 0.0,
     tile_norm_blocksize: int = 0,
     black_threshold: float = 0.30,
     batch_size: int = 32,
+    diameter: float = None,        # <-- added
     log_fn=print,
 ):
     """
@@ -143,6 +144,7 @@ def run_segmentation(
             flow_threshold=flow_threshold,
             cellprob_threshold=cellprob_threshold,
             normalize={"tile_norm_blocksize": tile_norm_blocksize},
+            diameter=diameter,     
         )
     except Exception as e:
         log_fn(f"❌ Cellpose inference failed: {e}")
@@ -181,7 +183,7 @@ def run_segmentation(
                 "masks":    mask,
                 "flows":    resized_flows,
                 "filename": str(f.resolve()),
-                "diameter": None,
+                "diameter": diameter,      # <-- was hardcoded to None before
                 "ismanual": np.zeros(len(np.unique(mask)) - 1, dtype=bool),
             }
 
