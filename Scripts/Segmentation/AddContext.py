@@ -138,9 +138,9 @@ def batch_add_context(seg_root, single_cell_root, output_root):
 # ---------------------------------------------------------
 # Example usage
 # ---------------------------------------------------------
-seg_root = "D:/MMA_batch2_CellposeCustom/Segmented_Images"
-single_cell_root = "D:/MMA_batch2_CellposeCustom/Single cells/contrast_1.0"
-output_root = "D:/MMA_batch2_CellposeCustom/ContextCells"
+seg_root = "D:/MMA_batch3_CellposeCustom/Segmented_Images"
+single_cell_root = "D:/MMA_batch3_CellposeCustom/Single cells/contrast_1.0"
+output_root = "D:/MMA_batch3_CellposeCustom/ContextCells"
 
 batch_add_context(seg_root, single_cell_root, output_root)
 

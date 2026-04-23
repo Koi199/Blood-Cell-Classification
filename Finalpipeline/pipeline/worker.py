@@ -7,6 +7,9 @@ from pathlib import Path
 
 class PipelineWorker(QObject):
     log = Signal(str)
+    label_PI = Signal(str)
+    label_UnclusteredI = Signal(str)
+    label_ClusteredI = Signal(str)
     finished = Signal()
 
     def __init__(self, image_paths, root_dir):
@@ -19,7 +22,7 @@ class PipelineWorker(QObject):
         self.npy_dir     = self.root_dir / "segmentednpy"
         self.overlay_dir = self.root_dir / "Overlay"
         self.output_dir  = self.root_dir / "SingleCells"
-        self.model_path  = "cpsam"
+        self.model_path  = "D:/MMA_batch1/TrainedCellposev2/models/MMATrainv5"
 
     def run(self):
         self.log.emit("Pipeline started.")
@@ -95,10 +98,15 @@ class PipelineWorker(QObject):
 
             # Calculate phagocytic index
             try:
-                counts = count_cells(results) # reports a summary of counts for each cell type
+                # filter out low confidence before counting
+                confident_results = [r for r in results if not r.get("low_confidence")]
+                counts = count_cells(confident_results) # reports a summary of counts for each cell type
                 indices = calculate_phagocytic_index(counts)
-                boom = "\n".join(f"{key}: {value}" for key, value in indices.items())
-                self.log.emit(boom)
+                self.label_PI.emit(f"{indices['Total Phagocytic Index']}")
+                self.label_UnclusteredI.emit(f"{indices['Unclustered phagocytic Index']}")
+                self.label_ClusteredI.emit(f"{indices['Clustered phagocytic Index']}")     
+                # boom = "\n".join(f"{key}: {value}" for key, value in indices.items())
+                # self.log.emit(boom)
             except Exception as e:
                 self.log.emit(f"ERROR Calculating Index.\n")
 

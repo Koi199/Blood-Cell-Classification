@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.ui)
         self.ui.show()
         self.adjustSize()
-        self.setMinimumSize(800, 600)  # locks in the calculated size as the minimum
+        self.setMinimumSize(800,600)  # locks in the calculated size as the minimum
 
         self.ui.Button_Upload.clicked.connect(self.upload_images)
         self.ui.Button_Start.clicked.connect(self.start_pipeline)
@@ -97,14 +97,31 @@ class MainWindow(QMainWindow):
                 top1_by_class[cls] = top_file
 
             # Display in QLabel
-            self.display_image_in_label(self.ui.Image_1, top1_by_class['NONmonocyte'])
-            self.display_image_in_label(self.ui.Image_2, top1_by_class['UNclustered Monocyte oneRBC'])
-            self.display_image_in_label(self.ui.Image_3, top1_by_class['UNclustered Monocyte'])
-            self.display_image_in_label(self.ui.Image_4, top1_by_class['Clustered Monocyte oneRBC'])
-            self.display_image_in_label(self.ui.Image_5, top1_by_class['Clustered Monocyte'])
+            self.display_image_in_label(self.ui.Image_Nonmonocyte, top1_by_class['NONmonocyte'])
+            self.display_image_in_label(self.ui.Image_MonocytewithRBC, top1_by_class['UNclustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_emptymonocyte, top1_by_class['UNclustered Monocyte'])
+            self.display_image_in_label(self.ui.Image_ClusteredmonocytewithRBC, top1_by_class['Clustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_ClusteredemptyMonocyte, top1_by_class['Clustered Monocyte'])           
 
         except Exception as e:
             self.ui.TextEdit_Log.append(f"Error in post-processing: {e}")
+
+        # Display Results
+        text = self.ui.label_PI.text()
+
+        try:
+            index = float(text)
+        except ValueError:
+            print("Could not convert to float")
+            self.ui.label_Accepted.setStyleSheet('background-color:red;')
+            self.ui.label_Accepted.setText('Error')
+        else:
+            if index > 0.2:
+                self.ui.label_Accepted.setStyleSheet('background-color:red;')
+                self.ui.label_Accepted.setText('No')
+            else:
+                self.ui.label_Accepted.setStyleSheet('background-color:green;')
+                self.ui.label_Accepted.setText('Yes')
 
     def start_pipeline(self):
         if not self.image_paths:
@@ -130,6 +147,9 @@ class MainWindow(QMainWindow):
 
         self.thread.started.connect(self.worker.run)
         self.worker.log.connect(self.ui.TextEdit_Log.append)
+        self.worker.label_PI.connect(self.ui.label_PI.setText)
+        self.worker.label_UnclusteredI.connect(self.ui.label_UnclusteredI.setText)
+        self.worker.label_ClusteredI.connect(self.ui.label_ClusteredI.setText)
         # When worker finishes
         self.worker.finished.connect(self.after_pipeline) #<-- figure out the images to display
         self.worker.finished.connect(self.thread.quit)

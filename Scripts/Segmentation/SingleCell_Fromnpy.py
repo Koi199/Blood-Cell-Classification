@@ -5,7 +5,7 @@ from PIL import Image
 import cv2
 from pathlib import Path
 
-def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_strength=10, contrast=2.0):
+def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256):
     """
     Extract single cells from segmentation with maximum image quality
     
@@ -79,20 +79,20 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
             crop_img = ((crop_img.astype(np.float32) - crop_img.min()) / 
                        (crop_img.max() - crop_img.min() + 1e-10) * 255).astype(np.uint8)
         
-        # Apply non-local means denoising
-        crop_img = cv2.fastNlMeansDenoising(crop_img, h=denoise_strength, 
-                                           templateWindowSize=7, searchWindowSize=21)
+        # # Apply non-local means denoising
+        # crop_img = cv2.fastNlMeansDenoising(crop_img, h=denoise_strength, 
+        #                                    templateWindowSize=7, searchWindowSize=21)
         
-        # Apply CLAHE for local contrast enhancement
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        crop_img = clahe.apply(crop_img)
+        # # Apply CLAHE for local contrast enhancement
+        # clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        # crop_img = clahe.apply(crop_img)
         
-        # Apply contrast adjustment
-        if contrast != 1.0:
-            # Convert to float, adjust contrast around midpoint (128)
-            crop_img = crop_img.astype(np.float32)
-            crop_img = 128 + (crop_img - 128) * contrast
-            crop_img = np.clip(crop_img, 0, 255).astype(np.uint8)
+        # # Apply contrast adjustment
+        # if contrast != 1.0:
+        #     # Convert to float, adjust contrast around midpoint (128)
+        #     crop_img = crop_img.astype(np.float32)
+        #     crop_img = 128 + (crop_img - 128) * contrast
+        #     crop_img = np.clip(crop_img, 0, 255).astype(np.uint8)
         
         # Convert grayscale to RGB
         if crop_img.ndim == 2:
@@ -138,8 +138,8 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
 # ============ USAGE ============
 
 # Base directories
-segmented_images_dir = Path("D:\MMA_batch2_CellposeCustom\Segmented_Images")
-output_base_dir = Path("D:\MMA_batch2_CellposeCustom\Single cells")
+segmented_images_dir = Path("D:\MMA_batch3_CellposeCustom\Segmented_Images")
+output_base_dir = Path("D:\MMA_batch3_CellposeCustom\Single cells")
 
 # Parameters
 pad = 20
@@ -177,9 +177,7 @@ else:
                     seg_file=seg_file,
                     output_dir=output_dir,
                     pad=pad,
-                    bg_size=bg_size,
-                    denoise_strength=denoise_strength,
-                    contrast=contrast
+                    bg_size=bg_size
                 )
             except Exception as e:
                 print(f"ERROR processing {seg_file.name}: {str(e)}\n")

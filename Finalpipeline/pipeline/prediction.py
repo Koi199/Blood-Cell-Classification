@@ -33,6 +33,16 @@ MODEL_CLASSES = {
     "Unclustered_RBCCount": 4,
 }
 
+# ── Default per-node thresholds ────────────────────────────────
+# Rough starting points based on 1/n_classes + margin.
+# Tune these against your validation set.
+DEFAULT_THRESHOLDS = {
+    "MonovsNonMono":        0.40,   # 3 classes, baseline 0.33
+    "Cluster":              0.60,   # 2 classes, baseline 0.50
+    "Cluster_RBCCount":     0.30,   # 5 classes, baseline 0.20
+    "Unclustered_RBCCount": 0.30,   # 4 classes, baseline 0.25
+}
+
 
 # ── Loaders ───────────────────────────────────────────────────
 def _load_convnext_tiny(path: str, num_classes: int, device: str) -> torch.nn.Module:
@@ -80,13 +90,30 @@ class CascadeTree:
         self.nodes = nodes
         self.root  = root
 
-    def classify(self, pil_image: Image.Image) -> dict[str, Any]:
+    def classify(
+        self,
+        pil_image: Image.Image,
+        thresholds: dict[str, float] = {},
+    ) -> dict[str, Any]:
+        """
+        Classify an image through the cascade.
+
+        Args:
+            pil_image:  PIL image to classify.
+            thresholds: Per-node confidence thresholds keyed by model name.
+                        If a node's score falls below its threshold, the cascade
+                        stops and the result is flagged with low_confidence=True.
+                        Nodes not present in the dict default to 0.0 (no filtering).
+                        Use DEFAULT_THRESHOLDS as a starting point.
+        """
         path    = []
         current = self.root
 
         while True:
-            node = self.nodes[current]
-            out  = node.predict(pil_image)
+            node      = self.nodes[current]
+            out       = node.predict(pil_image)
+            threshold = thresholds.get(node.name, 0.0)
+
             path.append({
                 "model": node.name,
                 "pred":  out["pred"],
@@ -94,11 +121,21 @@ class CascadeTree:
                 "probs": out["probs"],
             })
 
+            # Stop cascade if confidence is below this node's threshold
+            if out["score"] < threshold:
+                return {
+                    "final_pred":     out["pred"],
+                    "final_score":    out["score"],
+                    "path":           path,
+                    "low_confidence": True,
+                }
+
             if out["pred"] not in node.routes:
                 return {
-                    "final_pred":  out["pred"],
-                    "final_score": out["score"],
-                    "path": path,
+                    "final_pred":     out["pred"],
+                    "final_score":    out["score"],
+                    "path":           path,
+                    "low_confidence": False,
                 }
 
             current = node.routes[out["pred"]]
@@ -110,18 +147,26 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
     Load all model weights and assemble the CascadeTree.
     Call once at startup and reuse the returned object.
     """
-    mono    = ModelNode("MonovsNonMono",
-                        _load_convnext_tiny(MODEL_PATHS["MonovsNonMono"], MODEL_CLASSES["MonovsNonMono"], device),
-                        device)
-    cluster = ModelNode("Cluster",
-                        _load_convnext_base(MODEL_PATHS["Cluster"], MODEL_CLASSES["Cluster"], device),
-                        device)
-    clust_rbc  = ModelNode("Cluster_RBCCount",
-                           _load_convnext_tiny(MODEL_PATHS["Cluster_RBCCount"], MODEL_CLASSES["Cluster_RBCCount"], device),
-                           device)
-    unclust_rbc = ModelNode("Unclustered_RBCCount",
-                            _load_convnext_base(MODEL_PATHS["Unclustered_RBCCount"], MODEL_CLASSES["Unclustered_RBCCount"], device),
-                            device)
+    mono = ModelNode(
+        "MonovsNonMono",
+        _load_convnext_tiny(MODEL_PATHS["MonovsNonMono"], MODEL_CLASSES["MonovsNonMono"], device),
+        device,
+    )
+    cluster = ModelNode(
+        "Cluster",
+        _load_convnext_base(MODEL_PATHS["Cluster"], MODEL_CLASSES["Cluster"], device),
+        device,
+    )
+    clust_rbc = ModelNode(
+        "Cluster_RBCCount",
+        _load_convnext_tiny(MODEL_PATHS["Cluster_RBCCount"], MODEL_CLASSES["Cluster_RBCCount"], device),
+        device,
+    )
+    unclust_rbc = ModelNode(
+        "Unclustered_RBCCount",
+        _load_convnext_base(MODEL_PATHS["Unclustered_RBCCount"], MODEL_CLASSES["Unclustered_RBCCount"], device),
+        device,
+    )
 
     mono.set_routes({2: "Cluster"})
     cluster.set_routes({0: "Unclustered_RBCCount", 1: "Cluster_RBCCount"})
@@ -136,10 +181,12 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
         root="MonovsNonMono",
     )
 
+
 # ── Main entry point ──────────────────────────────────────────
 def run_classification(
     image_paths: list[str],
     tree: CascadeTree,
+    thresholds: dict[str, float] = DEFAULT_THRESHOLDS,
     log_fn=print,
 ) -> list[dict[str, Any]]:
     """
@@ -148,11 +195,14 @@ def run_classification(
     Args:
         image_paths: List of paths to segmented crop images.
         tree:        A CascadeTree built with build_cascade_tree().
+        thresholds:  Per-node confidence thresholds keyed by model name.
+                     Defaults to DEFAULT_THRESHOLDS. Pass an empty dict {}
+                     to disable thresholding entirely.
         log_fn:      Callable for logging — pass worker.log.emit for Qt signal.
 
     Returns:
         List of result dicts, one per image, each containing:
-        { "file", "final_pred", "final_score", "path" }
+        { "file", "final_pred", "final_score", "path", "low_confidence" }
     """
     results = []
 
@@ -160,16 +210,20 @@ def run_classification(
         p = Path(path)
         try:
             img    = Image.open(p).convert("RGB")
-            result = tree.classify(img)
+            result = tree.classify(img, thresholds=thresholds)
             result["file"] = str(p)
             results.append(result)
-            log_fn(f"  [{i+1}/{len(image_paths)}] {p.name} → pred={result['final_pred']} ({result['final_score']:.2f})")
+
+            flag = " ⚠ low confidence" if result.get("low_confidence") else ""
+            log_fn(f"  [{i+1}/{len(image_paths)}] {p.name} → pred={result['final_pred']} ({result['final_score']:.2f}){flag}")
         except Exception as e:
             log_fn(f"  ❌ Failed on {p.name}: {e}")
             continue
 
+    low_conf = sum(1 for r in results if r.get("low_confidence"))
     log_fn(f"\n✅ Classification done — {len(results)}/{len(image_paths)} images classified.")
+    if low_conf:
+        log_fn(f"  ⚠ {low_conf} images flagged as low confidence.")
+        log_fn(f"  Thresholds used: {thresholds}")
+
     return results
-
-
-    

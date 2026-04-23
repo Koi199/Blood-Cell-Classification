@@ -1,6 +1,6 @@
 def run_segmentation(base_dir="D:/MMA_batch1/Raw Image",
-                     save_base_dir="D:/MMA_batch2_CellposeCustom/Segmented_Images",
-                     overlay_base_dir="D:/MMA_batch2_CellposeCustom/Overlay"):
+                     save_base_dir="D:/MMA_batch3_CellposeCustom/Segmented_Images",
+                     overlay_base_dir="D:/MMA_batch3_CellposeCustom/Overlay"): # fucked up here, did not update the overlay save directory :(
     """
     Batch segmentation of microscopy images using Cellpose-SAM.
     Includes:
@@ -30,7 +30,7 @@ def run_segmentation(base_dir="D:/MMA_batch1/Raw Image",
 
     model = models.CellposeModel(
         gpu=True,
-        pretrained_model="D:/MMA_batch1/TrainedCellpose/models/MMA_trainv3"
+        pretrained_model="D:/MMA_batch1/TrainedCellposev2/models/MMA_trainv5"
     )
 
     # ============================================================
@@ -57,6 +57,7 @@ def run_segmentation(base_dir="D:/MMA_batch1/Raw Image",
     cellprob_threshold = 0.0
     tile_norm_blocksize = 0
     black_threshold = 0.30  # Skip images with >30% black pixels
+    diameter = 70
 
     # ============================================================
     # BLACK IMAGE CHECK
@@ -217,7 +218,8 @@ def run_segmentation(base_dir="D:/MMA_batch1/Raw Image",
                 batch_size=32,
                 flow_threshold=flow_threshold,
                 cellprob_threshold=cellprob_threshold,
-                normalize={"tile_norm_blocksize": tile_norm_blocksize}
+                normalize={"tile_norm_blocksize": tile_norm_blocksize}, 
+                diameter=diameter
             )
 
         except Exception as e:

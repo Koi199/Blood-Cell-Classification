@@ -79,20 +79,20 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
             crop_img = ((crop_img.astype(np.float32) - crop_img.min()) / 
                        (crop_img.max() - crop_img.min() + 1e-10) * 255).astype(np.uint8)
         
-        # Apply non-local means denoising
-        crop_img = cv2.fastNlMeansDenoising(crop_img, h=denoise_strength, 
-                                           templateWindowSize=7, searchWindowSize=21)
+        # # Apply non-local means denoising
+        # crop_img = cv2.fastNlMeansDenoising(crop_img, h=denoise_strength, 
+        #                                    templateWindowSize=7, searchWindowSize=21)
         
-        # Apply CLAHE for local contrast enhancement
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        crop_img = clahe.apply(crop_img)
+        # # Apply CLAHE for local contrast enhancement
+        # clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        # crop_img = clahe.apply(crop_img)
         
-        # Apply contrast adjustment
-        if contrast != 1.0:
-            # Convert to float, adjust contrast around midpoint (128)
-            crop_img = crop_img.astype(np.float32)
-            crop_img = 128 + (crop_img - 128) * contrast
-            crop_img = np.clip(crop_img, 0, 255).astype(np.uint8)
+        # # Apply contrast adjustment
+        # if contrast != 1.0:
+        #     # Convert to float, adjust contrast around midpoint (128)
+        #     crop_img = crop_img.astype(np.float32)
+        #     crop_img = 128 + (crop_img - 128) * contrast
+        #     crop_img = np.clip(crop_img, 0, 255).astype(np.uint8)
         
         # Convert grayscale to RGB
         if crop_img.ndim == 2:

@@ -6,258 +6,464 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
-    <height>600</height>
+    <width>799</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="Button_Upload">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>111</width>
-      <height>26</height>
+      <x>0</x>
+      <y>0</y>
+      <width>791</width>
+      <height>571</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Upload Images</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Button_Start">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>20</y>
-      <width>81</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Start</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="TextEdit_Log">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>20</y>
-      <width>341</width>
-      <height>541</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget_imageList">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>60</y>
-      <width>391</width>
-      <height>111</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Button_Clear">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>20</y>
-      <width>91</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Clear Images</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="TextInput_folderpath">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>180</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Label_folderpath">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>190</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Working Folder</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Image_1">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>290</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Image_2">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>290</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Image_3">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>290</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Image_4">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>420</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Image_5">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>420</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::Box</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_Nonmonocyte">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>390</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Nonmonocyte</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_MonocyteWithRBC">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>390</y>
-      <width>111</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Monocyte with RBC</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_EmptyMonocyte">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>390</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Empty Monocyte</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_ClusteredEmptyMonocyte">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>520</y>
-      <width>151</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Clustered Empty Monocyte</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_ClusteredMonocyteWithRBC">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>520</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Clustered Monocyte with RBC</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>240</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Some example images:</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Monocyte Monolayer Assay</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10,1,1,1,10,1,10,1">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="Button_Upload">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Upload Images</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Button_Clear">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Clear Images</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QListWidget" name="listWidget_imageList"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Button_Start">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Start</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5,10">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="Label_folderpath">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Working Folder:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="TextInput_folderpath"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="text">
+            <string>Some example images:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,0">
+           <property name="spacing">
+            <number>30</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SizeConstraint::SetFixedSize</enum>
+           </property>
+           <property name="leftMargin">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="Image_Nonmonocyte">
+             <property name="frameShape">
+              <enum>QFrame::Shape::Box</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="Image_MonocytewithRBC">
+             <property name="frameShape">
+              <enum>QFrame::Shape::Box</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="Image_emptymonocyte">
+             <property name="frameShape">
+              <enum>QFrame::Shape::Box</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_Nonmonocyte">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Nonmonocyte</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_MonocyteWithRBC">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Monocyte with RBC</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_EmptyMonocyte">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Empty Monocyte</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <property name="spacing">
+            <number>80</number>
+           </property>
+           <property name="leftMargin">
+            <number>50</number>
+           </property>
+           <property name="rightMargin">
+            <number>50</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="Image_ClusteredemptyMonocyte">
+             <property name="frameShape">
+              <enum>QFrame::Shape::Box</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="Image_ClusteredmonocytewithRBC">
+             <property name="frameShape">
+              <enum>QFrame::Shape::Box</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QLabel" name="label_ClusteredEmptyMonocyte">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Clustered Empty Monocyte</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_ClusteredMonocyteWithRBC">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Clustered Monocyte with RBC</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,30,10">
+         <item>
+          <widget class="QLabel" name="Label_logs">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="text">
+            <string>Logs:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="TextEdit_Log"/>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="5,1">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string>Phagocytic Index (Ratio of phagocytosed cells):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_PI">
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="5,1">
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string>Unclustered Index (Counting Unclustered cells only):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_UnclusteredI">
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="5,1">
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string>Clustered Index (Counting Clustered cells only):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_ClusteredI">
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="5,1">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string>Accepted?</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_Accepted">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::Box</enum>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
