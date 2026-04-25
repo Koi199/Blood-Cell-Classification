@@ -22,25 +22,30 @@ preprocess_256 = transforms.Compose([
 MODEL_PATHS = {
     "MonovsNonMono":        r"C:\repos\Blood-Cell-Classification\checkpoints_stage1\convnext_tiny_t3000.pth",
     "Cluster":              r"C:\repos\Blood-Cell-Classification\checkpoints_stage2\convnext_base_t1500.pth",
-    "Cluster_RBCCount":     r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_clustered\convnext_tiny.pth",
-    "Unclustered_RBCCount": r"C:\repos\Blood-Cell-Classification\checkpoints_rbc\convnext_base.pth",
+    "Cluster_RBCCount":     r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_clustered_binary\convnext_tiny.pth",
+    "Unclustered_RBCCount": r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_binary\convnext_tiny.pth",
 }
 
+# ── Number of output classes per node ─────────────────────────
+# MonovsNonMono        : 3  (NonMono=0, ?, Mono=2)
+# Cluster              : 2  (Unclustered=0, Clustered=1)
+# Cluster_RBCCount     : 3  (No_RBC=0, Has_RBC=1, RBC_alone=2)
+# Unclustered_RBCCount : 2  (No_RBC=0, Has_RBC=1)
 MODEL_CLASSES = {
     "MonovsNonMono":        3,
     "Cluster":              2,
-    "Cluster_RBCCount":     5,
-    "Unclustered_RBCCount": 4,
+    "Cluster_RBCCount":     3,
+    "Unclustered_RBCCount": 2,
 }
 
 # ── Default per-node thresholds ────────────────────────────────
-# Rough starting points based on 1/n_classes + margin.
 # Tune these against your validation set.
+# With binary nodes the baseline is higher so thresholds can be stricter.
 DEFAULT_THRESHOLDS = {
     "MonovsNonMono":        0.40,   # 3 classes, baseline 0.33
-    "Cluster":              0.60,   # 2 classes, baseline 0.50
-    "Cluster_RBCCount":     0.30,   # 5 classes, baseline 0.20
-    "Unclustered_RBCCount": 0.30,   # 4 classes, baseline 0.25
+    "Cluster":              0.50,   # 2 classes, baseline 0.50
+    "Cluster_RBCCount":     0.60,   # 3 classes, baseline 0.33
+    "Unclustered_RBCCount": 0.60,   # 2 classes, baseline 0.50
 }
 
 
@@ -98,6 +103,17 @@ class CascadeTree:
         """
         Classify an image through the cascade.
 
+        Cascade structure:
+            MonovsNonMono
+                └─ pred=2 (Mono) → Cluster
+                        ├─ pred=0 (Unclustered) → Unclustered_RBCCount
+                        │       ├─ pred=0 → No_RBC   (terminal)
+                        │       └─ pred=1 → Has_RBC  (terminal → RBC segmentation)
+                        └─ pred=1 (Clustered) → Cluster_RBCCount
+                                ├─ pred=0 → No_RBC    (terminal)
+                                ├─ pred=1 → Has_RBC   (terminal → RBC segmentation)
+                                └─ pred=2 → RBC_alone (terminal, excluded from counts)
+
         Args:
             pil_image:  PIL image to classify.
             thresholds: Per-node confidence thresholds keyed by model name.
@@ -146,6 +162,12 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
     """
     Load all model weights and assemble the CascadeTree.
     Call once at startup and reuse the returned object.
+
+    Routing:
+        MonovsNonMono  : pred=2 → Cluster
+        Cluster        : pred=0 → Unclustered_RBCCount
+                         pred=1 → Cluster_RBCCount
+        Cluster_RBCCount / Unclustered_RBCCount : terminal (no further routing)
     """
     mono = ModelNode(
         "MonovsNonMono",
@@ -164,12 +186,13 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
     )
     unclust_rbc = ModelNode(
         "Unclustered_RBCCount",
-        _load_convnext_base(MODEL_PATHS["Unclustered_RBCCount"], MODEL_CLASSES["Unclustered_RBCCount"], device),
+        _load_convnext_tiny(MODEL_PATHS["Unclustered_RBCCount"], MODEL_CLASSES["Unclustered_RBCCount"], device),
         device,
     )
 
     mono.set_routes({2: "Cluster"})
     cluster.set_routes({0: "Unclustered_RBCCount", 1: "Cluster_RBCCount"})
+    # RBC count nodes are terminal — no routes needed
 
     return CascadeTree(
         nodes={
@@ -203,6 +226,10 @@ def run_classification(
     Returns:
         List of result dicts, one per image, each containing:
         { "file", "final_pred", "final_score", "path", "low_confidence" }
+
+    Final pred meanings per terminal node:
+        Unclustered_RBCCount : 0 = No_RBC,  1 = Has_RBC
+        Cluster_RBCCount     : 0 = No_RBC,  1 = Has_RBC,  2 = RBC_alone
     """
     results = []
 

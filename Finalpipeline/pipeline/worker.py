@@ -3,6 +3,7 @@ from pipeline.segmentation import run_segmentation
 from pipeline.npyprocessing import extract_single_cells
 from pipeline.prediction import build_cascade_tree, run_classification
 from pipeline.metrics import count_cells, save_results_list_to_csv, calculate_phagocytic_index
+from pipeline.segmentationcount import run_full_rbc_segmentation_pipeline
 from pathlib import Path
 
 class PipelineWorker(QObject):
@@ -22,12 +23,13 @@ class PipelineWorker(QObject):
         self.npy_dir     = self.root_dir / "segmentednpy"
         self.overlay_dir = self.root_dir / "Overlay"
         self.output_dir  = self.root_dir / "SingleCells"
-        self.model_path  = "D:/MMA_batch1/TrainedCellposev2/models/MMATrainv5"
+        self.model_path  = "C:/repos/Blood-Cell-Classification/Finalpipeline/model/MMATrainv5"
 
     def run(self):
         self.log.emit("Pipeline started.")
 
         # Cellpose Segmentation Loop
+        self.log.emit(f"using {self.model_path}")
         try:
             seg_output = run_segmentation(
                 image_paths      = self.image_paths,
@@ -96,19 +98,54 @@ class PipelineWorker(QObject):
             except Exception as e:
                 self.log.emit(f"❌ Prediction error: {e}")
 
+            # Count segmentation
+            try:
+                count_results = run_full_rbc_segmentation_pipeline(
+                    results = results, 
+                    clustered_save_dir = self.root_dir / "clustered", 
+                    unclustered_save_dir = self.root_dir / "unclustered",
+                    model_path = "C:/repos/Blood-Cell-Classification/Finalpipeline/model/RBCCountSegmentation",
+                    log_fn      = self.log.emit
+                )
+                self.log.emit(f"Clustered RBCs: {count_results['clustered_counts']['total_rbcs']}")
+                self.log.emit(f"Unclustered RBCs: {count_results['unclustered_counts']['total_rbcs']}")
+                self.log.emit(f"Total RBCs: {count_results['total_rbcs']}")
+
+            except Exception as e:
+                self.log.emit(f"❌ Counting ERROR: {e}")
+
             # Calculate phagocytic index
             try:
-                # filter out low confidence before counting
                 confident_results = [r for r in results if not r.get("low_confidence")]
-                counts = count_cells(confident_results) # reports a summary of counts for each cell type
-                indices = calculate_phagocytic_index(counts)
-                self.label_PI.emit(f"{indices['Total Phagocytic Index']}")
-                self.label_UnclusteredI.emit(f"{indices['Unclustered phagocytic Index']}")
-                self.label_ClusteredI.emit(f"{indices['Clustered phagocytic Index']}")     
-                # boom = "\n".join(f"{key}: {value}" for key, value in indices.items())
-                # self.log.emit(boom)
+                counts = count_cells(confident_results)
+                self.log.emit(f"counts: {counts}")
+
+                u_mono   = counts.get('Unclustered_monocyte', 0)
+                u_mono_r = counts.get('Unclustered_monocyte_hasRBC', 0)
+                c_mono   = counts.get('Clustered_monocyte', 0)
+                c_mono_r = counts.get('Clustered_monocyte_hasRBC', 0)
+
+                total_mono = u_mono + u_mono_r + c_mono + c_mono_r
+
+                if total_mono == 0:
+                    raise ValueError("No monocytes detected — cannot compute PI")
+
+                MonocyteIdx = count_results['total_rbcs'] / total_mono
+
+                denom_u = u_mono + u_mono_r
+                denom_c = c_mono + c_mono_r
+
+                Unclustered_PI = count_results['unclustered_counts']['total_rbcs'] / denom_u if denom_u else 0
+                Clustered_PI   = count_results['clustered_counts']['total_rbcs'] / denom_c if denom_c else 0
+
+                self.label_PI.emit(f"{MonocyteIdx:.4f}")
+                self.label_UnclusteredI.emit(f"{Unclustered_PI:.4f}")
+                self.label_ClusteredI.emit(f"{Clustered_PI:.4f}")
+
             except Exception as e:
-                self.log.emit(f"ERROR Calculating Index.\n")
+                self.log.emit(f"ERROR Calculating Index: {e}")
+
+
 
             # Display cell count
             try:

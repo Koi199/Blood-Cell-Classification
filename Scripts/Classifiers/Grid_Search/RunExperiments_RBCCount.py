@@ -23,18 +23,23 @@ from Classifier_RBCCount import train, DEFAULT_CONFIG
 # ─────────────────────────────────────────────
 # GRID DEFINITION
 # ─────────────────────────────────────────────
+# ARCHITECTURES = [
+#     "resnet18",
+#     "resnet34",
+#     "resnet50",
+#     "resnet101",
+#     "resnet152",
+#     "efficientnet_b0",
+#     "efficientnet_b1",
+#     "efficientnet_b4",
+#     "convnext_tiny",
+#     "convnext_base",
+#     "vit_b16",
+# ]
+
 ARCHITECTURES = [
-    "resnet18",
-    "resnet34",
-    "resnet50",
-    "resnet101",
-    "resnet152",
-    "efficientnet_b0",
-    "efficientnet_b1",
-    "efficientnet_b4",
     "convnext_tiny",
     "convnext_base",
-    "vit_b16",
 ]
 
 RESULTS_CSV = "C:/repos/Blood-Cell-Classification/grid_search_results_rbc_count.csv"

@@ -339,7 +339,7 @@
                 <enum>QFrame::Shape::Box</enum>
                </property>
                <property name="text">
-                <string>Phagocytic Index (Ratio of phagocytosed cells):</string>
+                <string>Monocyte Index (Ratio of phagocytosed cells):</string>
                </property>
               </widget>
              </item>

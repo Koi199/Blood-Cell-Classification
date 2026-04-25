@@ -1,24 +1,25 @@
 """
-classifier_rbc_count_clustered.py
-──────────────────────────────────
-Reusable library for RBC count classification on clustered monocytes.
+classifier_rbc_clustered_binary.py
+────────────────────────────────────
+Binary-ish classifier for clustered monocyte RBC presence.
 Input: Clustered monocyte images
-Output: 5 classes
-  0 = RBC_0    (empty monocyte, no RBCs)
-  1 = RBC_1    (1 RBC)
-  2 = RBC_2    (2 RBCs)
-  3 = RBC_3    (3 RBCs)
-  4 = RBC_alone (RBC without monocyte)
+Output: 3 classes
+  0 = No_RBC   (clustered monocyte with no RBCs)
+  1 = Has_RBC  (clustered monocyte with one or more RBCs)
+  2 = RBC_alone (RBC without monocyte)
+
+RBC_1 through RBC_5 folders are all collapsed into Has_RBC (label=1)
+at load time — folder structure does not need to change.
 
 Usage:
-    from classifier_rbc_count_clustered import train, DEFAULT_CONFIG
+    from classifier_rbc_clustered_binary import train, DEFAULT_CONFIG
     import copy
 
     config = copy.deepcopy(DEFAULT_CONFIG)
     config["architecture"]    = "resnet50"
-    config["checkpoint_path"] = "checkpoints_rbc_clustered/resnet50.pth"
+    config["checkpoint_path"] = "checkpoints_rbc_clustered_binary/resnet50.pth"
 
-    train(config, notes="resnet50 clustered rbc count")
+    train(config, notes="resnet50 clustered binary")
 """
 
 import os
@@ -57,33 +58,44 @@ DEFAULT_CONFIG = {
     "lr":                       5e-5,
     "weight_decay":             1e-4,
     "num_workers":              4,
-    "checkpoint_path":          "checkpoints_rbc_clustered/resnet34_rbc_clustered.pth",
+    "checkpoint_path":          "checkpoints_rbc_clustered_binary/convnext_tiny.pth",
     "device":                   "cuda" if torch.cuda.is_available() else "cpu",
-    "architecture":             "resnet34",
+    "architecture":             "convnext_tiny",
 
-    # Adjust targets based on your natural counts per class
-    # Equal balance is a safe starting point
+    # Balance across the 3 binary classes
     "subclass_targets": {
-        "RBC_0":     300,
-        "RBC_1":     300,
-        "RBC_2":     300,
-        "RBC_3":     300,
-        "RBC_alone": 300,
+        "No_RBC":   800,
+        "Has_RBC":  800,
+        "RBC_alone": 400,
     }
 }
 
 # ─────────────────────────────────────────────
-# LABEL MAPS — all 5 classes included
+# LABEL MAPS
+# Collapse RBC_1 through RBC_5 into Has_RBC (label=1)
 # ─────────────────────────────────────────────
 FOLDER_MAP = {
-    "RBC_0":     0,
-    "RBC_1":     1,
-    "RBC_2":     2,
-    "RBC_3":     3,
-    "RBC_alone": 4,
+    "RBC_0":     0,  # No RBC
+    "RBC_1":     1,  # Has RBC
+    "RBC_2":     1,  # Has RBC
+    "RBC_3":     1,  # Has RBC
+    "RBC_4":     1,  # Has RBC
+    "RBC_5":     1,  # Has RBC
+    "RBC_alone": 2,  # RBC without monocyte
 }
 
-CLASS_NAMES = ["RBC_0", "RBC_1", "RBC_2", "RBC_3", "RBC_alone"]
+# Binary name used for weighted sampler
+BINARY_NAME_MAP = {
+    "RBC_0":     "No_RBC",
+    "RBC_1":     "Has_RBC",
+    "RBC_2":     "Has_RBC",
+    "RBC_3":     "Has_RBC",
+    "RBC_4":     "Has_RBC",
+    "RBC_5":     "Has_RBC",
+    "RBC_alone": "RBC_alone",
+}
+
+CLASS_NAMES = ["No_RBC", "Has_RBC", "RBC_alone"]
 
 # ─────────────────────────────────────────────
 # ViT image size handling
@@ -117,10 +129,11 @@ def make_transforms(img_size):
     ])
     return train_tf, val_tf
 
+
 # ─────────────────────────────────────────────
 # MODEL BUILDER
 # ─────────────────────────────────────────────
-def build_model(architecture, num_classes=5, freeze_backbone=False):
+def build_model(architecture, num_classes=3, freeze_backbone=False):
     arch = architecture.lower()
 
     if arch == "resnet18":
@@ -177,6 +190,7 @@ def build_model(architecture, num_classes=5, freeze_backbone=False):
 
     return model
 
+
 # ─────────────────────────────────────────────
 # DATASET
 # ─────────────────────────────────────────────
@@ -195,6 +209,7 @@ class BloodCellDataset(Dataset):
             img = self.transform(img)
         return img, label
 
+
 # ─────────────────────────────────────────────
 # DATA LOADING
 # ─────────────────────────────────────────────
@@ -208,26 +223,28 @@ def load_samples(data_dir):
         count = 0
         for fname in os.listdir(folder_path):
             if fname.lower().endswith(('.png', '.jpg', '.jpeg')):
-                samples.append((os.path.join(folder_path, fname), folder_name, label))
+                binary_name = BINARY_NAME_MAP[folder_name]
+                samples.append((os.path.join(folder_path, fname), binary_name, label))
                 count += 1
-        print(f"  {folder_name} (class {label}): {count} images")
+        binary_name = BINARY_NAME_MAP[folder_name]
+        print(f"  {folder_name} → {binary_name} (label {label}): {count} images")
     return samples
 
 
 def make_weighted_sampler(train_samples, subclass_targets):
     folder_counts = {}
-    for _, folder_name, _ in train_samples:
-        folder_counts[folder_name] = folder_counts.get(folder_name, 0) + 1
+    for _, binary_name, _ in train_samples:
+        folder_counts[binary_name] = folder_counts.get(binary_name, 0) + 1
 
-    print("\nNatural class counts in training set:")
+    print("\nBinary class counts in training set:")
     for folder, count in sorted(folder_counts.items()):
         target = subclass_targets.get(folder, count)
         print(f"  {folder}: {count} → {target} ({target/count:.2f}x)")
 
     sample_weights = np.zeros(len(train_samples), dtype=np.float32)
-    for idx, (_, folder_name, _) in enumerate(train_samples):
-        natural = folder_counts[folder_name]
-        target  = subclass_targets.get(folder_name, natural)
+    for idx, (_, binary_name, _) in enumerate(train_samples):
+        natural = folder_counts[binary_name]
+        target  = subclass_targets.get(binary_name, natural)
         sample_weights[idx] = target / natural
 
     total_samples = sum(subclass_targets.values())
@@ -279,6 +296,7 @@ def make_dataloaders(config, train_tf, val_tf):
 
     return train_loader, val_loader, test_loader
 
+
 # ─────────────────────────────────────────────
 # TRAINING LOOP
 # ─────────────────────────────────────────────
@@ -296,6 +314,7 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
         correct    += (outputs.argmax(1) == labels).sum().item()
         total      += imgs.size(0)
     return total_loss / total, correct / total
+
 
 # ─────────────────────────────────────────────
 # EVALUATE
@@ -318,6 +337,7 @@ def evaluate(model, loader, criterion, device):
 
     return total_loss / total, correct / total, all_preds, all_labels
 
+
 # ─────────────────────────────────────────────
 # PLOTS
 # ─────────────────────────────────────────────
@@ -328,38 +348,39 @@ def save_plots(train_losses, val_losses, train_accs, val_accs,
     plt.figure(figsize=(10, 5))
     plt.plot(train_losses, label="Train Loss", marker="o", markersize=3)
     plt.plot(val_losses,   label="Val Loss",   marker="o", markersize=3)
-    plt.title("Clustered RBC Count — Training & Validation Loss")
+    plt.title("Clustered RBC Binary — Training & Validation Loss")
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "loss_curve_rbc_clustered.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "loss_curve_clustered_binary.png"), dpi=150)
     plt.close()
 
     plt.figure(figsize=(10, 5))
     plt.plot(train_accs, label="Train Accuracy", marker="o", markersize=3)
     plt.plot(val_accs,   label="Val Accuracy",   marker="o", markersize=3)
-    plt.title("Clustered RBC Count — Training & Validation Accuracy")
+    plt.title("Clustered RBC Binary — Training & Validation Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy")
     plt.ylim(0, 1)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "accuracy_curve_rbc_clustered.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "accuracy_curve_clustered_binary.png"), dpi=150)
     plt.close()
 
-    cm = confusion_matrix(true_labels, preds, labels=[0, 1, 2, 3, 4])
-    plt.figure(figsize=(10, 8))
+    cm = confusion_matrix(true_labels, preds, labels=[0, 1, 2])
+    plt.figure(figsize=(7, 6))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                 xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES)
-    plt.title("Clustered RBC Count — Confusion Matrix (counts)")
+    plt.title("Clustered RBC Binary — Confusion Matrix")
     plt.ylabel("True Label")
     plt.xlabel("Predicted Label")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "confusion_matrix_rbc_clustered.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "confusion_matrix_clustered_binary.png"), dpi=150)
     plt.close()
 
     print("  ✓ Saved loss, accuracy, and confusion matrix plots")
+
 
 # ─────────────────────────────────────────────
 # EXCEL LOGGING
@@ -375,7 +396,7 @@ def log_experiment_excel(config, results,
     row = [
         run_num, str(date.today()), notes,
         config.get("architecture", "resnet34"), "ImageNet", "No", 0.4,
-        "Clustered RBC Count",
+        "Clustered RBC Binary",
         70, 10, 20,
         "N/A", "N/A", "N/A", "N/A", "N/A",
         "WeightedRandomSampler equal balance", "AdamW",
@@ -384,12 +405,10 @@ def log_experiment_excel(config, results,
         f"{config['img_size']}x{config['img_size']}",
         "HFlip, VFlip, Rotation(15°), ColorJitter(b=0.2,c=0.2), ImageNet norm",
         results["test_acc"],
-        results["rbc0_prec"],  results["rbc0_recall"],  results["rbc0_f1"],
-        results["rbc1_prec"],  results["rbc1_recall"],  results["rbc1_f1"],
-        results["rbc2_prec"],  results["rbc2_recall"],  results["rbc2_f1"],
-        results["rbc3_prec"],  results["rbc3_recall"],  results["rbc3_f1"],
-        results["rbcalone_prec"], results["rbcalone_recall"], results["rbcalone_f1"],
-        results["macro_f1"],   results["weighted_f1"],
+        results["no_rbc_prec"],    results["no_rbc_recall"],    results["no_rbc_f1"],
+        results["has_rbc_prec"],   results["has_rbc_recall"],   results["has_rbc_f1"],
+        results["rbc_alone_prec"], results["rbc_alone_recall"], results["rbc_alone_f1"],
+        results["macro_f1"],       results["weighted_f1"],
         results["val_acc"],
     ]
 
@@ -399,26 +418,27 @@ def log_experiment_excel(config, results,
     wb.save(log_path)
     print(f"  ✓ Run {run_num} logged to {log_path}")
 
+
 # ─────────────────────────────────────────────
 # MAIN TRAIN FUNCTION
 # ─────────────────────────────────────────────
 def train(config=None, notes=""):
     """
-    Train clustered RBC count classifier.
+    Train clustered RBC binary classifier.
 
     Args:
         config: dict — override any keys from DEFAULT_CONFIG.
         notes:  string — logged to MLflow and Excel.
 
     Example:
-        from classifier_rbc_count_clustered import train, DEFAULT_CONFIG
+        from classifier_rbc_clustered_binary import train, DEFAULT_CONFIG
         import copy
 
         config = copy.deepcopy(DEFAULT_CONFIG)
         config["architecture"]    = "resnet50"
-        config["checkpoint_path"] = "checkpoints_rbc_clustered/resnet50.pth"
+        config["checkpoint_path"] = "checkpoints_rbc_clustered_binary/resnet50.pth"
 
-        train(config, notes="resnet50 clustered rbc")
+        train(config, notes="resnet50 clustered binary")
     """
     cfg = copy.deepcopy(DEFAULT_CONFIG)
     if config is not None:
@@ -437,12 +457,12 @@ def train(config=None, notes=""):
     os.makedirs(os.path.dirname(cfg["checkpoint_path"]), exist_ok=True)
     plot_dir = os.path.dirname(cfg["checkpoint_path"])
 
-    setup_mlflow("Clustered_RBC_Count_Classification")
+    setup_mlflow("Clustered_RBC_Binary_Classification")
     start_run(run_name=f"{arch}_{notes}" if notes else arch, notes=notes)
     log_params(cfg)
 
     train_loader, val_loader, test_loader = make_dataloaders(cfg, train_tf, val_tf)
-    model     = build_model(arch, num_classes=5, freeze_backbone=False).to(device)
+    model     = build_model(arch, num_classes=3, freeze_backbone=False).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg["weight_decay"])
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg["num_epochs"])
@@ -487,52 +507,52 @@ def train(config=None, notes=""):
     print("\n── Validation Set Evaluation ──")
     _, val_acc_final, val_preds, val_true = evaluate(model, val_loader, criterion, device)
     print(f"Val Accuracy: {val_acc_final:.4f}\n")
-    print(classification_report(val_true, val_preds, target_names=CLASS_NAMES))
-    print(confusion_matrix(val_true, val_preds, labels=[0, 1, 2, 3, 4]))
+    print(classification_report(val_true, val_preds, target_names=CLASS_NAMES, zero_division=0))
+    print(confusion_matrix(val_true, val_preds, labels=[0, 1, 2]))
 
     # ── Test evaluation ──
     print("\n── Test Set Evaluation ──")
     _, test_acc, preds, true_labels = evaluate(model, test_loader, criterion, device)
     print(f"Test Accuracy: {test_acc:.4f}\n")
-    print(classification_report(true_labels, preds, target_names=CLASS_NAMES))
-    print(confusion_matrix(true_labels, preds, labels=[0, 1, 2, 3, 4]))
+    print(classification_report(true_labels, preds, target_names=CLASS_NAMES, zero_division=0))
+    print(confusion_matrix(true_labels, preds, labels=[0, 1, 2]))
 
     save_plots(train_losses, val_losses, train_accs, val_accs, true_labels, preds, plot_dir)
 
     # ── Compile results ──
-    prec, rec, f1, _ = precision_recall_fscore_support(true_labels, preds, labels=[0, 1, 2, 3, 4])
-    _, _, f1w, _     = precision_recall_fscore_support(true_labels, preds, average="weighted")
-    _, _, f1m, _     = precision_recall_fscore_support(true_labels, preds, average="macro")
+    prec, rec, f1, _ = precision_recall_fscore_support(
+        true_labels, preds, labels=[0, 1, 2], zero_division=0
+    )
+    _, _, f1w, _ = precision_recall_fscore_support(
+        true_labels, preds, average="weighted", zero_division=0
+    )
+    _, _, f1m, _ = precision_recall_fscore_support(
+        true_labels, preds, average="macro", zero_division=0
+    )
 
     results = {
-        "test_acc":        round(test_acc, 4),
-        "rbc0_prec":       round(prec[0],  4),
-        "rbc0_recall":     round(rec[0],   4),
-        "rbc0_f1":         round(f1[0],    4),
-        "rbc1_prec":       round(prec[1],  4),
-        "rbc1_recall":     round(rec[1],   4),
-        "rbc1_f1":         round(f1[1],    4),
-        "rbc2_prec":       round(prec[2],  4),
-        "rbc2_recall":     round(rec[2],   4),
-        "rbc2_f1":         round(f1[2],    4),
-        "rbc3_prec":       round(prec[3],  4),
-        "rbc3_recall":     round(rec[3],   4),
-        "rbc3_f1":         round(f1[3],    4),
-        "rbcalone_prec":   round(prec[4],  4),
-        "rbcalone_recall": round(rec[4],   4),
-        "rbcalone_f1":     round(f1[4],    4),
-        "macro_f1":        round(f1m,      4),
-        "weighted_f1":     round(f1w,      4),
-        "val_acc":         round(val_acc_final, 4),
+        "test_acc":         round(test_acc,       4),
+        "no_rbc_prec":      round(prec[0],        4),
+        "no_rbc_recall":    round(rec[0],         4),
+        "no_rbc_f1":        round(f1[0],          4),
+        "has_rbc_prec":     round(prec[1],        4),
+        "has_rbc_recall":   round(rec[1],         4),
+        "has_rbc_f1":       round(f1[1],          4),
+        "rbc_alone_prec":   round(prec[2],        4),
+        "rbc_alone_recall": round(rec[2],         4),
+        "rbc_alone_f1":     round(f1[2],          4),
+        "macro_f1":         round(f1m,            4),
+        "weighted_f1":      round(f1w,            4),
+        "val_acc":          round(val_acc_final,  4),
     }
 
     log_experiment_excel(cfg, results, notes=notes)
     log_results(results)
     log_confusion_matrix(true_labels, preds, CLASS_NAMES,
-                         os.path.join(plot_dir, "confusion_matrix_rbc_clustered.png"))
+                         os.path.join(plot_dir, "confusion_matrix_clustered_binary.png"))
     log_artifacts([
-        os.path.join(plot_dir, "loss_curve_rbc_clustered.png"),
-        os.path.join(plot_dir, "accuracy_curve_rbc_clustered.png"),
+        os.path.join(plot_dir, "loss_curve_clustered_binary.png"),
+        os.path.join(plot_dir, "accuracy_curve_clustered_binary.png"),
         cfg["checkpoint_path"],
     ])
     end_run()
@@ -544,4 +564,4 @@ def train(config=None, notes=""):
 # ENTRY POINT
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
-    train(notes="default config run")
+    train(notes="clustered binary: No_RBC / Has_RBC / RBC_alone")

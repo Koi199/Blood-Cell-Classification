@@ -98,9 +98,9 @@ class MainWindow(QMainWindow):
 
             # Display in QLabel
             self.display_image_in_label(self.ui.Image_Nonmonocyte, top1_by_class['NONmonocyte'])
-            self.display_image_in_label(self.ui.Image_MonocytewithRBC, top1_by_class['UNclustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_MonocytewithRBC, top1_by_class['UNclustered Monocyte RBC'])
             self.display_image_in_label(self.ui.Image_emptymonocyte, top1_by_class['UNclustered Monocyte'])
-            self.display_image_in_label(self.ui.Image_ClusteredmonocytewithRBC, top1_by_class['Clustered Monocyte oneRBC'])
+            self.display_image_in_label(self.ui.Image_ClusteredmonocytewithRBC, top1_by_class['Clustered Monocyte RBC'])
             self.display_image_in_label(self.ui.Image_ClusteredemptyMonocyte, top1_by_class['Clustered Monocyte'])           
 
         except Exception as e:

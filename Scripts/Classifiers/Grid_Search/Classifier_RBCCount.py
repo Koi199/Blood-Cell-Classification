@@ -1,25 +1,21 @@
 """
-classifier_rbc_count.py
-───────────────────────
-Reusable library for RBC count classification.
-Input: Unclustered monocyte images (MCwRBC only, RBC_0 excluded)
-Output: 3 classes
-  0 = RBC_1 (1 RBC)
-  1 = RBC_2 (2 RBCs)
-  2 = RBC_3 (3 RBCs)
-
-Natural distribution sampling — no oversampling, model learns
-from real class frequencies.
+classifier_rbc_binary.py
+────────────────────────
+Binary classifier for monocyte RBC presence.
+Input: Monocyte images
+Output: 2 classes
+  0 = No_RBC  (empty monocyte)
+  1 = Has_RBC (monocyte with one or more RBCs)
 
 Usage:
-    from classifier_rbc_count import train, DEFAULT_CONFIG
+    from classifier_rbc_binary import train, DEFAULT_CONFIG
     import copy
 
     config = copy.deepcopy(DEFAULT_CONFIG)
     config["architecture"]    = "resnet50"
-    config["checkpoint_path"] = "checkpoints_rbc/resnet50.pth"
+    config["checkpoint_path"] = "checkpoints_rbc_binary/resnet50.pth"
 
-    train(config, notes="resnet50 rbc count")
+    train(config, notes="resnet50 binary rbc")
 """
 
 import os
@@ -58,31 +54,34 @@ DEFAULT_CONFIG = {
     "lr":                       5e-5,
     "weight_decay":             1e-4,
     "num_workers":              4,
-    "checkpoint_path":          "checkpoints_rbc/resnet34_rbc.pth",
+    "checkpoint_path":          "checkpoints_rbc_binary/convnext_tiny.pth",
     "device":                   "cuda" if torch.cuda.is_available() else "cpu",
-    "architecture":             "resnet34",
+    "architecture":             "convnext_tiny",
 
-    # Equal balance across RBC_1, RBC_2, RBC_3
-    # Adjust targets based on your natural counts per class
+    # RBC_0 = empty monocyte, everything else = has RBC
+    # Adjust targets to balance the two classes
     "subclass_targets": {
-        "RBC_0": 400,
-        "RBC_1": 400,
-        "RBC_2": 200,
-        "RBC_3": 200,
+        "No_RBC":  400,
+        "Has_RBC": 400,
     }
 }
 
 # ─────────────────────────────────────────────
 # LABEL MAPS
+# Binary: fold all RBC_1+ into a single "Has_RBC" class
+# Your data folders can still be RBC_0, RBC_1, RBC_2 etc —
+# this map collapses them into 0 or 1 at load time.
 # ─────────────────────────────────────────────
 FOLDER_MAP = {
-    "RBC_0": 0,
-    "RBC_1": 1,
-    "RBC_2": 2,
-    "RBC_3": 3,
+    "RBC_0": 0,  # No RBC
+    "RBC_1": 1,  # Has RBC
+    "RBC_2": 1,  # Has RBC
+    "RBC_3": 1,  # Has RBC
+    "RBC_4": 1,  # Has RBC
+    "RBC_5": 1,  # Has RBC
 }
 
-CLASS_NAMES = ["RBC_0", "RBC_1", "RBC_2", "RBC_3"]
+CLASS_NAMES = ["No_RBC", "Has_RBC"]
 
 # ─────────────────────────────────────────────
 # ViT image size handling
@@ -116,10 +115,11 @@ def make_transforms(img_size):
     ])
     return train_tf, val_tf
 
+
 # ─────────────────────────────────────────────
 # MODEL BUILDER
 # ─────────────────────────────────────────────
-def build_model(architecture, num_classes=4, freeze_backbone=False):
+def build_model(architecture, num_classes=2, freeze_backbone=False):
     arch = architecture.lower()
 
     if arch == "resnet18":
@@ -176,6 +176,7 @@ def build_model(architecture, num_classes=4, freeze_backbone=False):
 
     return model
 
+
 # ─────────────────────────────────────────────
 # DATASET
 # ─────────────────────────────────────────────
@@ -194,8 +195,10 @@ class BloodCellDataset(Dataset):
             img = self.transform(img)
         return img, label
 
+
 # ─────────────────────────────────────────────
-# DATA LOADING — weighted sampler for equal balance
+# DATA LOADING
+# Folds RBC_1+ into Has_RBC (label=1) at load time
 # ─────────────────────────────────────────────
 def load_samples(data_dir):
     samples = []
@@ -207,27 +210,30 @@ def load_samples(data_dir):
         count = 0
         for fname in os.listdir(folder_path):
             if fname.lower().endswith(('.png', '.jpg', '.jpeg')):
-                samples.append((os.path.join(folder_path, fname), folder_name, label))
+                # Store binary_folder_name for sampler weighting
+                binary_name = "No_RBC" if label == 0 else "Has_RBC"
+                samples.append((os.path.join(folder_path, fname), binary_name, label))
                 count += 1
-        print(f"  {folder_name} (class {label}): {count} images")
+        class_name = "No_RBC" if label == 0 else "Has_RBC"
+        print(f"  {folder_name} → {class_name} (label {label}): {count} images")
     return samples
 
 
 def make_weighted_sampler(train_samples, subclass_targets):
-    # Count natural occurrences per folder
+    # Count per binary class
     folder_counts = {}
-    for _, folder_name, _ in train_samples:
-        folder_counts[folder_name] = folder_counts.get(folder_name, 0) + 1
+    for _, binary_name, _ in train_samples:
+        folder_counts[binary_name] = folder_counts.get(binary_name, 0) + 1
 
-    print("\nNatural class counts in training set:")
+    print("\nBinary class counts in training set:")
     for folder, count in sorted(folder_counts.items()):
         target = subclass_targets.get(folder, count)
         print(f"  {folder}: {count} → {target} ({target/count:.2f}x)")
 
     sample_weights = np.zeros(len(train_samples), dtype=np.float32)
-    for idx, (_, folder_name, _) in enumerate(train_samples):
-        natural = folder_counts[folder_name]
-        target  = subclass_targets.get(folder_name, natural)
+    for idx, (_, binary_name, _) in enumerate(train_samples):
+        natural = folder_counts[binary_name]
+        target  = subclass_targets.get(binary_name, natural)
         sample_weights[idx] = target / natural
 
     total_samples = sum(subclass_targets.values())
@@ -279,6 +285,7 @@ def make_dataloaders(config, train_tf, val_tf):
 
     return train_loader, val_loader, test_loader
 
+
 # ─────────────────────────────────────────────
 # TRAINING LOOP
 # ─────────────────────────────────────────────
@@ -296,6 +303,7 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
         correct    += (outputs.argmax(1) == labels).sum().item()
         total      += imgs.size(0)
     return total_loss / total, correct / total
+
 
 # ─────────────────────────────────────────────
 # EVALUATE
@@ -318,6 +326,7 @@ def evaluate(model, loader, criterion, device):
 
     return total_loss / total, correct / total, all_preds, all_labels
 
+
 # ─────────────────────────────────────────────
 # PLOTS
 # ─────────────────────────────────────────────
@@ -328,38 +337,39 @@ def save_plots(train_losses, val_losses, train_accs, val_accs,
     plt.figure(figsize=(10, 5))
     plt.plot(train_losses, label="Train Loss", marker="o", markersize=3)
     plt.plot(val_losses,   label="Val Loss",   marker="o", markersize=3)
-    plt.title("RBC Count — Training & Validation Loss")
+    plt.title("RBC Binary — Training & Validation Loss")
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "loss_curve_rbc.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "loss_curve_binary.png"), dpi=150)
     plt.close()
 
     plt.figure(figsize=(10, 5))
     plt.plot(train_accs, label="Train Accuracy", marker="o", markersize=3)
     plt.plot(val_accs,   label="Val Accuracy",   marker="o", markersize=3)
-    plt.title("RBC Count — Training & Validation Accuracy")
+    plt.title("RBC Binary — Training & Validation Accuracy")
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy")
     plt.ylim(0, 1)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "accuracy_curve_rbc.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "accuracy_curve_binary.png"), dpi=150)
     plt.close()
 
-    cm = confusion_matrix(true_labels, preds, labels=[0, 1, 2, 3])
-    plt.figure(figsize=(8, 6))
+    cm = confusion_matrix(true_labels, preds, labels=[0, 1])
+    plt.figure(figsize=(6, 5))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                 xticklabels=CLASS_NAMES, yticklabels=CLASS_NAMES)
-    plt.title("RBC Count — Confusion Matrix (counts)")
+    plt.title("RBC Binary — Confusion Matrix")
     plt.ylabel("True Label")
     plt.xlabel("Predicted Label")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "confusion_matrix_rbc.png"), dpi=150)
+    plt.savefig(os.path.join(output_dir, "confusion_matrix_binary.png"), dpi=150)
     plt.close()
 
     print("  ✓ Saved loss, accuracy, and confusion matrix plots")
+
 
 # ─────────────────────────────────────────────
 # EXCEL LOGGING
@@ -375,18 +385,18 @@ def log_experiment_excel(config, results,
     row = [
         run_num, str(date.today()), notes,
         config.get("architecture", "resnet34"), "ImageNet", "No", 0.4,
-        "RBC Count",
+        "RBC Binary",
         70, 10, 20,
         "N/A", "N/A", "N/A", "N/A", "N/A",
-        "Natural distribution", "AdamW",
+        "Weighted sampler", "AdamW",
         config["lr"], config["weight_decay"], config["batch_size"], config["num_epochs"],
         f"CosineAnnealingLR (T_max={config['num_epochs']})",
         f"{config['img_size']}x{config['img_size']}",
         "HFlip, VFlip, Rotation(15°), ColorJitter(b=0.2,c=0.2), ImageNet norm",
         results["test_acc"],
-        results["rbc1_prec"],  results["rbc1_recall"],  results["rbc1_f1"],
-        results["rbc2_prec"],  results["rbc2_recall"],  results["rbc2_f1"],
-        results["macro_f1"],   results["weighted_f1"],
+        results["no_rbc_prec"],   results["no_rbc_recall"],   results["no_rbc_f1"],
+        results["has_rbc_prec"],  results["has_rbc_recall"],  results["has_rbc_f1"],
+        results["macro_f1"],      results["weighted_f1"],
         results["val_acc"],
     ]
 
@@ -396,26 +406,27 @@ def log_experiment_excel(config, results,
     wb.save(log_path)
     print(f"  ✓ Run {run_num} logged to {log_path}")
 
+
 # ─────────────────────────────────────────────
 # MAIN TRAIN FUNCTION
 # ─────────────────────────────────────────────
 def train(config=None, notes=""):
     """
-    Train RBC count classifier.
+    Train binary RBC presence classifier.
 
     Args:
         config: dict — override any keys from DEFAULT_CONFIG.
         notes:  string — logged to MLflow and Excel.
 
     Example:
-        from classifier_rbc_count import train, DEFAULT_CONFIG
+        from classifier_rbc_binary import train, DEFAULT_CONFIG
         import copy
 
         config = copy.deepcopy(DEFAULT_CONFIG)
         config["architecture"]    = "resnet50"
-        config["checkpoint_path"] = "checkpoints_rbc/resnet50.pth"
+        config["checkpoint_path"] = "checkpoints_rbc_binary/resnet50.pth"
 
-        train(config, notes="resnet50 rbc count")
+        train(config, notes="resnet50 binary rbc")
     """
     cfg = copy.deepcopy(DEFAULT_CONFIG)
     if config is not None:
@@ -434,12 +445,12 @@ def train(config=None, notes=""):
     os.makedirs(os.path.dirname(cfg["checkpoint_path"]), exist_ok=True)
     plot_dir = os.path.dirname(cfg["checkpoint_path"])
 
-    setup_mlflow("RBC_Count_Classification")
+    setup_mlflow("RBC_Binary_Classification")
     start_run(run_name=f"{arch}_{notes}" if notes else arch, notes=notes)
     log_params(cfg)
 
     train_loader, val_loader, test_loader = make_dataloaders(cfg, train_tf, val_tf)
-    model     = build_model(arch, num_classes=4, freeze_backbone=False).to(device)
+    model     = build_model(arch, num_classes=2, freeze_backbone=False).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg["weight_decay"])
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg["num_epochs"])
@@ -484,46 +495,49 @@ def train(config=None, notes=""):
     print("\n── Validation Set Evaluation ──")
     _, val_acc_final, val_preds, val_true = evaluate(model, val_loader, criterion, device)
     print(f"Val Accuracy: {val_acc_final:.4f}\n")
-    print(classification_report(val_true, val_preds, target_names=CLASS_NAMES))
-    print(confusion_matrix(val_true, val_preds, labels=[0, 1, 2, 3]))
+    print(classification_report(val_true, val_preds, target_names=CLASS_NAMES, zero_division=0))
+    print(confusion_matrix(val_true, val_preds, labels=[0, 1]))
 
     # ── Test evaluation ──
     print("\n── Test Set Evaluation ──")
     _, test_acc, preds, true_labels = evaluate(model, test_loader, criterion, device)
     print(f"Test Accuracy: {test_acc:.4f}\n")
-    print(classification_report(true_labels, preds, target_names=CLASS_NAMES))
-    print(confusion_matrix(true_labels, preds, labels=[0, 1, 2, 3]))
+    print(classification_report(true_labels, preds, target_names=CLASS_NAMES, zero_division=0))
+    print(confusion_matrix(true_labels, preds, labels=[0, 1]))
 
     save_plots(train_losses, val_losses, train_accs, val_accs, true_labels, preds, plot_dir)
 
     # ── Compile results ──
-    prec, rec, f1, _ = precision_recall_fscore_support(true_labels, preds, labels=[0, 1, 2, 3])
-    _, _, f1w, _     = precision_recall_fscore_support(true_labels, preds, average="weighted")
-    _, _, f1m, _     = precision_recall_fscore_support(true_labels, preds, average="macro")
+    prec, rec, f1, _ = precision_recall_fscore_support(
+        true_labels, preds, labels=[0, 1], zero_division=0
+    )
+    _, _, f1w, _ = precision_recall_fscore_support(
+        true_labels, preds, average="weighted", zero_division=0
+    )
+    _, _, f1m, _ = precision_recall_fscore_support(
+        true_labels, preds, average="macro", zero_division=0
+    )
 
     results = {
-        "test_acc":      round(test_acc, 4),
-        "rbc1_prec":     round(prec[0],  4),
-        "rbc1_recall":   round(rec[0],   4),
-        "rbc1_f1":       round(f1[0],    4),
-        "rbc2_prec":     round(prec[1],  4),
-        "rbc2_recall":   round(rec[1],   4),
-        "rbc2_f1":       round(f1[1],    4),
-        "rbc3_prec":     round(prec[2],  4),
-        "rbc3_recall":   round(rec[2],   4),
-        "rbc3_f1":       round(f1[2],    4),
-        "macro_f1":      round(f1m,      4),
-        "weighted_f1":   round(f1w,      4),
-        "val_acc":       round(val_acc_final, 4),
+        "test_acc":       round(test_acc,    4),
+        "no_rbc_prec":    round(prec[0],     4),
+        "no_rbc_recall":  round(rec[0],      4),
+        "no_rbc_f1":      round(f1[0],       4),
+        "has_rbc_prec":   round(prec[1],     4),
+        "has_rbc_recall": round(rec[1],      4),
+        "has_rbc_f1":     round(f1[1],       4),
+        "macro_f1":       round(f1m,         4),
+        "weighted_f1":    round(f1w,         4),
+        "val_acc":        round(val_acc_final, 4),
     }
 
     log_experiment_excel(cfg, results, notes=notes)
     log_results(results)
     log_confusion_matrix(true_labels, preds, CLASS_NAMES,
-                         os.path.join(plot_dir, "confusion_matrix_rbc.png"))
+                         os.path.join(plot_dir, "confusion_matrix_binary.png"))
     log_artifacts([
-        os.path.join(plot_dir, "loss_curve_rbc.png"),
-        os.path.join(plot_dir, "accuracy_curve_rbc.png"),
+        os.path.join(plot_dir, "loss_curve_binary.png"),
+        os.path.join(plot_dir, "accuracy_curve_binary.png"),
         cfg["checkpoint_path"],
     ])
     end_run()
@@ -535,4 +549,4 @@ def train(config=None, notes=""):
 # ENTRY POINT
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
-    train(notes="default config run")
+    train(notes="binary rbc presence classifier")
