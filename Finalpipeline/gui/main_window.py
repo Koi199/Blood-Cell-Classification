@@ -104,6 +104,7 @@ class MainWindow(QMainWindow):
             self.display_image_in_label(self.ui.Image_ClusteredemptyMonocyte, top1_by_class['Clustered Monocyte'])           
 
         except Exception as e:
+            
             self.ui.TextEdit_Log.append(f"Error in post-processing: {e}")
 
         # Display Results

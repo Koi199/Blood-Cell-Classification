@@ -138,9 +138,9 @@ class PipelineWorker(QObject):
                 Unclustered_PI = count_results['unclustered_counts']['total_rbcs'] / denom_u if denom_u else 0
                 Clustered_PI   = count_results['clustered_counts']['total_rbcs'] / denom_c if denom_c else 0
 
-                self.label_PI.emit(f"{MonocyteIdx:.4f}")
-                self.label_UnclusteredI.emit(f"{Unclustered_PI:.4f}")
-                self.label_ClusteredI.emit(f"{Clustered_PI:.4f}")
+                self.label_PI.emit(f"{float(MonocyteIdx):.4f}")
+                self.label_UnclusteredI.emit(f"{float(Unclustered_PI):.4f}")
+                self.label_ClusteredI.emit(f"{float(Clustered_PI):.4f}")
 
             except Exception as e:
                 self.log.emit(f"ERROR Calculating Index: {e}")
