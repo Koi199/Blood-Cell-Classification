@@ -43,7 +43,7 @@ class PipelineWorker(QObject):
         except Exception as e:
             self.log.emit(f"❌ Segmentation error: {e}")
 
-        if seg_output['total_cells'] > 100: # need at least 100 cells for inference
+        if seg_output['total_cells'] > 0: # need at least 100 cells for inference - disabled for the sake of comparison
 
             # Single Cell npy processing
             self.npy_dir = Path(self.npy_dir)
@@ -130,13 +130,13 @@ class PipelineWorker(QObject):
                 if total_mono == 0:
                     raise ValueError("No monocytes detected — cannot compute PI")
 
-                MonocyteIdx = count_results['total_rbcs'] / total_mono
+                MonocyteIdx = (count_results['total_rbcs'] / total_mono) * 100 
 
                 denom_u = u_mono + u_mono_r
                 denom_c = c_mono + c_mono_r
 
-                Unclustered_PI = count_results['unclustered_counts']['total_rbcs'] / denom_u if denom_u else 0
-                Clustered_PI   = count_results['clustered_counts']['total_rbcs'] / denom_c if denom_c else 0
+                Unclustered_PI = (count_results['unclustered_counts']['total_rbcs']) * 100 / denom_u if denom_u else 0
+                Clustered_PI   = (count_results['clustered_counts']['total_rbcs']) * 100 / denom_c if denom_c else 0
 
                 self.label_PI.emit(f"{float(MonocyteIdx):.4f}")
                 self.label_UnclusteredI.emit(f"{float(Unclustered_PI):.4f}")

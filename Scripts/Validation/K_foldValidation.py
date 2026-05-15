@@ -80,7 +80,7 @@ from Logger import (
 # Adjust these to experiment with class balance without touching the configs.
 
 # Stage 1 — usability classifier
-_stage1_mono_total = 1800   # total budget shared across MCwRBC, MCwoRBC, Clustered
+_stage1_mono_total = 4400   # total budget shared across MCwRBC, MCwoRBC, Clustered
 
 # Stage 2 — clustered vs unclustered
 _stage2_target     = 1200   # per-class target for Clustered and Unclustered
@@ -106,7 +106,7 @@ CONFIGS = {
         "class_names":    ["Unusable", "Usable"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_stage1",
         "subclass_targets": {
-            "Unusable": 1800,
+            "Unusable": 2200,
             "Usable":   _stage1_mono_total,
         },
     },

@@ -339,7 +339,7 @@
                 <enum>QFrame::Shape::Box</enum>
                </property>
                <property name="text">
-                <string>Monocyte Index (Ratio of phagocytosed cells):</string>
+                <string>Phagocytic Index (#eaten RBC/#Monocytes) * 100:</string>
                </property>
               </widget>
              </item>
@@ -371,7 +371,7 @@
                 <enum>QFrame::Shape::Box</enum>
                </property>
                <property name="text">
-                <string>Unclustered Index (Counting Unclustered cells only):</string>
+                <string>Unclustered Index (Unclustered cells only) * 100:</string>
                </property>
               </widget>
              </item>
@@ -403,7 +403,7 @@
                 <enum>QFrame::Shape::Box</enum>
                </property>
                <property name="text">
-                <string>Clustered Index (Counting Clustered cells only):</string>
+                <string>Clustered Index (Clustered cells only)* 100:</string>
                </property>
               </widget>
              </item>

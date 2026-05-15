@@ -133,7 +133,11 @@ class MainWindow(QMainWindow):
  
         if not root_dir.exists():
             self.ui.TextEdit_Log.append(f"❌ Folder does not exist: {root_dir}")
-            return
+            try:
+                root_dir.mkdir(parents=True, exist_ok=True)
+                self.ui.TextEdit_Log.append(f"📁 Created folder: {root_dir}")
+            except Exception as e:
+                self.ui.TextEdit_Log.append(f"Error: {e}")
 
         self.ui.Button_Start.setEnabled(False)
         self.ui.TextEdit_Log.append("Starting pipeline...")

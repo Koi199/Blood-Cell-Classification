@@ -50,21 +50,22 @@ def visualize_segmentation(img, masks, filename, output_dir, alpha=0.5):
     axes[0].imshow(img_display, cmap="gray");  axes[0].set_title("Original");      axes[0].axis("off")
     axes[1].imshow(masks_2d, cmap="nipy_spectral")
     n_cells = len(np.unique(masks_2d)) - 1
-    axes[1].set_title(f"Masks ({n_cells} cells)"); axes[1].axis("off")
+    # axes[1].set_title(f"Masks ({n_cells} cells)"); axes[1].axis("off")
 
-    overlay = img_display.copy()
-    cell_ids = np.unique(masks_2d)[1:]
-    colors = random_colors(len(cell_ids))
-    for idx, cell_id in enumerate(cell_ids):
-        cell_mask = masks_2d == cell_id
-        overlay[cell_mask] = (1 - alpha) * overlay[cell_mask] + alpha * colors[idx]
+    # overlay = img_display.copy()
+    # cell_ids = np.unique(masks_2d)[1:]
+    # colors = random_colors(len(cell_ids))
+    # for idx, cell_id in enumerate(cell_ids):
+    #     cell_mask = masks_2d == cell_id
+    #     overlay[cell_mask] = (1 - alpha) * overlay[cell_mask] + alpha * colors[idx]
 
-    axes[2].imshow(overlay); axes[2].set_title("Overlay"); axes[2].axis("off")
-    plt.tight_layout()
+    # axes[2].imshow(overlay); axes[2].set_title("Overlay"); axes[2].axis("off")
+    # plt.tight_layout()
 
-    save_path = Path(output_dir) / f"{filename}_overlay.png"
-    plt.savefig(save_path, dpi=150, bbox_inches="tight")
-    plt.close()
+    # save_path = Path(output_dir) / f"{filename}_overlay.png"
+    # plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    # plt.close()
+    save_path = ""
     return save_path, n_cells
 
 
