@@ -113,7 +113,7 @@ def run_segmentation(
     save_base_dir = Path(save_base_dir)
     overlay_base_dir = Path(overlay_base_dir)
     save_base_dir.mkdir(parents=True, exist_ok=True)
-    overlay_base_dir.mkdir(parents=True, exist_ok=True)
+    # overlay_base_dir.mkdir(parents=True, exist_ok=True)
 
     # ── Load images ────────────────────────────────────────────
     log_fn(f"Loading {len(image_paths)} images...")

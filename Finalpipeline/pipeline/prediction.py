@@ -5,16 +5,71 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 from torchvision import transforms
+from torchvision.transforms import functional as TF
 from torchvision.models import convnext_tiny, convnext_base
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# INTENSITY NORMALISATION
+# Stretches each image's per-channel intensity to a consistent range before
+# ImageNet normalisation. Compensates for exposure/contrast differences across
+# imaging sessions without requiring retraining.
+#
+# Uses robust quantile-based min-max stretch (ignores top/bottom 1% of pixels)
+# so dust, bright spots, or imaging artefacts don't skew the normalisation.
+# ─────────────────────────────────────────────────────────────────────────────
+
+class NormaliseToImageNet:
+    """
+    Per-image robust intensity stretch to [0, 1] before normalisation.
+    Assumes grayscale input (single channel).
+    """
+    def __call__(self, img: Image.Image) -> Image.Image:
+        # ensure grayscale
+        img = img.convert("L")
+        tensor = TF.to_tensor(img)          # (1, H, W) float32 in [0, 1]
+        ch = tensor[0]
+        lo = ch.quantile(0.01)
+        hi = ch.quantile(0.99)
+        if hi > lo:
+            tensor[0] = ((ch - lo) / (hi - lo)).clamp(0, 1)
+        return TF.to_pil_image(tensor)
+
 
 
 # ── Preprocessing ─────────────────────────────────────────────
 preprocess_256 = transforms.Compose([
     transforms.Resize((256, 256)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225])
+    NormaliseToImageNet(),
+    transforms.ToTensor(),                      # → (1, H, W)
+    transforms.Normalize(mean=[0.5], std=[0.25])
 ])
+
+# -- Convert the first conv layer of a pretrained model to accept single-channel input --
+def _convert_first_layer_to_grayscale(model: torch.nn.Module) -> torch.nn.Module:
+    """
+    Convert ConvNeXt first conv to 1‑channel to match grayscale training.
+    """
+    old = model.features[0][0]
+    new = torch.nn.Conv2d(
+        in_channels=1,
+        out_channels=old.out_channels,
+        kernel_size=old.kernel_size,
+        stride=old.stride,
+        padding=old.padding,
+        bias=(old.bias is not None),
+    )
+    with torch.no_grad():
+        # if loading pretrained RGB weights, average them; if loading from
+        # scratch, this will be overwritten by checkpoint anyway
+        if old.weight.shape[1] == 3:
+            new.weight[:] = old.weight.mean(dim=1, keepdim=True)
+        else:
+            new.weight[:] = old.weight
+        if old.bias is not None:
+            new.bias[:] = old.bias
+    model.features[0][0] = new
+    return model
 
 # ─────────────────────────────────────────────────────────────────────────────
 # MODEL PATHS
@@ -35,13 +90,13 @@ MODEL_PATHS = {
         # ── Single model (original) ──
         # "single": r"model\cellusability\stage1_usability_fold4.pth",
 
-        # ── Ensemble (uncomment and fill in fold checkpoint paths to enable) ──
+        # ── Ensemble ──
         "folds": [
-            r"model\cellusability\stage1_usability_fold1.pth",
-            r"model\cellusability\stage1_usability_fold2.pth",
-            r"model\cellusability\stage1_usability_fold3.pth",
-            r"model\cellusability\stage1_usability_fold4.pth",
-            r"model\cellusability\stage1_usability_fold5.pth",
+            r"model\cellusability\stage1_usability_fold1_v2.pth",
+            r"model\cellusability\stage1_usability_fold2_v2.pth",
+            r"model\cellusability\stage1_usability_fold3_v2.pth",
+            r"model\cellusability\stage1_usability_fold4_v2.pth",
+            r"model\cellusability\stage1_usability_fold5_v2.pth",
         ],
     },
 
@@ -51,11 +106,11 @@ MODEL_PATHS = {
 
         # ── Ensemble ──
         "folds": [
-            r"model\cellclusters\stage2_clustered_fold1.pth",
-            r"model\cellclusters\stage2_clustered_fold2.pth",
-            r"model\cellclusters\stage2_clustered_fold3.pth",
-            r"model\cellclusters\stage2_clustered_fold4.pth",
-            r"model\cellclusters\stage2_clustered_fold5.pth",
+            r"model\cellclusters\stage2_clustered_fold1_v2.pth",
+            r"model\cellclusters\stage2_clustered_fold2_v2.pth",
+            r"model\cellclusters\stage2_clustered_fold3_v2.pth",
+            r"model\cellclusters\stage2_clustered_fold4_v2.pth",
+            r"model\cellclusters\stage2_clustered_fold5_v2.pth",
         ],
     },
 
@@ -65,11 +120,11 @@ MODEL_PATHS = {
 
         # ── Ensemble ──
         "folds": [
-            r"model\cellrbccluster\clustered_binary_fold1.pth",
-            r"model\cellrbccluster\clustered_binary_fold2.pth",
-            r"model\cellrbccluster\clustered_binary_fold3.pth",
-            r"model\cellrbccluster\clustered_binary_fold4.pth",
-            r"model\cellrbccluster\clustered_binary_fold5.pth",
+            r"model\cellrbccluster\clustered_binary_fold1_v2.pth",
+            r"model\cellrbccluster\clustered_binary_fold2_v2.pth",
+            r"model\cellrbccluster\clustered_binary_fold3_v2.pth",
+            r"model\cellrbccluster\clustered_binary_fold4_v2.pth",
+            r"model\cellrbccluster\clustered_binary_fold5_v2.pth",
         ],
     },
 
@@ -79,11 +134,11 @@ MODEL_PATHS = {
 
         # ── Ensemble ──
         "folds": [
-            r"model\cellrbcuncluster\unclustered_binary_fold1.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold2.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold3.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold4.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold5.pth",
+            r"model\cellrbcuncluster\unclustered_binary_fold1_v2.pth",
+            r"model\cellrbcuncluster\unclustered_binary_fold2_v2.pth",
+            r"model\cellrbcuncluster\unclustered_binary_fold3_v2.pth",
+            r"model\cellrbcuncluster\unclustered_binary_fold4_v2.pth",
+            r"model\cellrbcuncluster\unclustered_binary_fold5_v2.pth",
         ],
     },
 }
@@ -98,24 +153,14 @@ MODEL_CLASSES = {
     "Cluster_RBCCount":     3,
     "Unclustered_RBCCount": 2,
 }
- 
-# ── Default per-node thresholds ────────────────────────────────
-DEFAULT_THRESHOLDS = {
-    "MonovsNonMono":        0.50,
-    "Cluster":              0.50,
-    "Cluster_RBCCount":     0.50,
-    "Unclustered_RBCCount": 0.50,
-}
- 
- 
+
 # ── Fold weights for weighted ensemble averaging ───────────────
-# Fill in each fold's validation accuracy (or macro F1) from your
-# kfold_trainer Excel/MLflow logs. Folds with higher scores get
-# proportionally more weight. Set all to 1.0 for equal weighting.
-# Order must match the order of paths in MODEL_PATHS["folds"].
+# One weight per fold — order must match MODEL_PATHS["folds"].
+# Weights are normalised automatically so raw macro F1 scores work fine.
+# Set all to 1.0 for equal weighting.
 FOLD_WEIGHTS = {
     "MonovsNonMono": [
-        0.8767,   # fold 1 — replace with macro_f1 weightage
+        0.8767,   # fold 1
         0.8649,   # fold 2
         0.8169,   # fold 3
         0.8963,   # fold 4
@@ -123,9 +168,9 @@ FOLD_WEIGHTS = {
     ],
     "Cluster": [
         0.9288,   # fold 1
-        0.94,   # fold 2
+        0.9400,   # fold 2
         0.9295,   # fold 3
-        0.922,   # fold 4
+        0.9220,   # fold 4
         0.9427,   # fold 5
     ],
     "Cluster_RBCCount": [
@@ -140,15 +185,15 @@ FOLD_WEIGHTS = {
         0.9943,   # fold 2
         0.9893,   # fold 3
         0.9929,   # fold 4
-        0.974,   # fold 5
+        0.9740,   # fold 5
     ],
 }
 
-# ── Default per-node thresholds ────────────────────────────────
+# ── Default per-node confidence thresholds ─────────────────────
 DEFAULT_THRESHOLDS = {
     "MonovsNonMono":        0.50,
     "Cluster":              0.50,
-    "Cluster_RBCCount":     0.50,
+    "Cluster_RBCCount":     0.40,
     "Unclustered_RBCCount": 0.50,
 }
 
@@ -156,23 +201,27 @@ DEFAULT_THRESHOLDS = {
 # ─────────────────────────────────────────────────────────────────────────────
 # MODEL LOADERS
 # ─────────────────────────────────────────────────────────────────────────────
-
 def _load_convnext_tiny(path: str, num_classes: int, device: str) -> torch.nn.Module:
     model = convnext_tiny(weights=None)
+    model = _convert_first_layer_to_grayscale(model)
     model.classifier[2] = torch.nn.Linear(
         model.classifier[2].in_features, num_classes
     )
-    model.load_state_dict(torch.load(path, map_location=device))
+    state = torch.load(path, map_location=device)
+    model.load_state_dict(state)
     return model.to(device).eval()
 
 
 def _load_convnext_base(path: str, num_classes: int, device: str) -> torch.nn.Module:
     model = convnext_base(weights=None)
+    model = _convert_first_layer_to_grayscale(model)
     model.classifier[2] = torch.nn.Linear(
         model.classifier[2].in_features, num_classes
     )
-    model.load_state_dict(torch.load(path, map_location=device))
+    state = torch.load(path, map_location=device)
+    model.load_state_dict(state)
     return model.to(device).eval()
+
 
 
 def _load_model(path: str, num_classes: int, device: str,
@@ -204,24 +253,27 @@ class ModelNode:
             models       — list of loaded models. Single model = list of length 1.
                            Ensemble = list of k fold models.
             fold_weights — per-fold weights for weighted averaging. Must match
-                           len(models). If None or all equal, falls back to
-                           simple mean. Weights are normalised automatically.
+                           len(models). If None or mismatched, falls back to
+                           equal weights. Normalised automatically.
         """
-        self.name    = name
-        self.device  = device
-        self.models  = models
+        self.name        = name
+        self.device      = device
+        self.models      = models
         self.routes: dict[int, str] = {}
         self.is_ensemble = len(models) > 1
 
-        # Normalise fold weights — fall back to uniform if not provided
         if fold_weights is not None and len(fold_weights) == len(models):
-            w = torch.tensor(fold_weights, dtype=torch.float32)
+            w            = torch.tensor(fold_weights, dtype=torch.float32)
             self.weights = (w / w.sum()).to(device)
             weight_str   = ", ".join(f"{x:.3f}" for x in self.weights.cpu())
             print(f"  {name}: ensemble of {len(models)} models "
                   f"(weights: [{weight_str}])")
         else:
             self.weights = None
+            if fold_weights is not None and len(fold_weights) != len(models):
+                print(f"  WARNING [{name}]: FOLD_WEIGHTS has "
+                      f"{len(fold_weights)} entries but {len(models)} folds — "
+                      f"falling back to equal weights.")
             if self.is_ensemble:
                 print(f"  {name}: ensemble of {len(models)} models (equal weights)")
             else:
@@ -244,10 +296,9 @@ class ModelNode:
                 probs  = F.softmax(logits, dim=1)[0]
                 all_probs.append(probs)
 
-            stacked = torch.stack(all_probs)   # shape: (n_folds, n_classes)
+            stacked = torch.stack(all_probs)   # (n_folds, n_classes)
 
             if self.weights is not None:
-                # Weighted average: (n_folds,) · (n_folds, n_classes)
                 avg_probs = (stacked * self.weights.unsqueeze(1)).sum(dim=0)
             else:
                 avg_probs = stacked.mean(dim=0)
@@ -328,14 +379,10 @@ class CascadeTree:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FACTORY
-# Reads MODEL_PATHS, detects single vs ensemble automatically,
-# and assembles the CascadeTree.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Architecture used per node.
-# NOTE: These must match the architecture the checkpoints were actually trained with.
-# The original single Cluster model was convnext_base, but the kfold ensemble
-# checkpoints were trained with convnext_tiny — update here if you switch back.
+# NOTE: Must match the architecture the checkpoints were actually trained with.
 NODE_ARCHITECTURES = {
     "MonovsNonMono":        "convnext_tiny",
     "Cluster":              "convnext_tiny",
@@ -359,9 +406,9 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
         num_classes  = MODEL_CLASSES[node_name]
         architecture = NODE_ARCHITECTURES[node_name]
 
-        # Validate config — exactly one of "single" or "folds" must be present
         has_single = "single" in path_config
         has_folds  = "folds"  in path_config
+
         if has_single and has_folds:
             raise ValueError(
                 f"[{node_name}] Both 'single' and 'folds' are defined in MODEL_PATHS. "
@@ -373,16 +420,13 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
             )
 
         if has_single:
-            # Single model
             loaded_models = [
                 _load_model(path_config["single"], num_classes, device, architecture)
             ]
         else:
-            # Ensemble — load all fold checkpoints
-            fold_paths    = path_config["folds"]
             loaded_models = [
                 _load_model(p, num_classes, device, architecture)
-                for p in fold_paths
+                for p in path_config["folds"]
             ]
 
         nodes[node_name] = ModelNode(
@@ -391,7 +435,6 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
         )
 
     # Wire up routing
-    # MonovsNonMono: pred=0 Unusable (terminal), pred=1 Usable → Cluster
     nodes["MonovsNonMono"].set_routes({1: "Cluster"})
     nodes["Cluster"].set_routes({0: "Unclustered_RBCCount", 1: "Cluster_RBCCount"})
     # RBC count nodes are terminal — no routes needed
@@ -413,6 +456,10 @@ def run_classification(
     """
     Classify a list of image paths using a pre-built CascadeTree.
 
+    Each image is intensity-normalised via NormaliseToImageNet before
+    being passed to the model, compensating for exposure and contrast
+    differences across imaging sessions.
+
     Args:
         image_paths: List of paths to segmented crop images.
         tree:        A CascadeTree built with build_cascade_tree().
@@ -433,7 +480,7 @@ def run_classification(
     for i, path in enumerate(image_paths):
         p = Path(path)
         try:
-            img    = Image.open(p).convert("RGB")
+            img    = Image.open(p).convert("L")
             result = tree.classify(img, thresholds=thresholds)
             result["file"] = str(p)
             results.append(result)

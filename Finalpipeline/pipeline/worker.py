@@ -9,8 +9,14 @@ from pathlib import Path
 class PipelineWorker(QObject):
     log = Signal(str)
     label_PI = Signal(str)
-    label_UnclusteredI = Signal(str)
-    label_ClusteredI = Signal(str)
+    label_UnclusteredPI = Signal(str)
+    label_ClusteredPI = Signal(str)
+    label_ClusteredMonocyteCount = Signal(str)
+    label_UnclusteredMonocyteCount = Signal(str)
+    label_ClusteredRBCCount = Signal(str)
+    label_UnclusteredRBCCount = Signal(str)
+    label_UnclusteredPhagocyteCount = Signal(str)
+    label_ClusteredPhagocyteCount = Signal(str)
     finished = Signal()
 
     def __init__(self, image_paths, root_dir):
@@ -23,7 +29,7 @@ class PipelineWorker(QObject):
         self.npy_dir     = self.root_dir / "segmentednpy"
         self.overlay_dir = self.root_dir / "Overlay"
         self.output_dir  = self.root_dir / "SingleCells"
-        self.model_path  = "C:/repos/Blood-Cell-Classification/Finalpipeline/model/MMATrainv5"
+        self.model_path  = "C:/repos/Blood-Cell-Classification/Finalpipeline/model/MMAv7" # Version 7 
 
     def run(self):
         self.log.emit("Pipeline started.")
@@ -35,8 +41,8 @@ class PipelineWorker(QObject):
                 image_paths      = self.image_paths,
                 save_base_dir    = self.npy_dir,
                 overlay_base_dir = self.overlay_dir,
-                model_path       = self.model_path,
-                diameter         = 70, # pixels
+                model_path       = self.model_path, # <-- added model path
+                diameter         = 60, # pixels from 70
                 log_fn           = self.log.emit,   # ← routes all logs to the UI
             )
 
@@ -139,8 +145,14 @@ class PipelineWorker(QObject):
                 Clustered_PI   = (count_results['clustered_counts']['total_rbcs']) * 100 / denom_c if denom_c else 0
 
                 self.label_PI.emit(f"{float(MonocyteIdx):.4f}")
-                self.label_UnclusteredI.emit(f"{float(Unclustered_PI):.4f}")
-                self.label_ClusteredI.emit(f"{float(Clustered_PI):.4f}")
+                self.label_UnclusteredPI.emit(f"{float(Unclustered_PI):.4f}")
+                self.label_ClusteredPI.emit(f"{float(Clustered_PI):.4f}")
+                self.label_ClusteredMonocyteCount.emit(f"{c_mono+c_mono_r}")
+                self.label_UnclusteredMonocyteCount.emit(f"{u_mono+u_mono_r}")
+                self.label_ClusteredRBCCount.emit(f"{count_results['clustered_counts']['total_rbcs']}")
+                self.label_UnclusteredRBCCount.emit(f"{count_results['unclustered_counts']['total_rbcs']}")
+                self.label_ClusteredPhagocyteCount.emit(f"{c_mono_r}")
+                self.label_UnclusteredPhagocyteCount.emit(f"{u_mono_r}")
 
             except Exception as e:
                 self.log.emit(f"ERROR Calculating Index: {e}")

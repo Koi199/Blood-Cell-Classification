@@ -80,7 +80,7 @@ from Logger import (
 # Adjust these to experiment with class balance without touching the configs.
 
 # Stage 1 — usability classifier
-_stage1_mono_total = 4400   # total budget shared across MCwRBC, MCwoRBC, Clustered
+_stage1_mono_total = 2200   # total budget shared across MCwRBC, MCwoRBC, Clustered
 
 # Stage 2 — clustered vs unclustered
 _stage2_target     = 1200   # per-class target for Clustered and Unclustered
@@ -97,17 +97,22 @@ CONFIGS = {
         "name":        "stage1_usability",
         "data_dir":    "D:/MMA_LabelledData/training_perslide",
         "folder_map": {
-            "Unusable":             0,   # Unusable
-            "RBC alone":            0,   # collapsed → Unusable
-            "Monocyte_with_RBC":    1,   # Usable
-            "Monocyte_without_RBC": 1,   # Usable
-            "Clustered_cell":       1,   # Usable
+            "Unusable":             0,
+            "RBC alone":            0,
+            "Monocyte_with_RBC":    1,
+            "Monocyte_without_RBC": 1,
+            "Clustered_cell":       1,
         },
         "class_names":    ["Unusable", "Usable"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_stage1",
+
+        # NEW: subclass-balanced sampling
         "subclass_targets": {
-            "Unusable": 2200,
-            "Usable":   _stage1_mono_total,
+            "Unusable":             2200,
+            "RBC alone":            2200,
+            "Monocyte_with_RBC":    2200,
+            "Monocyte_without_RBC": 2200,
+            "Clustered_cell":       2200,
         },
     },
 
@@ -216,6 +221,92 @@ VIT_ARCHITECTURES = {"vit_b16", "vit_b32", "vit_l16"}
 # ─────────────────────────────────────────────────────────────────────────────
 # HELPERS
 # ─────────────────────────────────────────────────────────────────────────────
+def convert_first_layer_to_grayscale(model):
+    """
+    Replace the first conv layer with a 1‑channel version.
+    The new weights are the mean of the pretrained RGB filters.
+    Works for ResNet, EfficientNet, ConvNeXt, ViT.
+    """
+    # ───────────────────────────────
+    # ResNet stem
+    # ───────────────────────────────
+    if hasattr(model, "conv1") and isinstance(model.conv1, nn.Conv2d):
+        old = model.conv1
+        new = nn.Conv2d(
+            in_channels=1,
+            out_channels=old.out_channels,
+            kernel_size=old.kernel_size,
+            stride=old.stride,
+            padding=old.padding,
+            bias=(old.bias is not None)
+        )
+        with torch.no_grad():
+            new.weight[:] = old.weight.mean(dim=1, keepdim=True)
+            if old.bias is not None:
+                new.bias[:] = old.bias
+        model.conv1 = new
+        return model
+
+    # ───────────────────────────────
+    # EfficientNet stem
+    # ───────────────────────────────
+    if hasattr(model, "features") and hasattr(model.features[0], "0"):
+        old = model.features[0][0]
+        if isinstance(old, nn.Conv2d):
+            new = nn.Conv2d(
+                1, old.out_channels,
+                kernel_size=old.kernel_size,
+                stride=old.stride,
+                padding=old.padding,
+                bias=(old.bias is not None)
+            )
+            with torch.no_grad():
+                new.weight[:] = old.weight.mean(dim=1, keepdim=True)
+                if old.bias is not None:
+                    new.bias[:] = old.bias
+            model.features[0][0] = new
+            return model
+
+    # ───────────────────────────────
+    # ConvNeXt stem
+    # ───────────────────────────────
+    if hasattr(model, "features") and hasattr(model.features[0], "0"):
+        old = model.features[0][0]
+        if isinstance(old, nn.Conv2d):
+            new = nn.Conv2d(
+                1, old.out_channels,
+                kernel_size=old.kernel_size,
+                stride=old.stride,
+                padding=old.padding,
+                bias=(old.bias is not None)
+            )
+            with torch.no_grad():
+                new.weight[:] = old.weight.mean(dim=1, keepdim=True)
+                if old.bias is not None:
+                    new.bias[:] = old.bias
+            model.features[0][0] = new
+            return model
+
+    # ───────────────────────────────
+    # ViT patch embedding
+    # ───────────────────────────────
+    if hasattr(model, "conv_proj"):
+        old = model.conv_proj
+        new = nn.Conv2d(
+            1, old.out_channels,
+            kernel_size=old.kernel_size,
+            stride=old.stride,
+            padding=old.padding,
+            bias=(old.bias is not None)
+        )
+        with torch.no_grad():
+            new.weight[:] = old.weight.mean(dim=1, keepdim=True)
+            if old.bias is not None:
+                new.bias[:] = old.bias
+        model.conv_proj = new
+        return model
+
+    raise RuntimeError("Could not locate first conv layer to convert.")
 
 def resolve_config(user_config: dict) -> dict:
     """Merge user config with TRAINING_DEFAULTS. User values take priority."""
@@ -239,14 +330,12 @@ def make_transforms(img_size: int):
         transforms.RandomRotation(15),
         transforms.ColorJitter(brightness=0.2, contrast=0.2),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                             std=[0.229, 0.224, 0.225]),
+        transforms.Normalize(mean=[0.5], std=[0.25]),
     ])
     val_tf = transforms.Compose([
         transforms.Resize((img_size, img_size)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                             std=[0.229, 0.224, 0.225]),
+        transforms.Normalize(mean=[0.5], std=[0.25]),
     ])
     return train_tf, val_tf
 
@@ -276,6 +365,8 @@ def build_model(architecture: str, num_classes: int, freeze_backbone: bool = Fal
 
     model_fn, weights = weight_map[arch]
     model = model_fn(weights=weights)
+    # Convert first layer to grayscale
+    model = convert_first_layer_to_grayscale(model)
 
     if freeze_backbone:
         for param in model.parameters():
@@ -318,7 +409,7 @@ class BloodCellDataset(Dataset):
 
     def __getitem__(self, idx):
         path, label = self.samples[idx]
-        img = Image.open(path).convert("RGB")
+        img = Image.open(path).convert("L")
         if self.transform:
             img = self.transform(img)
         return img, label
@@ -656,7 +747,7 @@ def train_kfold(user_config: dict, notes: str = ""):
             optimizer, T_max=cfg["num_epochs"]
         )
 
-        checkpoint_path = os.path.join(cfg["checkpoint_dir"], f"{name}_fold{fold}.pth")
+        checkpoint_path = os.path.join(cfg["checkpoint_dir"], f"{name}_fold{fold}_v2.pth")
         os.makedirs(cfg["checkpoint_dir"], exist_ok=True)
 
         start_run(run_name=f"{name}_fold{fold}_{notes}" if notes else f"{name}_fold{fold}",

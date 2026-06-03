@@ -153,8 +153,34 @@ class MainWindow(QMainWindow):
         self.thread.started.connect(self.worker.run)
         self.worker.log.connect(self.ui.TextEdit_Log.append)
         self.worker.label_PI.connect(self.ui.label_PI.setText)
-        self.worker.label_UnclusteredI.connect(self.ui.label_UnclusteredI.setText)
-        self.worker.label_ClusteredI.connect(self.ui.label_ClusteredI.setText)
+
+        self.worker.label_UnclusteredPI.connect(self.ui.label_UnclusteredPI.setText)
+        #self.worker.label_UnclusteredPIError.connect(self.ui.label_UnclusteredPIError.setText)
+
+        self.worker.label_ClusteredPI.connect(self.ui.label_ClusteredPI.setText)
+        #self.worker.label_ClusteredPIError.connect(self.ui.label_ClusteredPIError.setText)
+
+        self.worker.label_PI.connect(self.ui.label_PI.setText)
+        #self.worker.label_PIError.connect(self.ui.label_PIError.setText)
+
+        self.worker.label_ClusteredMonocyteCount.connect(self.ui.label_ClusteredMonocyteCount.setText)
+        #self.worker.label_ClusteredMonocyteCountError.connect(self.ui.label_ClusteredMonocyteCountError.setText)
+
+        self.worker.label_UnclusteredMonocyteCount.connect(self.ui.label_UnclusteredMonocyteCount.setText)
+        #self.worker.label_UnclusteredMonocyteCountError.connect(self.ui.label_UnclusteredMonocyteCountError.setText)
+
+        self.worker.label_UnclusteredPhagocyteCount.connect(self.ui.label_UnclusteredPhagocyteCount.setText)
+        #self.worker.label_UnclusteredPhagocyteCountError.connect(self.ui.label_UnclusteredPhagocyteCountError.setText)
+
+        self.worker.label_ClusteredPhagocyteCount.connect(self.ui.label_ClusteredPhagocyteCount.setText)
+        #self.worker.label_ClusteredPhagocyteCountError.connect(self.ui.label_Cluster
+
+        self.worker.label_ClusteredRBCCount.connect(self.ui.label_ClusteredRBCCount.setText)
+        #self.worker.label_ClusteredRBCCountError.connect(self.ui.label_ClusteredRBCCountError.setText)
+
+        self.worker.label_UnclusteredRBCCount.connect(self.ui.label_UnclusteredRBCCount.setText)
+        #self.worker.label_UnclusteredRBCCountError.connect(self.ui.label_UnclusteredRBCCountError.setText)
+
         # When worker finishes
         self.worker.finished.connect(self.after_pipeline) #<-- figure out the images to display
         self.worker.finished.connect(self.thread.quit)
