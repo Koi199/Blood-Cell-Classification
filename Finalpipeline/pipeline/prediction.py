@@ -501,3 +501,57 @@ def run_classification(
         log_fn(f"  Thresholds used: {thresholds}")
 
     return results
+
+def run_classification_ram(
+    cells: list[dict],
+    tree: CascadeTree,
+    thresholds: dict[str, float] = DEFAULT_THRESHOLDS,
+    log_fn=print,
+) -> list[dict[str, Any]]:
+    """
+    Classify a list of in‑RAM cell dicts produced by extract_single_cells().
+
+    Each entry in `cells` must contain:
+        {
+            "image": np.ndarray (H,W,3) uint8,
+            "label": int,
+            "parent": str,
+            "index": int,
+            "bbox": (minr, minc, maxr, maxc),
+            "orig_bbox": original bbox
+        }
+    """
+    results = []
+
+    for i, cell in enumerate(cells):
+        try:
+            # Convert NumPy → PIL (grayscale expected by your pipeline)
+            pil_img = Image.fromarray(cell["image"]).convert("L")
+
+            out = tree.classify(pil_img, thresholds=thresholds)
+
+            # Attach metadata
+            out["parent"]    = cell["parent"]
+            out["index"]     = cell["index"]
+            out["bbox"]      = cell["bbox"]
+            out["orig_bbox"] = cell["orig_bbox"]
+
+            results.append(out)
+
+            flag = " ⚠ low confidence" if out.get("low_confidence") else ""
+            log_fn(
+                f"  [{i+1}/{len(cells)}] {cell['parent']}_cell_{cell['index']:04d} → "
+                f"pred={out['final_pred']} ({out['final_score']:.2f}){flag}"
+            )
+
+        except Exception as e:
+            log_fn(f"  ❌ Failed on cell {cell['index']} from {cell['parent']}: {e}")
+            continue
+
+    low_conf = sum(1 for r in results if r.get("low_confidence"))
+    log_fn(f"\n✅ Classification done — {len(results)}/{len(cells)} cells classified.")
+    if low_conf:
+        log_fn(f"  ⚠ {low_conf} cells flagged as low confidence.")
+        log_fn(f"  Thresholds used: {thresholds}")
+
+    return results

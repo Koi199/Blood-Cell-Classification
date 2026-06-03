@@ -141,6 +141,84 @@ def save_results_list_to_csv(results, csv_path):
         for row in rows:
             writer.writerow(row)
 
+# RAM VERSION OF SAVING LIST TO CSV (no disk writes)
+def save_results_list_to_csv_ram(results, csv_path):
+    csv_path = Path(csv_path)
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+    rows = []
+
+    for entry in results:
+        flat = {
+            "parent":      entry.get("parent", ""),
+            "index":       entry.get("index", -1),
+            "final_pred":  entry["final_pred"],
+            "final_score": entry["final_score"],
+        }
+
+        # Combined cascade confidence
+        scores = [step["score"] for step in entry["path"]]
+        flat["combined_score"] = float(np.prod(scores))
+
+        # Determine final outcome label
+        path_len = len(entry["path"])
+
+        if path_len == 1:
+            outcome = "NONmonocyte"
+
+        elif path_len == 3:
+            last       = entry["path"][2]
+            model_name = last["model"]
+            pred       = last["pred"]
+
+            if model_name == "Unclustered_RBCCount":
+                outcome = (
+                    "UNclustered Monocyte" if pred == 0 else
+                    "UNclustered Monocyte RBC" if pred == 1 else
+                    "UNKNOWN"
+                )
+
+            elif model_name == "Cluster_RBCCount":
+                outcome = (
+                    "Clustered Monocyte" if pred == 0 else
+                    "Clustered Monocyte RBC" if pred == 1 else
+                    "RBC alone" if pred == 2 else
+                    "UNKNOWN"
+                )
+            else:
+                outcome = "UNKNOWN"
+
+        else:
+            outcome = "UNKNOWN"
+
+        flat["class"] = outcome
+
+        # Flatten cascade steps
+        for idx, step in enumerate(entry["path"], start=1):
+            flat[f"model{idx}_name"]  = step["model"]
+            flat[f"model{idx}_pred"]  = step["pred"]
+            flat[f"model{idx}_score"] = step["score"]
+            flat[f"model{idx}_probs"] = json.dumps(step["probs"])
+
+        rows.append(flat)
+
+    # Build CSV header
+    all_keys = set()
+    for row in rows:
+        all_keys.update(row.keys())
+    fieldnames = sorted(all_keys)
+
+    write_header = not csv_path.exists()
+
+    with open(csv_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if write_header:
+            writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+
+
 
 # ─────────────────────────────────────────────
 # PHAGOCYTIC INDEX

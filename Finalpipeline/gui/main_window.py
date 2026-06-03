@@ -5,8 +5,9 @@ from PySide6.QtCore import QFile, QThread
 from pipeline.worker import PipelineWorker
 from pathlib import Path
 import pandas as pd
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtCore import Qt
+import numpy as np
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -59,7 +60,6 @@ class MainWindow(QMainWindow):
 
         self.ui.TextEdit_Log.append(f"Added {len(new_files)} image ({len(self.image_paths)} total)")
 
-
     def clear_images(self):
         self.image_paths = []
         self.ui.listWidget_imageList.clear()
@@ -74,55 +74,66 @@ class MainWindow(QMainWindow):
         )
         element.setPixmap(pixmap)
 
-    def after_pipeline(self):
+    def display_image_array_in_label(self, label, np_img):
+        # Ensure RGB
+        if np_img.ndim == 2:
+            np_img = np.stack([np_img]*3, axis=-1)
+
+        h, w, ch = np_img.shape
+        bytes_per_line = ch * w
+
+        qimg = QImage(np_img.data, w, h, bytes_per_line, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(qimg)
+        pixmap = pixmap.scaled(label.width(), label.height(), Qt.KeepAspectRatio)
+
+        label.setPixmap(pixmap)
+
+
+    def handle_after_pipeline(self, results, cell_images, pi_value):
+        self.results = results
+        self.cell_images = cell_images
+        self.pi_value = pi_value
+
         self.ui.TextEdit_Log.append("Pipeline complete. Running post-processing...")
-        root_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
+
         try:
+            root_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
             csv_path = root_dir / 'predictions.csv'
 
-            # Load CSV
             df = pd.read_csv(csv_path)
 
-            # Dictionary: class → top file
             top1_by_class = {}
 
-            # Group by class
             for cls, group in df.groupby("class"):
-                # Sort by combined score (descending)
                 group_sorted = group.sort_values(by="combined_score", ascending=False)
 
-                # Take the top 1 file
-                top_file = group_sorted.iloc[0]["file"]
+                parent = group_sorted.iloc[0]["parent"]
+                index  = group_sorted.iloc[0]["index"]
 
-                top1_by_class[cls] = top_file
+                top1_by_class[cls] = (parent, index)
 
-            # Display in QLabel
-            self.display_image_in_label(self.ui.Image_Nonmonocyte, top1_by_class['NONmonocyte'])
-            self.display_image_in_label(self.ui.Image_MonocytewithRBC, top1_by_class['UNclustered Monocyte RBC'])
-            self.display_image_in_label(self.ui.Image_emptymonocyte, top1_by_class['UNclustered Monocyte'])
-            self.display_image_in_label(self.ui.Image_ClusteredmonocytewithRBC, top1_by_class['Clustered Monocyte RBC'])
-            self.display_image_in_label(self.ui.Image_ClusteredemptyMonocyte, top1_by_class['Clustered Monocyte'])           
+            def show(label_widget, key):
+                parent, index = top1_by_class[key]
+                np_img = self.cell_images[(parent, index)]
+                self.display_image_array_in_label(label_widget, np_img)
+
+            show(self.ui.Image_Nonmonocyte,               'NONmonocyte')
+            show(self.ui.Image_MonocytewithRBC,           'UNclustered Monocyte RBC')
+            show(self.ui.Image_emptymonocyte,             'UNclustered Monocyte')
+            show(self.ui.Image_ClusteredmonocytewithRBC,  'Clustered Monocyte RBC')
+            show(self.ui.Image_ClusteredemptyMonocyte,    'Clustered Monocyte')
 
         except Exception as e:
-            
             self.ui.TextEdit_Log.append(f"Error in post-processing: {e}")
+            return
 
-        # Display Results
-        text = self.ui.label_PI.text()
-
-        try:
-            index = float(text)
-        except ValueError:
-            print("Could not convert to float")
+        if self.pi_value > 0.2:
             self.ui.label_Accepted.setStyleSheet('background-color:red;')
-            self.ui.label_Accepted.setText('Error')
+            self.ui.label_Accepted.setText('No')
         else:
-            if index > 0.2:
-                self.ui.label_Accepted.setStyleSheet('background-color:red;')
-                self.ui.label_Accepted.setText('No')
-            else:
-                self.ui.label_Accepted.setStyleSheet('background-color:green;')
-                self.ui.label_Accepted.setText('Yes')
+            self.ui.label_Accepted.setStyleSheet('background-color:green;')
+            self.ui.label_Accepted.setText('Yes')
+
 
     def start_pipeline(self):
         if not self.image_paths:
@@ -149,7 +160,7 @@ class MainWindow(QMainWindow):
         )
 
         self.worker.moveToThread(self.thread)
-
+        
         self.thread.started.connect(self.worker.run)
         self.worker.log.connect(self.ui.TextEdit_Log.append)
         self.worker.label_PI.connect(self.ui.label_PI.setText)
@@ -173,7 +184,7 @@ class MainWindow(QMainWindow):
         #self.worker.label_UnclusteredPhagocyteCountError.connect(self.ui.label_UnclusteredPhagocyteCountError.setText)
 
         self.worker.label_ClusteredPhagocyteCount.connect(self.ui.label_ClusteredPhagocyteCount.setText)
-        #self.worker.label_ClusteredPhagocyteCountError.connect(self.ui.label_Cluster
+        #self.worker.label_ClusteredPhagocyteCountError.connect(self.ui.label_ClusteredPhagocyteCountError.setText)
 
         self.worker.label_ClusteredRBCCount.connect(self.ui.label_ClusteredRBCCount.setText)
         #self.worker.label_ClusteredRBCCountError.connect(self.ui.label_ClusteredRBCCountError.setText)
@@ -182,9 +193,10 @@ class MainWindow(QMainWindow):
         #self.worker.label_UnclusteredRBCCountError.connect(self.ui.label_UnclusteredRBCCountError.setText)
 
         # When worker finishes
-        self.worker.finished.connect(self.after_pipeline) #<-- figure out the images to display
+        self.worker.finished_with_data.connect(self.handle_after_pipeline)
+        self.worker.finished_with_data.connect(self.worker.deleteLater)   # <-- moved here
+
         self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
         self.worker.finished.connect(lambda: self.ui.Button_Start.setEnabled(True))
         self.thread.finished.connect(self.thread.deleteLater)
 

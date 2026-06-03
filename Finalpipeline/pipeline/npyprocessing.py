@@ -5,7 +5,7 @@ from PIL import Image
 import cv2
 from pathlib import Path
 
-def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_strength=10, contrast=1.0, log_fn = print):
+def extract_single_cells(seg_file, output_dir = None, pad=20, bg_size=256, denoise_strength=10, contrast=1.0, log_fn = print):
     """
     Extract single cells from segmentation with maximum image quality
     
@@ -24,15 +24,19 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
     contrast : float
         Contrast multiplier (1.0 = no change, 2.0 = double contrast, 0.5 = half contrast)
     """
-    
-    # Load segmentation data
+    cells = [] #<= RAM buffer
+
+    # Load segmentation
     data = np.load(seg_file, allow_pickle=True).item()
     masks = data['masks']
     img = io.imread(data['filename'])
-    
+
     imgname = Path(data['filename']).stem
-    output_dir = Path(output_dir)
-    output_dir.mkdir(exist_ok=True)
+
+    # Only create output_dir if saving is enabled
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        output_dir.mkdir(exist_ok=True)
     
     log_fn(f"Processing image: {imgname}")
     log_fn(f"Image dtype: {img.dtype}, shape: {img.shape}\n")
@@ -125,11 +129,23 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256, denoise_stre
         canvas[y_min:y_max, x_min:x_max] = crop_rgb[crop_y_min:crop_y_max, crop_x_min:crop_x_max]
         
         # Convert to PIL and save
-        pil_img = Image.fromarray(canvas, mode='RGB')
-        out_path = output_dir / f"{imgname}_cell_{i:04d}.png"
-        pil_img.save(out_path)
-        
+        # pil_img = Image.fromarray(canvas, mode='L')
+        # out_path = output_dir / f"{imgname}_cell_{i:04d}.png"
+        # pil_img.save(out_path)
+
+        cells.append({
+            "image": canvas,
+            "label": prop.label,
+            "parent": imgname,
+            "index": i,
+            "bbox": (minr, minc, maxr, maxc),   # padded bbox
+            "orig_bbox": prop.bbox             # original bbox
+        })
+
         if i % 10 == 0 or i == len(props):
             log_fn(f"Saved {i}/{len(props)} cells")
     
-    log_fn(f"\nCompleted! {len(props)} cells extracted to {output_dir}")
+    # log_fn(f"\nCompleted! {len(props)} cells extracted to {output_dir}")
+    log_fn(f"\nCompleted! {len(props)} cells saved to RAM buffer")
+
+    return cells
