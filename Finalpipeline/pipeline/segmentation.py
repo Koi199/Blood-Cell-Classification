@@ -46,9 +46,9 @@ def visualize_segmentation(img, masks, filename, output_dir, alpha=0.5):
     if img_display.ndim == 2:
         img_display = np.stack([img_display] * 3, axis=-1)
 
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
-    axes[0].imshow(img_display, cmap="gray");  axes[0].set_title("Original");      axes[0].axis("off")
-    axes[1].imshow(masks_2d, cmap="nipy_spectral")
+    # fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    # axes[0].imshow(img_display, cmap="gray");  axes[0].set_title("Original");      axes[0].axis("off")
+    # axes[1].imshow(masks_2d, cmap="nipy_spectral")
     n_cells = len(np.unique(masks_2d)) - 1
     # axes[1].set_title(f"Masks ({n_cells} cells)"); axes[1].axis("off")
 

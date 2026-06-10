@@ -1,6 +1,6 @@
 from PySide6.QtCore import QObject, Signal
 from pathlib import Path
-
+import requests
 from pipeline.segmentation import run_segmentation
 from pipeline.npyprocessing import extract_single_cells
 from pipeline.prediction import build_cascade_tree, run_classification_ram
@@ -196,4 +196,10 @@ class PipelineWorker(QObject):
         self.log.emit("Emitted results and cell images to GUI.")
 
         self.log.emit("Pipeline finished.")
+
+        requests.post(
+            "https://ntfy.sh/kyle_pipeline_done",
+            data="Pipeline run completed successfully.".encode("utf-8")
+        )
+
         self.finished.emit()
