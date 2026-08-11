@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1013</width>
-    <height>766</height>
+    <width>1015</width>
+    <height>770</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1015</width>
+    <height>770</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -136,7 +142,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,0">
            <property name="spacing">
-            <number>30</number>
+            <number>4</number>
            </property>
            <property name="sizeConstraint">
             <enum>QLayout::SizeConstraint::SetFixedSize</enum>
@@ -162,6 +168,9 @@
            </item>
            <item>
             <widget class="QLabel" name="Image_MonocytewithRBC">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="frameShape">
               <enum>QFrame::Shape::Box</enum>
              </property>
@@ -184,6 +193,9 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_Nonmonocyte">
              <property name="font">
@@ -207,7 +219,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Monocyte with RBC</string>
+              <string>Unclustered Phagocyte</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -234,7 +246,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <property name="spacing">
-            <number>80</number>
+            <number>84</number>
            </property>
            <property name="leftMargin">
             <number>50</number>
@@ -266,6 +278,9 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <property name="spacing">
+            <number>4</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_ClusteredEmptyMonocyte">
              <property name="font">
@@ -290,7 +305,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Clustered Monocyte with RBC</string>
+              <string>Clustered Phagocyte</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -305,7 +320,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,5,20">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,10,20">
          <item>
           <widget class="QLabel" name="Label_logs">
            <property name="font">

@@ -218,8 +218,6 @@ def save_results_list_to_csv_ram(results, csv_path):
             writer.writerow(row)
 
 
-
-
 # ─────────────────────────────────────────────
 # PHAGOCYTIC INDEX
 # Based on binary Has_RBC classification.
@@ -332,3 +330,29 @@ def count_rbcs_from_segmentation(
         "per_cell":       per_cell,
         "rbc_count_dist": rbc_count_dist,
     }
+
+# CALCULATE ERROR IN EACH COUNT: SAMPLING ERROR or CLASSIFICATION UNCERTAINTY at 95% confidence interval NOT DONE
+def calculate_count_error(result: dict) -> dict:
+    """
+    Calculate sampling error for each count in the result dict.
+
+    Args:
+        result: dict returned by count_cells()
+
+    Returns:
+        Error margins for each count at 95% confidence interval.
+    """
+    from scipy.stats import norm
+
+    z_score = norm.ppf(0.975)  # 95% confidence interval
+
+    def error_margin(count):
+        if count == 0:
+            return 0
+        return z_score * np.sqrt(count)
+
+    error_dict = {}
+    for key in result:
+        error_dict[key] = error_margin(result[key])
+
+    return error_dict

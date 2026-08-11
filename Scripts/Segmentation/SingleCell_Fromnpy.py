@@ -138,8 +138,8 @@ def extract_single_cells(seg_file, output_dir, pad=20, bg_size=256):
 # ============ USAGE ============
 
 # Base directories
-segmented_images_dir = Path("D:\MMA_batch3_CellposeCustom\Segmented_Images")
-output_base_dir = Path("D:\MMA_batch3_CellposeCustom\Single cells")
+segmented_images_dir = Path("D:\\tester\\2\\14\\selectednpy")
+output_base_dir = Path("D:\\tester\\2\\14\\extractedcell\\x18y14")
 
 # Parameters
 pad = 20

@@ -43,7 +43,8 @@ class PipelineWorker(QObject):
                 save_base_dir    = self.npy_dir,
                 overlay_base_dir = self.overlay_dir,
                 model_path       = self.model_path,
-                diameter         = 60,
+                cellprob_threshold = -1.0,
+                diameter         = 40, # changed from 60
                 log_fn           = self.log.emit,
             )
         except Exception as e:
@@ -117,7 +118,9 @@ class PipelineWorker(QObject):
             rbc_results = run_full_rbc_segmentation_pipeline_ram(
                 results=results,
                 cells=single_cell_BUFFER,
-                model_path="C:/repos/Blood-Cell-Classification/Finalpipeline/model/RBCCountSegmentation",
+                flow_threshold=0.6,
+                cellprob_threshold=-1.5,
+                model_path="C:/repos/Blood-Cell-Classification/Finalpipeline/model/RBCCountSegmentationv2",
                 log_fn=self.log.emit,
             )
 

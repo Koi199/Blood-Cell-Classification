@@ -31,8 +31,6 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(self.ui)
         self.ui.show()
-        self.adjustSize()
-        self.setMinimumSize(800,600)  # locks in the calculated size as the minimum
 
         self.ui.Button_Upload.clicked.connect(self.upload_images)
         self.ui.Button_Start.clicked.connect(self.start_pipeline)

@@ -28,6 +28,24 @@ USAGE — configure and run a classifier:
     Or import and call directly:
         from kfold_trainer import train_kfold, CONFIGS
         results, summary = train_kfold(CONFIGS["clustered_binary"])
+
+────────────────────────────────────────────────────────────────────────────
+FIX (this version): subclass_targets can be keyed at TWO different
+granularities depending on the config:
+  - stage1_usability keys its targets by RAW FOLDER NAME (e.g. "RBC alone",
+    "Monocyte_with_RBC") because it wants independent control over each
+    raw folder even though several collapse into the same final label.
+  - clustered_binary / unclustered_binary / stage2_clustered key their
+    targets by the COLLAPSED DISPLAY NAME (e.g. "Has_RBC") because they
+    want one shared budget across several raw folders that collapse
+    together.
+
+Previously, load_samples() only tracked the collapsed display name, so
+raw-folder-keyed targets (stage1_usability) silently matched nothing and
+fell back to natural frequency (effective 0x — see native=0 output). Now
+each sample carries BOTH its raw folder name and its collapsed display
+name, and the sampler checks subclass_targets against whichever one
+actually matches.
 """
 
 import os
@@ -72,8 +90,9 @@ from Logger import (
 # Optional keys (fall back to TRAINING_DEFAULTS if omitted):
 #   img_size, batch_size, num_epochs, early_stopping_patience,
 #   lr, weight_decay, num_workers, n_splits, architecture
-#   subclass_targets  dict  — {display_name: target_n} for WeightedRandomSampler
-#                             omit to use natural class frequencies
+#   subclass_targets  dict  — target_n keyed by EITHER the raw folder_map
+#                             key OR the collapsed class_names entry.
+#                             omit to use natural class frequencies.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── Sampler tuning knobs ──────────────────────────────────────────────────────
@@ -95,7 +114,7 @@ CONFIGS = {
     # RBCalone is collapsed into Unusable; MCwRBC/MCwoRBC/Clustered → Usable
     "stage1_usability": {
         "name":        "stage1_usability",
-        "data_dir":    "D:/MMA_LabelledData/training_perslide",
+        "data_dir":    "D:/MMA_LabelledData/training_perslide_pruned",
         "folder_map": {
             "Unusable":             0,
             "RBC alone":            0,
@@ -106,7 +125,8 @@ CONFIGS = {
         "class_names":    ["Unusable", "Usable"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_stage1",
 
-        # NEW: subclass-balanced sampling
+        # Keyed by RAW folder name — independent control per raw folder even
+        # though several collapse into the same final label.
         "subclass_targets": {
             "Unusable":             2200,
             "RBC alone":            2200,
@@ -122,7 +142,7 @@ CONFIGS = {
     # MCwRBC and MCwoRBC are collapsed into Unclustered
     "stage2_clustered": {
         "name":        "stage2_clustered",
-        "data_dir":    "D:/MMA_LabelledData/training_perslide",
+        "data_dir":    "D:/MMA_LabelledData/training_perslide_pruned",
         "folder_map": {
             "Monocyte_with_RBC":    0,   # Unclustered
             "Monocyte_without_RBC": 0,   # Unclustered (collapsed)
@@ -130,6 +150,7 @@ CONFIGS = {
         },
         "class_names":    ["Unclustered", "Clustered"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_stage2",
+        # Keyed by COLLAPSED display name — shared budget across raw folders.
         "subclass_targets": {
             "Unclustered": _stage2_target,
             "Clustered":   _stage2_target,
@@ -141,7 +162,7 @@ CONFIGS = {
     # Output: No_RBC (0)  vs  Has_RBC (1)
     "unclustered_binary": {
         "name":        "unclustered_binary",
-        "data_dir":    "D:/MMA_LabelledData/training_perslide/Unclustered_RBCCount",
+        "data_dir":    "D:/MMA_LabelledData/training_perslide_pruned/Unclustered_RBCCount",
         "folder_map": {
             "RBC_0": 0,   # No RBC
             "RBC_1": 1,   # Has RBC (collapsed)
@@ -160,10 +181,14 @@ CONFIGS = {
 
     # ── Clustered RBC binary ──────────────────────────────────────────────────
     # Input : Clustered monocytes only (output of Stage 2 = 1)
-    # Output: No_RBC (0)  vs  Has_RBC (1)  vs  RBC_alone (2)
+    # Output: No_RBC (0)  vs  Has_RBC (1)
+    # NOTE: RBC_alone removed — free-floating RBCs with no monocyte present
+    # belong to stage1_usability's "Unusable" class, not here. This node only
+    # ever sees cells that already passed the usability + clustering gates,
+    # so there is no valid "RBC_alone" case left to classify at this stage.
     "clustered_binary": {
         "name":        "clustered_binary",
-        "data_dir":    "D:/MMA_LabelledData/training_perslide/clustered_RBCCount",
+        "data_dir":    "D:/MMA_LabelledData/training_perslide_pruned/clustered_RBCCount",
         "folder_map": {
             "RBC_0":     0,   # No RBC
             "RBC_1":     1,   # Has RBC (collapsed)
@@ -171,14 +196,12 @@ CONFIGS = {
             "RBC_3":     1,
             "RBC_4":     1,
             "RBC_5":     1,
-            "RBC_alone": 2,   # RBC without monocyte
         },
-        "class_names":    ["No_RBC", "Has_RBC", "RBC_alone"],
+        "class_names":    ["No_RBC", "Has_RBC"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_rbc_clustered_binary",
         "subclass_targets": {
             "No_RBC":    800,
             "Has_RBC":   800,
-            "RBC_alone": 400,
         },
     },
 
@@ -422,12 +445,18 @@ class BloodCellDataset(Dataset):
 def load_samples(data_dir: str, folder_map: dict, class_names: list) -> list:
     """
     Walk data_dir/FolderName/donor_id/image.png
-    Returns list of (path, class_display_name, label_int, donor_id)
+    Returns list of (path, raw_folder_name, display_name, label_int, donor_id)
+
+    raw_folder_name — the literal folder_map key this sample came from
+                       (e.g. "RBC alone", "Monocyte_with_RBC"). Used for
+                       subclass_targets that want per-raw-folder control.
+    display_name    — the COLLAPSED class name (class_names[label]). Used
+                       for subclass_targets that want a shared budget
+                       across several raw folders collapsing to one class.
 
     folder_map  — e.g. {"RBC_0": 0, "RBC_1": 1, "RBC_2": 1}
     class_names — e.g. ["No_RBC", "Has_RBC"] — index = label int
     """
-    # Build reverse map: label_int → display name (first class_name with that label)
     label_to_display = {i: class_names[i] for i in range(len(class_names))}
 
     samples = []
@@ -446,9 +475,10 @@ def load_samples(data_dir: str, folder_map: dict, class_names: list) -> list:
                 if fname.lower().endswith(('.png', '.jpg', '.jpeg')):
                     samples.append((
                         os.path.join(donor_path, fname),
-                        label_to_display[label],   # display name for sampler
-                        label,                     # integer label for model
-                        donor_id,                  # donor group key
+                        folder_name,                   # raw folder name (pre-collapse)
+                        label_to_display[label],        # collapsed display name
+                        label,                           # integer label for model
+                        donor_id,                        # donor group key
                     ))
                     count += 1
 
@@ -461,28 +491,47 @@ def load_samples(data_dir: str, folder_map: dict, class_names: list) -> list:
 def make_weighted_sampler(train_samples: list, subclass_targets: dict):
     """
     Build a WeightedRandomSampler from train_samples.
-    subclass_targets — {display_name: target_n} or None to use equal weighting.
-    """
-    # Count by display name
-    class_counts = {}
-    for _, display_name, _, _ in train_samples:
-        class_counts[display_name] = class_counts.get(display_name, 0) + 1
 
-    # If no targets provided, balance all classes equally
+    subclass_targets keys may be EITHER a raw folder name or a collapsed
+    display name — whichever matches is used, checking raw folder name
+    first. This lets stage1_usability (raw-keyed) and clustered_binary /
+    unclustered_binary / stage2_clustered (display-keyed) share the same
+    sampler logic correctly.
+    """
+    raw_counts     = {}
+    display_counts = {}
+    for _, raw_name, display_name, _, _ in train_samples:
+        raw_counts[raw_name]         = raw_counts.get(raw_name, 0) + 1
+        display_counts[display_name] = display_counts.get(display_name, 0) + 1
+
+    # If no targets provided, balance all (collapsed) classes equally
     if not subclass_targets:
-        max_count       = max(class_counts.values())
-        subclass_targets = {name: max_count for name in class_counts}
+        max_count        = max(display_counts.values())
+        subclass_targets = {name: max_count for name in display_counts}
 
     print("\n  Weighted sampler:")
-    for name, count in sorted(class_counts.items()):
-        target = subclass_targets.get(name, count)
-        print(f"    {name}: {count} → {target} ({target/count:.2f}x)")
+    for name, target in sorted(subclass_targets.items()):
+        if name in raw_counts:
+            natural = raw_counts[name]
+        else:
+            natural = display_counts.get(name, 0)
+        ratio = (target / natural) if natural else 0.0
+        flag = "" if natural else "  <-- WARNING: no matching samples found for this key"
+        print(f"    {name}: {natural} → {target} ({ratio:.2f}x){flag}")
 
     weights = np.zeros(len(train_samples), dtype=np.float32)
-    for idx, (_, display_name, _, _) in enumerate(train_samples):
-        natural       = class_counts[display_name]
-        target        = subclass_targets.get(display_name, natural)
-        weights[idx]  = target / natural
+    for idx, (_, raw_name, display_name, _, _) in enumerate(train_samples):
+        if raw_name in subclass_targets:
+            natural = raw_counts[raw_name]
+            target  = subclass_targets[raw_name]
+        elif display_name in subclass_targets:
+            natural = display_counts[display_name]
+            target  = subclass_targets[display_name]
+        else:
+            natural = display_counts[display_name]
+            target  = natural   # no target specified — keep natural frequency
+
+        weights[idx] = target / natural if natural else 0.0
 
     total_samples = sum(subclass_targets.values())
     sampler = WeightedRandomSampler(
@@ -688,9 +737,10 @@ def train_kfold(user_config: dict, notes: str = ""):
     all_samples = load_samples(cfg["data_dir"], cfg["folder_map"], class_names)
     print(f"  Total images loaded: {len(all_samples)}")
 
+    # Tuple layout: (path, raw_folder_name, display_name, label_int, donor_id)
     X      = np.array([s[0] for s in all_samples])   # paths
-    y      = np.array([s[2] for s in all_samples])   # int labels
-    groups = np.array([s[3] for s in all_samples])   # donor IDs
+    y      = np.array([s[3] for s in all_samples])   # int labels
+    groups = np.array([s[4] for s in all_samples])   # donor IDs
 
     # ── Donor summary ──
     unique_donors = np.unique(groups)
@@ -727,12 +777,12 @@ def train_kfold(user_config: dict, notes: str = ""):
         sampler = make_weighted_sampler(train_samples, subclass_targets)
 
         train_loader = DataLoader(
-            BloodCellDataset([(s[0], s[2]) for s in train_samples], transform=train_tf),
+            BloodCellDataset([(s[0], s[3]) for s in train_samples], transform=train_tf),
             batch_size=cfg["batch_size"], sampler=sampler,
             num_workers=cfg["num_workers"], pin_memory=True,
         )
         test_loader = DataLoader(
-            BloodCellDataset([(s[0], s[2]) for s in test_samples], transform=val_tf),
+            BloodCellDataset([(s[0], s[3]) for s in test_samples], transform=val_tf),
             batch_size=cfg["batch_size"], shuffle=False,
             num_workers=cfg["num_workers"], pin_memory=True,
         )

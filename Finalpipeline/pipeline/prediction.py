@@ -79,66 +79,57 @@ def _convert_first_layer_to_grayscale(model: torch.nn.Module) -> torch.nn.Module
 #   Single model  — provide "single" key with one .pth path
 #   Ensemble      — provide "folds" key with a list of .pth paths (one per fold)
 #
-# To switch a node from single to ensemble, comment out "single" and
-# uncomment "folds", then point each entry at the fold checkpoint saved
-# by kfold_trainer.py (e.g. stage1_usability_fold1.pth ... fold5.pth).
+# UPDATED: now pointing at the folds trained with the new capped-oversampling
+# validation protocol (kfold_trainer_capped_oversampling.py), which saves
+# checkpoints as "{name}_capped{max_ratio}x_fold{N}_v2.pth" instead of the
+# old fixed-target "{name}_fold{N}_v2.pth".
+#
+# NOTE: the "3.0x" in these filenames must match whatever --max_ratio you
+# actually trained with. If you ran with a different ratio (e.g. 2.0 or 4.0),
+# update the suffix below accordingly.
 # ─────────────────────────────────────────────────────────────────────────────
+
+CAPPED_RATIO_SUFFIX = "capped3.0x"   # must match --max_ratio used at training time
 
 MODEL_PATHS = {
 
     "MonovsNonMono": {
-        # ── Single model (original) ──
-        # "single": r"model\cellusability\stage1_usability_fold4.pth",
-
-        # ── Ensemble ──
         "folds": [
-            r"model\cellusability\stage1_usability_fold1_v2.pth",
-            r"model\cellusability\stage1_usability_fold2_v2.pth",
-            r"model\cellusability\stage1_usability_fold3_v2.pth",
-            r"model\cellusability\stage1_usability_fold4_v2.pth",
-            r"model\cellusability\stage1_usability_fold5_v2.pth",
+            rf"model\cellusability\stage1_usability_{CAPPED_RATIO_SUFFIX}_fold1_v2.pth",
+            rf"model\cellusability\stage1_usability_{CAPPED_RATIO_SUFFIX}_fold2_v2.pth",
+            rf"model\cellusability\stage1_usability_{CAPPED_RATIO_SUFFIX}_fold3_v2.pth",
+            rf"model\cellusability\stage1_usability_{CAPPED_RATIO_SUFFIX}_fold4_v2.pth",
+            rf"model\cellusability\stage1_usability_{CAPPED_RATIO_SUFFIX}_fold5_v2.pth",
         ],
     },
 
     "Cluster": {
-        # ── Single model (original) ──
-        # "single": r"C:\repos\Blood-Cell-Classification\checkpoints_stage2\convnext_base_t1500.pth",
-
-        # ── Ensemble ──
         "folds": [
-            r"model\cellclusters\stage2_clustered_fold1_v2.pth",
-            r"model\cellclusters\stage2_clustered_fold2_v2.pth",
-            r"model\cellclusters\stage2_clustered_fold3_v2.pth",
-            r"model\cellclusters\stage2_clustered_fold4_v2.pth",
-            r"model\cellclusters\stage2_clustered_fold5_v2.pth",
+            rf"model\cellclusters\stage2_clustered_{CAPPED_RATIO_SUFFIX}_fold1_v2.pth",
+            rf"model\cellclusters\stage2_clustered_{CAPPED_RATIO_SUFFIX}_fold2_v2.pth",
+            rf"model\cellclusters\stage2_clustered_{CAPPED_RATIO_SUFFIX}_fold3_v2.pth",
+            rf"model\cellclusters\stage2_clustered_{CAPPED_RATIO_SUFFIX}_fold4_v2.pth",
+            rf"model\cellclusters\stage2_clustered_{CAPPED_RATIO_SUFFIX}_fold5_v2.pth",
         ],
     },
 
     "Cluster_RBCCount": {
-        # ── Single model (original) ──
-        # "single": r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_clustered_binary\convnext_tiny.pth",
-
-        # ── Ensemble ──
         "folds": [
-            r"model\cellrbccluster\clustered_binary_fold1_v2.pth",
-            r"model\cellrbccluster\clustered_binary_fold2_v2.pth",
-            r"model\cellrbccluster\clustered_binary_fold3_v2.pth",
-            r"model\cellrbccluster\clustered_binary_fold4_v2.pth",
-            r"model\cellrbccluster\clustered_binary_fold5_v2.pth",
+            rf"model\cellrbccluster\clustered_binary_{CAPPED_RATIO_SUFFIX}_fold1_v2.pth",
+            rf"model\cellrbccluster\clustered_binary_{CAPPED_RATIO_SUFFIX}_fold2_v2.pth",
+            rf"model\cellrbccluster\clustered_binary_{CAPPED_RATIO_SUFFIX}_fold3_v2.pth",
+            rf"model\cellrbccluster\clustered_binary_{CAPPED_RATIO_SUFFIX}_fold4_v2.pth",
+            rf"model\cellrbccluster\clustered_binary_{CAPPED_RATIO_SUFFIX}_fold5_v2.pth",
         ],
     },
 
     "Unclustered_RBCCount": {
-        # ── Single model (original) ──
-        # "single": r"C:\repos\Blood-Cell-Classification\checkpoints_rbc_binary\convnext_tiny.pth",
-
-        # ── Ensemble ──
         "folds": [
-            r"model\cellrbcuncluster\unclustered_binary_fold1_v2.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold2_v2.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold3_v2.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold4_v2.pth",
-            r"model\cellrbcuncluster\unclustered_binary_fold5_v2.pth",
+            rf"model\cellrbcuncluster\unclustered_binary_{CAPPED_RATIO_SUFFIX}_fold1_v2.pth",
+            rf"model\cellrbcuncluster\unclustered_binary_{CAPPED_RATIO_SUFFIX}_fold2_v2.pth",
+            rf"model\cellrbcuncluster\unclustered_binary_{CAPPED_RATIO_SUFFIX}_fold3_v2.pth",
+            rf"model\cellrbcuncluster\unclustered_binary_{CAPPED_RATIO_SUFFIX}_fold4_v2.pth",
+            rf"model\cellrbcuncluster\unclustered_binary_{CAPPED_RATIO_SUFFIX}_fold5_v2.pth",
         ],
     },
 }
@@ -150,7 +141,7 @@ MODEL_PATHS = {
 MODEL_CLASSES = {
     "MonovsNonMono":        2,
     "Cluster":              2,
-    "Cluster_RBCCount":     3,
+    "Cluster_RBCCount":     2,
     "Unclustered_RBCCount": 2,
 }
 
@@ -158,43 +149,41 @@ MODEL_CLASSES = {
 # One weight per fold — order must match MODEL_PATHS["folds"].
 # Weights are normalised automatically so raw macro F1 scores work fine.
 # Set all to 1.0 for equal weighting.
+#
+# UPDATED: these should be refreshed from experiment_log.xlsx once the new
+# capped-oversampling folds finish training — the macro F1 per fold will
+# differ from the fixed-target run. Placeholder values below are copied from
+# the previous (fixed-target) run and MUST be replaced before relying on
+# weighted-ensemble predictions.
 FOLD_WEIGHTS = {
     "MonovsNonMono": [
-        0.8767,   # fold 1
-        0.8649,   # fold 2
-        0.8169,   # fold 3
-        0.8963,   # fold 4
-        0.8829,   # fold 5
+        1,   # fold 1  — TODO: update from new capped run
+        1,   # fold 2  — TODO: update from new capped run
+        1,   # fold 3  — TODO: update from new capped run
+        1,   # fold 4  — TODO: update from new capped run
+        1,   # fold 5  — TODO: update from new capped run
     ],
     "Cluster": [
-        0.9288,   # fold 1
-        0.9400,   # fold 2
-        0.9295,   # fold 3
-        0.9220,   # fold 4
-        0.9427,   # fold 5
+        1,   # fold 1  — TODO: update from new capped run
+        1,   # fold 2  — TODO: update from new capped run
+        1,   # fold 3  — TODO: update from new capped run
+        1,   # fold 4  — TODO: update from new capped run
+        1,   # fold 5  — TODO: update from new capped run
     ],
     "Cluster_RBCCount": [
-        0.9476,   # fold 1
-        0.9136,   # fold 2
-        0.9353,   # fold 3
-        0.9630,   # fold 4
-        0.9071,   # fold 5
+        1,   # fold 1  — TODO: update from new capped run
+        1,   # fold 2  — TODO: update from new capped run
+        1,   # fold 3  — TODO: update from new capped run
+        1,   # fold 4  — TODO: update from new capped run
+        1,   # fold 5  — TODO: update from new capped run
     ],
     "Unclustered_RBCCount": [
-        0.9823,   # fold 1
-        0.9943,   # fold 2
-        0.9893,   # fold 3
-        0.9929,   # fold 4
-        0.9740,   # fold 5
+        1,   # fold 1  — TODO: update from new capped run
+        1,   # fold 2  — TODO: update from new capped run
+        1,   # fold 3  — TODO: update from new capped run
+        1,   # fold 4  — TODO: update from new capped run
+        1,   # fold 5  — TODO: update from new capped run
     ],
-}
-
-# ── Default per-node confidence thresholds ─────────────────────
-DEFAULT_THRESHOLDS = {
-    "MonovsNonMono":        0.50,
-    "Cluster":              0.50,
-    "Cluster_RBCCount":     0.40,
-    "Unclustered_RBCCount": 0.50,
 }
 
 
@@ -248,7 +237,7 @@ class ModelNode:
                  fold_weights: list[float] | None = None):
         """
         Args:
-            name         — node name, used for threshold lookup and result logging
+            name         — node name, used for result logging
             device       — torch device string
             models       — list of loaded models. Single model = list of length 1.
                            Ensemble = list of k fold models.
@@ -315,6 +304,9 @@ class ModelNode:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CASCADE TREE
+# Threshold-based early stopping / low-confidence flagging has been removed —
+# every cell now runs all the way to a terminal node's prediction, regardless
+# of how confident the ensemble is at any stage.
 # ─────────────────────────────────────────────────────────────────────────────
 
 class CascadeTree:
@@ -322,13 +314,10 @@ class CascadeTree:
         self.nodes = nodes
         self.root  = root
 
-    def classify(
-        self,
-        pil_image: Image.Image,
-        thresholds: dict[str, float] = {},
-    ) -> dict[str, Any]:
+    def classify(self, pil_image: Image.Image) -> dict[str, Any]:
         """
-        Classify an image through the cascade.
+        Classify an image through the cascade, always following the highest-
+        probability route at each node until a terminal prediction is reached.
 
         Cascade structure:
             MonovsNonMono
@@ -340,15 +329,14 @@ class CascadeTree:
                         └─ pred=1 (Clustered) → Cluster_RBCCount
                                 ├─ pred=0 → No_RBC    (terminal)
                                 ├─ pred=1 → Has_RBC   (terminal)
-                                └─ pred=2 → RBC_alone (terminal)
+
         """
         path    = []
         current = self.root
 
         while True:
-            node      = self.nodes[current]
-            out       = node.predict(pil_image)
-            threshold = thresholds.get(node.name, 0.0)
+            node = self.nodes[current]
+            out  = node.predict(pil_image)
 
             path.append({
                 "model":       node.name,
@@ -358,20 +346,11 @@ class CascadeTree:
                 "is_ensemble": node.is_ensemble,
             })
 
-            if out["score"] < threshold:
-                return {
-                    "final_pred":     out["pred"],
-                    "final_score":    out["score"],
-                    "path":           path,
-                    "low_confidence": True,
-                }
-
             if out["pred"] not in node.routes:
                 return {
-                    "final_pred":     out["pred"],
-                    "final_score":    out["score"],
-                    "path":           path,
-                    "low_confidence": False,
+                    "final_pred":  out["pred"],
+                    "final_score": out["score"],
+                    "path":        path,
                 }
 
             current = node.routes[out["pred"]]
@@ -450,7 +429,6 @@ def build_cascade_tree(device: str = "cuda") -> CascadeTree:
 def run_classification(
     image_paths: list[str],
     tree: CascadeTree,
-    thresholds: dict[str, float] = DEFAULT_THRESHOLDS,
     log_fn=print,
 ) -> list[dict[str, Any]]:
     """
@@ -463,17 +441,15 @@ def run_classification(
     Args:
         image_paths: List of paths to segmented crop images.
         tree:        A CascadeTree built with build_cascade_tree().
-        thresholds:  Per-node confidence thresholds. Defaults to
-                     DEFAULT_THRESHOLDS. Pass {} to disable thresholding.
         log_fn:      Callable for logging — pass worker.log.emit for Qt signal.
 
     Returns:
         List of result dicts, one per image:
-        { "file", "final_pred", "final_score", "path", "low_confidence" }
+        { "file", "final_pred", "final_score", "path" }
 
     Final pred meanings per terminal node:
         Unclustered_RBCCount : 0 = No_RBC,  1 = Has_RBC
-        Cluster_RBCCount     : 0 = No_RBC,  1 = Has_RBC,  2 = RBC_alone
+        Cluster_RBCCount     : 0 = No_RBC,  1 = Has_RBC
     """
     results = []
 
@@ -481,31 +457,25 @@ def run_classification(
         p = Path(path)
         try:
             img    = Image.open(p).convert("L")
-            result = tree.classify(img, thresholds=thresholds)
+            result = tree.classify(img)
             result["file"] = str(p)
             results.append(result)
 
-            flag = " ⚠ low confidence" if result.get("low_confidence") else ""
             log_fn(f"  [{i+1}/{len(image_paths)}] {p.name} → "
                    f"pred={result['final_pred']} "
-                   f"({result['final_score']:.2f}){flag}")
+                   f"({result['final_score']:.2f})")
 
         except Exception as e:
             log_fn(f"  ❌ Failed on {p.name}: {e}")
             continue
 
-    low_conf = sum(1 for r in results if r.get("low_confidence"))
     log_fn(f"\n✅ Classification done — {len(results)}/{len(image_paths)} images classified.")
-    if low_conf:
-        log_fn(f"  ⚠ {low_conf} images flagged as low confidence.")
-        log_fn(f"  Thresholds used: {thresholds}")
 
     return results
 
 def run_classification_ram(
     cells: list[dict],
     tree: CascadeTree,
-    thresholds: dict[str, float] = DEFAULT_THRESHOLDS,
     log_fn=print,
 ) -> list[dict[str, Any]]:
     """
@@ -528,7 +498,7 @@ def run_classification_ram(
             # Convert NumPy → PIL (grayscale expected by your pipeline)
             pil_img = Image.fromarray(cell["image"]).convert("L")
 
-            out = tree.classify(pil_img, thresholds=thresholds)
+            out = tree.classify(pil_img)
 
             # Attach metadata
             out["parent"]    = cell["parent"]
@@ -538,20 +508,15 @@ def run_classification_ram(
 
             results.append(out)
 
-            flag = " ⚠ low confidence" if out.get("low_confidence") else ""
             log_fn(
                 f"  [{i+1}/{len(cells)}] {cell['parent']}_cell_{cell['index']:04d} → "
-                f"pred={out['final_pred']} ({out['final_score']:.2f}){flag}"
+                f"pred={out['final_pred']} ({out['final_score']:.2f})"
             )
 
         except Exception as e:
             log_fn(f"  ❌ Failed on cell {cell['index']} from {cell['parent']}: {e}")
             continue
 
-    low_conf = sum(1 for r in results if r.get("low_confidence"))
     log_fn(f"\n✅ Classification done — {len(results)}/{len(cells)} cells classified.")
-    if low_conf:
-        log_fn(f"  ⚠ {low_conf} cells flagged as low confidence.")
-        log_fn(f"  Thresholds used: {thresholds}")
 
     return results
