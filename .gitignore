@@ -44,3 +44,5 @@ Finalpipeline/gui/__pycache__/main_window.cpython-311.pyc
 *.pyc
 *.pyc
 Scripts/FileOrganization/classCount.ipynb
+/CalibrationPlots
+/LabelledData
