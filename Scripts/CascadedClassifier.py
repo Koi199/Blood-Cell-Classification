@@ -241,4 +241,4 @@ def main(img_path: str):
 
 if __name__ == "__main__":
     # Point this at the same cell crop you're spot-checking
-    main(r"D:\tester\3\tile_x010_y014\tile_x010_y014_cell_0001.png")
+    main(r"D:\MMA_LabelledData\training_perslide_pruned\Unusable\Slide1-1\tile_x001_y002_cell_0006_slide1_1.png")

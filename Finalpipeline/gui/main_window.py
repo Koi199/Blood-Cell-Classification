@@ -1,5 +1,5 @@
 import os
-from PySide6.QtWidgets import QMainWindow, QFileDialog
+from PySide6.QtWidgets import QMainWindow, QFileDialog, QListView, QTreeView, QAbstractItemView
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QThread
 from pipeline.worker import PipelineWorker
@@ -36,8 +36,19 @@ class MainWindow(QMainWindow):
         self.ui.Button_Start.clicked.connect(self.start_pipeline)
         self.ui.Button_Clear.clicked.connect(self.clear_images)
         self.image_paths = []
+        self.folder_paths = []
+        self._folder_queue = []
+        self._current_folder_idx = 0
+        self._total_folders = 0
+        self.retired = []
 
     def upload_images(self):
+        if self.ui.checkBox_BatchMode.isChecked():
+            self._upload_folders()
+        else:
+            self._upload_files()
+
+    def _upload_files(self):
         files, _ = QFileDialog.getOpenFileNames(
             self,
             "Select Images",
@@ -47,16 +58,41 @@ class MainWindow(QMainWindow):
         if not files:
             return
 
-        # ✅ Extend instead of replace, and deduplicate
         new_files = [f for f in files if f not in self.image_paths]
         self.image_paths.extend(new_files)
 
-        # Refresh the list widget to show all images
         self.ui.listWidget_imageList.clear()
         for f in self.image_paths:
             self.ui.listWidget_imageList.addItem(f)
 
-        self.ui.TextEdit_Log.append(f"Added {len(new_files)} image ({len(self.image_paths)} total)")
+        self.ui.TextEdit_Log.append(f"Added {len(new_files)} image(s) ({len(self.image_paths)} total)")
+
+    def _upload_folders(self):
+        dialog = QFileDialog(self, "Select Folders")
+        dialog.setFileMode(QFileDialog.FileMode.Directory)
+        dialog.setOption(QFileDialog.Option.DontUseNativeDialog, True)
+        dialog.setOption(QFileDialog.Option.ShowDirsOnly, True)
+
+        for view_cls in (QListView, QTreeView):
+            view = dialog.findChild(view_cls)
+            if view:
+                view.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+
+        if not dialog.exec():
+            return
+
+        folders = dialog.selectedFiles()
+        if not folders:
+            return
+
+        new_folders = [f for f in folders if f not in self.folder_paths]
+        self.folder_paths.extend(new_folders)
+
+        self.ui.listWidget_imageList.clear()   # reusing the same list widget, now showing folder paths
+        for f in self.folder_paths:
+            self.ui.listWidget_imageList.addItem(f)
+
+        self.ui.TextEdit_Log.append(f"Added {len(new_folders)} folder(s) ({len(self.folder_paths)} total)")
 
     def clear_images(self):
         self.image_paths = []
@@ -87,7 +123,7 @@ class MainWindow(QMainWindow):
         label.setPixmap(pixmap)
 
 
-    def handle_after_pipeline(self, results, cell_images, pi_value):
+    def handle_after_pipeline(self, results, cell_images, pi_value): # need to add the statistics processing also need to implement individual file processing
         self.results = results
         self.cell_images = cell_images
         self.pi_value = pi_value
@@ -134,68 +170,155 @@ class MainWindow(QMainWindow):
 
 
     def start_pipeline(self):
+        if self.ui.checkBox_BatchMode.isChecked():
+            self.start_batch_pipeline()
+        else:
+            self.start_single_pipeline()
+
+    def start_single_pipeline(self):
         if not self.image_paths:
             self.ui.TextEdit_Log.append("No images selected.")
             return
 
-        root_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
- 
-        if not root_dir.exists():
-            self.ui.TextEdit_Log.append(f"❌ Folder does not exist: {root_dir}")
-            try:
-                root_dir.mkdir(parents=True, exist_ok=True)
-                self.ui.TextEdit_Log.append(f"📁 Created folder: {root_dir}")
-            except Exception as e:
-                self.ui.TextEdit_Log.append(f"Error: {e}")
+        output_dir = Path(self.ui.TextInput_folderpath.toPlainText().strip())
+        if not str(output_dir):
+            self.ui.TextEdit_Log.append("❌ Please set an output folder.")
+            return
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         self.ui.Button_Start.setEnabled(False)
-        self.ui.TextEdit_Log.append("Starting pipeline...")
+        self.ui.TextEdit_Log.append(f"Starting pipeline on {len(self.image_paths)} image(s)...")
+        thread = QThread()
+        worker = PipelineWorker(
+            image_paths=self.image_paths,
+            input_dir=None,
+            output_dir=output_dir,
+        )   
+        worker.moveToThread(thread)
 
-        self.thread = QThread()
-        self.worker = PipelineWorker(
-            image_paths  = self.image_paths,
-            root_dir= root_dir
+        self.thread = thread
+        self.worker = worker
+
+        thread.started.connect(worker.run)
+        worker.log.connect(self.ui.TextEdit_Log.append)
+        worker.label_PI.connect(self.ui.label_PI.setText)
+        worker.label_UnclusteredPI.connect(self.ui.label_UnclusteredPI.setText)
+        worker.label_ClusteredPI.connect(self.ui.label_ClusteredPI.setText)
+        worker.label_ClusteredMonocyteCount.connect(self.ui.label_ClusteredMonocyteCount.setText)
+        worker.label_UnclusteredMonocyteCount.connect(self.ui.label_UnclusteredMonocyteCount.setText)
+        worker.label_UnclusteredPhagocyteCount.connect(self.ui.label_UnclusteredPhagocyteCount.setText)
+        worker.label_ClusteredPhagocyteCount.connect(self.ui.label_ClusteredPhagocyteCount.setText)
+        worker.label_ClusteredRBCCount.connect(self.ui.label_ClusteredRBCCount.setText)
+        worker.label_UnclusteredRBCCount.connect(self.ui.label_UnclusteredRBCCount.setText)
+
+        worker.finished_with_data.connect(self.handle_after_pipeline)
+
+        # Proper shutdown order:
+        worker.finished.connect(thread.quit)
+        thread.finished.connect(worker.deleteLater)
+        thread.finished.connect(thread.deleteLater)
+        thread.finished.connect(lambda: self.ui.Button_Start.setEnabled(True))
+        # retire old refs after this pair is fully torn down, so they aren't GC'd early
+        thread.finished.connect(lambda: self.retired.append((thread, worker)))
+
+        thread.start()
+
+    def start_batch_pipeline(self):
+        if not self.folder_paths:
+            self.ui.TextEdit_Log.append("No folders selected.")
+            return
+
+        output_root_text = Path(self.ui.TextInput_folderpath.toPlainText().strip())
+        if not output_root_text:
+            self.ui.TextEdit_Log.append("❌ Please set an output folder.")
+            return
+
+        self.output_root = Path(output_root_text)
+        self.output_root.mkdir(parents=True, exist_ok=True)
+
+        self._folder_queue = []
+        for folder in self.folder_paths:
+            root = Path(folder)
+            subfolders = sorted(p for p in root.iterdir() if p.is_dir())
+            if not subfolders:
+                self.ui.TextEdit_Log.append(f"[{root.name}] no subfolders found, skipping.")
+                continue
+            for sub in subfolders:
+                self._folder_queue.append((root.name, sub))
+
+        if not self._folder_queue:
+            self.ui.TextEdit_Log.append("No valid samples found across selected folders.")
+            return
+
+        self._total_folders = len(self._folder_queue)
+        self._current_folder_idx = 0
+
+        self.ui.Button_Start.setEnabled(False)
+        self.ui.TextEdit_Log.append(f"Starting batch over {self._total_folders} sample(s)...")
+        self._run_next_folder()
+
+    def _run_next_folder(self):
+        if not self._folder_queue:
+            self.ui.Button_Start.setEnabled(True)
+            self.ui.TextEdit_Log.append("✅ All samples complete.")
+            return
+
+        donor_name, sample_dir = self._folder_queue.pop(0)
+        self._current_folder_idx += 1
+
+        valid_ext = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"}
+        image_files = sorted(
+            str(sample_dir / f) for f in os.listdir(sample_dir)
+            if os.path.splitext(f)[1].lower() in valid_ext
         )
 
-        self.worker.moveToThread(self.thread)
-        
-        self.thread.started.connect(self.worker.run)
-        self.worker.log.connect(self.ui.TextEdit_Log.append)
-        self.worker.label_PI.connect(self.ui.label_PI.setText)
+        if not image_files:
+            self.ui.TextEdit_Log.append(f"[{donor_name}/{sample_dir.name}] no images found, skipping.")
+            self._run_next_folder()
+            return
 
-        self.worker.label_UnclusteredPI.connect(self.ui.label_UnclusteredPI.setText)
-        #self.worker.label_UnclusteredPIError.connect(self.ui.label_UnclusteredPIError.setText)
+        sample_output_dir = self.output_root / donor_name / sample_dir.name
 
-        self.worker.label_ClusteredPI.connect(self.ui.label_ClusteredPI.setText)
-        #self.worker.label_ClusteredPIError.connect(self.ui.label_ClusteredPIError.setText)
+        self.ui.TextEdit_Log.append(
+            f"[{self._current_folder_idx}/{self._total_folders}] "
+            f"{donor_name}/{sample_dir.name}: processing {len(image_files)} images "
+            f"→ {sample_output_dir}"
+        )
 
-        self.worker.label_PI.connect(self.ui.label_PI.setText)
-        #self.worker.label_PIError.connect(self.ui.label_PIError.setText)
+        thread = QThread()
+        worker = PipelineWorker(
+            image_paths=image_files,
+            input_dir=sample_dir,
+            output_dir=sample_output_dir,
+        )
+        worker.moveToThread(thread)
+        worker._donor_name = donor_name
 
-        self.worker.label_ClusteredMonocyteCount.connect(self.ui.label_ClusteredMonocyteCount.setText)
-        #self.worker.label_ClusteredMonocyteCountError.connect(self.ui.label_ClusteredMonocyteCountError.setText)
+        # keep references alive on self so nothing gets GC'd mid-run
+        self.thread = thread
+        self.worker = worker
 
-        self.worker.label_UnclusteredMonocyteCount.connect(self.ui.label_UnclusteredMonocyteCount.setText)
-        #self.worker.label_UnclusteredMonocyteCountError.connect(self.ui.label_UnclusteredMonocyteCountError.setText)
+        thread.started.connect(worker.run)
+        worker.log.connect(self.ui.TextEdit_Log.append)
+        worker.label_PI.connect(self.ui.label_PI.setText)
+        worker.label_UnclusteredPI.connect(self.ui.label_UnclusteredPI.setText)
+        worker.label_ClusteredPI.connect(self.ui.label_ClusteredPI.setText)
+        worker.label_ClusteredMonocyteCount.connect(self.ui.label_ClusteredMonocyteCount.setText)
+        worker.label_UnclusteredMonocyteCount.connect(self.ui.label_UnclusteredMonocyteCount.setText)
+        worker.label_UnclusteredPhagocyteCount.connect(self.ui.label_UnclusteredPhagocyteCount.setText)
+        worker.label_ClusteredPhagocyteCount.connect(self.ui.label_ClusteredPhagocyteCount.setText)
+        worker.label_ClusteredRBCCount.connect(self.ui.label_ClusteredRBCCount.setText)
+        worker.label_UnclusteredRBCCount.connect(self.ui.label_UnclusteredRBCCount.setText)
 
-        self.worker.label_UnclusteredPhagocyteCount.connect(self.ui.label_UnclusteredPhagocyteCount.setText)
-        #self.worker.label_UnclusteredPhagocyteCountError.connect(self.ui.label_UnclusteredPhagocyteCountError.setText)
+        worker.finished_with_data.connect(self.handle_after_pipeline)
 
-        self.worker.label_ClusteredPhagocyteCount.connect(self.ui.label_ClusteredPhagocyteCount.setText)
-        #self.worker.label_ClusteredPhagocyteCountError.connect(self.ui.label_ClusteredPhagocyteCountError.setText)
+        # Proper shutdown order:
+        worker.finished.connect(thread.quit)
+        thread.finished.connect(worker.deleteLater)
+        thread.finished.connect(thread.deleteLater)
+        thread.finished.connect(self._run_next_folder)   # <-- only advance once thread has truly stopped
 
-        self.worker.label_ClusteredRBCCount.connect(self.ui.label_ClusteredRBCCount.setText)
-        #self.worker.label_ClusteredRBCCountError.connect(self.ui.label_ClusteredRBCCountError.setText)
+        # retire old refs after this pair is fully torn down, so they aren't GC'd early
+        thread.finished.connect(lambda: self.retired.append((thread, worker)))
 
-        self.worker.label_UnclusteredRBCCount.connect(self.ui.label_UnclusteredRBCCount.setText)
-        #self.worker.label_UnclusteredRBCCountError.connect(self.ui.label_UnclusteredRBCCountError.setText)
-
-        # When worker finishes
-        self.worker.finished_with_data.connect(self.handle_after_pipeline)
-        self.worker.finished_with_data.connect(self.worker.deleteLater)   # <-- moved here
-
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(lambda: self.ui.Button_Start.setEnabled(True))
-        self.thread.finished.connect(self.thread.deleteLater)
-
-        self.thread.start()
+        thread.start()

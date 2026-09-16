@@ -105,7 +105,6 @@ _stage1_mono_total = 2200   # total budget shared across MCwRBC, MCwoRBC, Cluste
 _stage2_target     = 1200   # per-class target for Clustered and Unclustered
 
 # ─────────────────────────────────────────────────────────────────────────────
-
 CONFIGS = {
 
     # ── Stage 1: Usability filter ─────────────────────────────────────────────
@@ -174,8 +173,8 @@ CONFIGS = {
         "class_names":    ["No_RBC", "Has_RBC"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_rbc_binary",
         "subclass_targets": {
-            "No_RBC":  400,
-            "Has_RBC": 400,
+            "No_RBC":  800,
+            "Has_RBC": 800,
         },
     },
 
@@ -200,8 +199,8 @@ CONFIGS = {
         "class_names":    ["No_RBC", "Has_RBC"],
         "checkpoint_dir": "C:/repos/Blood-Cell-Classification/checkpoints_rbc_clustered_binary",
         "subclass_targets": {
-            "No_RBC":    800,
-            "Has_RBC":   800,
+            "No_RBC":    1600,
+            "Has_RBC":   1600,
         },
     },
 
